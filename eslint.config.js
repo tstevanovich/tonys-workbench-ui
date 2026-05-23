@@ -1,11 +1,13 @@
 // @ts-check
 const eslint = require('@eslint/js');
-const { defineConfig } = require('eslint/config');
+const { defineConfig, globalIgnores } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const eslintConfigPrettier = require('eslint-config-prettier/flat');
+const simpleImportSort = require('eslint-plugin-simple-import-sort');
 
 module.exports = defineConfig([
+  globalIgnores(['dist/', 'coverage/', '.angular/', 'tmp/', 'out-tsc/', 'bazel-out/']),
   {
     files: ['**/*.ts'],
     extends: [
@@ -15,7 +17,12 @@ module.exports = defineConfig([
       angular.configs.tsRecommended
     ],
     processor: angular.processInlineTemplates,
+    plugins: {
+      'simple-import-sort': simpleImportSort
+    },
     rules: {
+      'simple-import-sort/imports': 'warn',
+      'simple-import-sort/exports': 'warn',
       '@angular-eslint/directive-selector': [
         'error',
         {
