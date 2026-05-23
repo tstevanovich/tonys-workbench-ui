@@ -10,8 +10,18 @@
       (click)="navigationToggled.emit()">
       <mat-icon fontIcon="menu" />
     </button>
-    <span class="brand">AI Agent</span>
+    <span class="brand">Tony's Workbench</span>
     <span class="toolbar-spacer"></span>
+    <button
+      matIconButton
+      type="button"
+      class="theme-toggle"
+      [attr.aria-label]="'Current theme: ' + activeTheme().label + '. Switch theme'"
+      [title]="'Current theme: ' + activeTheme().label"
+      (click)="themeToggled.emit()">
+      <span class="theme-swatch" aria-hidden="true"></span>
+      <mat-icon [fontIcon]="activeTheme().icon" />
+    </button>
     <button matButton="outlined" type="button">
       <mat-icon fontIcon="account_circle" />
       Sign in

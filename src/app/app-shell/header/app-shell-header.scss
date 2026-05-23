@@ -28,3 +28,19 @@ mat-toolbar {
 .navigation-toggle {
   color: var(--mat-sys-on-primary-container);
 }
+
+.theme-toggle {
+  position: relative;
+  color: var(--mat-sys-on-primary-container);
+}
+
+.theme-swatch {
+  position: absolute;
+  right: 0.25rem;
+  bottom: 0.25rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  background-color: var(--app-theme-swatch);
+  border: 1px solid var(--mat-sys-outline);
+  border-radius: 50%;
+}

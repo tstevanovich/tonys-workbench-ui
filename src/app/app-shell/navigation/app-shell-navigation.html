@@ -2,8 +2,12 @@
   <nav aria-label="Primary navigation">
     <p class="navigation-label mat-label-medium">Workspace</p>
     <mat-nav-list>
-      @for (item of items(); track item.anchor) {
-        <a mat-list-item [href]="item.anchor">
+      @for (item of items(); track item.route) {
+        <a
+          mat-list-item
+          [routerLink]="item.route"
+          routerLinkActive="active-navigation-item"
+          [routerLinkActiveOptions]="{ exact: item.route === '/' }">
           <mat-icon matListItemIcon [fontIcon]="item.icon" />
           <span matListItemTitle>{{ item.label }}</span>
         </a>

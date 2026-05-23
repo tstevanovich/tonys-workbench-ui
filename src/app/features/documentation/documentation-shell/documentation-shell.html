@@ -1,0 +1,30 @@
+<section class="documentation-layout" aria-labelledby="documentation-title">
+  <div class="documentation-heading">
+    <p class="eyebrow mat-label-large">Project documentation</p>
+    <h1 id="documentation-title">Application playbook</h1>
+    <p class="mat-body-large">
+      Living guidance for the stack, architecture, workflow, testing, deployment, and governance.
+    </p>
+  </div>
+
+  <nav class="documentation-nav" aria-label="Documentation pages">
+    @for (category of categories; track category.id) {
+      <section class="documentation-category">
+        <h2>{{ category.label }}</h2>
+        @for (article of category.articles; track article.id) {
+          <a
+            [routerLink]="article.id"
+            routerLinkActive="active-doc-link"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon fontIcon="article" />
+            <span>{{ article.title }}</span>
+          </a>
+        }
+      </section>
+    }
+  </nav>
+
+  <article class="documentation-article">
+    <router-outlet />
+  </article>
+</section>

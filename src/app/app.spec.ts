@@ -19,6 +19,7 @@ describe('App', () => {
 
   it('should render the application shell', async () => {
     const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('a[href="#main-content"]')?.textContent).toContain(
@@ -26,7 +27,7 @@ describe('App', () => {
     );
     expect(compiled.querySelector('app-shell-header header')).toBeTruthy();
     expect(compiled.querySelector('app-shell-navigation aside')).toBeTruthy();
-    expect(compiled.querySelector('main h1')?.textContent).toContain('Build useful AI agents');
+    expect(compiled.querySelector('main router-outlet')).toBeTruthy();
     expect(compiled.querySelector('app-shell-footer footer')).toBeTruthy();
   });
 

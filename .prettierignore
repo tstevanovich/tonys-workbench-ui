@@ -1,5 +1,8 @@
 # Generated output and dependencies
 dist
 coverage
+playwright-report
+test-results
+reports
 .angular
 node_modules

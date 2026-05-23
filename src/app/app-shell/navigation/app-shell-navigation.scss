@@ -26,6 +26,10 @@ a {
   color: var(--mat-sys-on-secondary-container);
 }
 
+.active-navigation-item {
+  background-color: color-mix(in srgb, var(--mat-sys-primary) 14%, transparent);
+}
+
 @media (width <= 48rem) {
   :host {
     border-right: 0;

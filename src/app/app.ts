@@ -1,28 +1,39 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 import { AppShellFooter } from './app-shell/footer/app-shell-footer';
 import { AppShellHeader } from './app-shell/header/app-shell-header';
 import { AppShellNavigation } from './app-shell/navigation/app-shell-navigation';
-import { NavigationItem } from './app-shell/navigation/navigation-item';
-import { HomePage } from './home-page/home-page';
+import { type NavigationItem } from './app-shell/navigation/navigation-item';
+import { ThemeService } from './core/theme/theme.service';
 
 @Component({
   selector: 'app-root',
-  imports: [AppShellFooter, AppShellHeader, AppShellNavigation, HomePage],
+  imports: [RouterOutlet, AppShellFooter, AppShellHeader, AppShellNavigation],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
+  protected readonly themeService = inject(ThemeService);
   protected readonly navigationOpen = signal(true);
   protected readonly navigationItems: readonly NavigationItem[] = [
-    { label: 'Overview', anchor: '#overview', icon: 'dashboard' },
-    { label: 'Agents', anchor: '#agents', icon: 'smart_toy' },
-    { label: 'Recent activity', anchor: '#activity', icon: 'history' },
-    { label: 'Connected tools', anchor: '#tools', icon: 'extension' }
+    { label: 'Home', route: '/', icon: 'dashboard' },
+    { label: 'Documentation', route: '/docs', icon: 'article' },
+    { label: 'Planner', route: '/planner', icon: 'checklist' },
+    { label: 'AI Studio', route: '/ai-studio', icon: 'auto_awesome' },
+    { label: 'Code Lab', route: '/code-lab', icon: 'terminal' },
+    { label: 'Projects', route: '/projects', icon: 'view_kanban' },
+    { label: 'Integrations', route: '/integrations', icon: 'hub' },
+    { label: 'Career', route: '/career', icon: 'badge' },
+    { label: 'Settings', route: '/settings', icon: 'settings' }
   ];
 
   protected toggleNavigation(): void {
     this.navigationOpen.update((open) => !open);
+  }
+
+  protected cycleTheme(): void {
+    this.themeService.cycleTheme();
   }
 }

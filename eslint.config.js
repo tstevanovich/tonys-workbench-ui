@@ -23,6 +23,52 @@ module.exports = defineConfig([
     rules: {
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          fixStyle: 'inline-type-imports'
+        }
+      ],
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'default',
+          format: ['camelCase']
+        },
+        {
+          selector: 'variable',
+          format: ['camelCase', 'PascalCase', 'UPPER_CASE']
+        },
+        {
+          selector: 'typeLike',
+          format: ['PascalCase']
+        },
+        {
+          selector: 'interface',
+          format: ['PascalCase'],
+          custom: {
+            regex: '^I[A-Z]',
+            match: false
+          }
+        },
+        {
+          selector: 'property',
+          modifiers: ['readonly'],
+          format: ['camelCase', 'PascalCase', 'UPPER_CASE']
+        },
+        {
+          selector: 'property',
+          modifiers: ['requiresQuotes'],
+          format: null
+        }
+      ],
+      '@angular-eslint/no-input-rename': 'error',
+      '@angular-eslint/no-output-rename': 'error',
+      '@angular-eslint/prefer-on-push-component-change-detection': 'error',
+      '@angular-eslint/prefer-standalone': 'error',
+      '@angular-eslint/prefer-output-readonly': 'error',
+      '@angular-eslint/prefer-output-emitter-ref': 'error',
       '@angular-eslint/directive-selector': [
         'error',
         {

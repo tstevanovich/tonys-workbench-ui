@@ -1,14 +1,18 @@
 <div class="app-shell" [class.navigation-closed]="!navigationOpen()">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <app-shell-header [navigationOpen]="navigationOpen()" (navigationToggled)="toggleNavigation()" />
+  <app-shell-header
+    [activeTheme]="themeService.activeTheme()"
+    [navigationOpen]="navigationOpen()"
+    (navigationToggled)="toggleNavigation()"
+    (themeToggled)="cycleTheme()" />
 
   @if (navigationOpen()) {
     <app-shell-navigation [items]="navigationItems" />
   }
 
   <main id="main-content" class="shell-content" tabindex="-1">
-    <app-home-page />
+    <router-outlet />
   </main>
 
   <app-shell-footer />

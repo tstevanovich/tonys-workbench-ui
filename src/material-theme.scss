@@ -1,64 +1,91 @@
 @use '@angular/material' as mat;
 
+$typography: (
+  plain-family: (
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif
+  ),
+  brand-family: (
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif
+  )
+);
+
+@mixin app-theme($theme-type, $primary, $tertiary) {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: $theme-type,
+        primary: $primary,
+        tertiary: $tertiary
+      ),
+      typography: $typography,
+      density: 0
+    )
+  );
+}
+
 $theme: mat.define-theme(
   (
     color: (
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette
     ),
-    typography: (
-      plain-family: (
-        system-ui,
-        -apple-system,
-        'Segoe UI',
-        sans-serif
-      ),
-      brand-family: (
-        system-ui,
-        -apple-system,
-        'Segoe UI',
-        sans-serif
-      )
-    ),
+    typography: $typography,
     density: (
       scale: 0
     )
   )
 );
 
+@include mat.typography-hierarchy($theme);
+
 html {
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette
-      ),
-      typography: (
-        plain-family: (
-          system-ui,
-          -apple-system,
-          'Segoe UI',
-          sans-serif
-        ),
-        brand-family: (
-          system-ui,
-          -apple-system,
-          'Segoe UI',
-          sans-serif
-        )
-      ),
-      density: 0
-    )
-  );
+  @include app-theme(light, mat.$azure-palette, mat.$blue-palette);
+
+  color-scheme: light;
 }
 
-@include mat.typography-hierarchy($theme);
+html.app-theme-azure-light {
+  @include app-theme(light, mat.$azure-palette, mat.$blue-palette);
+
+  color-scheme: light;
+
+  --app-theme-swatch: #005cbb;
+}
+
+html.app-theme-green-light {
+  @include app-theme(light, mat.$green-palette, mat.$spring-green-palette);
+
+  color-scheme: light;
+
+  --app-theme-swatch: #146c2e;
+}
+
+html.app-theme-cyan-dark {
+  @include app-theme(dark, mat.$cyan-palette, mat.$azure-palette);
+
+  color-scheme: dark;
+
+  --app-theme-swatch: #00acc1;
+}
+
+html.app-theme-rose-dark {
+  @include app-theme(dark, mat.$rose-palette, mat.$orange-palette);
+
+  color-scheme: dark;
+
+  --app-theme-swatch: #c2185b;
+}
 
 body {
   min-height: 100%;
   margin: 0;
   font: var(--mat-sys-body-medium);
   color: var(--mat-sys-on-surface);
-  color-scheme: light;
   background-color: var(--mat-sys-surface);
 }

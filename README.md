@@ -1,6 +1,8 @@
-# AiAgent
+# Tony's Workbench
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.12.
+Tony's Workbench is a personal workspace for living documentation, planning, AI workflows, code assistance, side projects, career material, and tool integrations.
+
+The project is built with Angular and is evolving toward a company-aligned full-stack architecture with Spring Boot, SQL Server, Ping OIDC/OAuth, OpenShift, EPLX-style CI/CD, and AppDynamics.
 
 ## Development server
 
@@ -49,7 +51,7 @@ ng test
 For end-to-end (e2e) testing, run:
 
 ```bash
-ng e2e
+npm run test:e2e
 ```
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.

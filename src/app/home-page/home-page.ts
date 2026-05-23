@@ -10,6 +10,7 @@ import {
   MatCardTitle
 } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 interface FeatureCard {
   readonly id: string;
@@ -18,6 +19,7 @@ interface FeatureCard {
   readonly subtitle: string;
   readonly description: string;
   readonly action: string;
+  readonly route: string;
 }
 
 @Component({
@@ -31,7 +33,8 @@ interface FeatureCard {
     MatCardHeader,
     MatCardSubtitle,
     MatCardTitle,
-    MatIcon
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
@@ -40,28 +43,58 @@ interface FeatureCard {
 export class HomePage {
   protected readonly cards: readonly FeatureCard[] = [
     {
-      id: 'agents',
-      icon: 'smart_toy',
-      title: 'Agents',
-      subtitle: 'Ready to configure',
-      description: 'Create assistants for focused research, support, and everyday workflows.',
-      action: 'Create agent'
+      id: 'documentation',
+      icon: 'article',
+      title: 'Documentation',
+      subtitle: 'Living source of truth',
+      description: 'Capture the stack, architecture, guides, decisions, and operating model.',
+      action: 'Open docs',
+      route: '/docs'
     },
     {
-      id: 'activity',
-      icon: 'history',
-      title: 'Recent activity',
-      subtitle: 'No runs yet',
-      description: 'Conversations and task history will appear here once your agents get moving.',
-      action: 'View history'
+      id: 'planner',
+      icon: 'checklist',
+      title: 'Planner',
+      subtitle: 'Ideas into action',
+      description: 'Turn thoughts into detailed plans, to-do lists, routines, and automations.',
+      action: 'Plan work',
+      route: '/planner'
     },
     {
-      id: 'tools',
-      icon: 'extension',
-      title: 'Connected tools',
-      subtitle: 'Set up integrations',
-      description: 'Bring in trusted data sources and actions for capable, grounded assistants.',
-      action: 'Browse tools'
+      id: 'ai-studio',
+      icon: 'auto_awesome',
+      title: 'AI Studio',
+      subtitle: 'Creative and practical AI',
+      description: 'Build ChatGPT routes, prompts, scripts, dialogue, and OpenArt video workflows.',
+      action: 'Open studio',
+      route: '/ai-studio'
+    },
+    {
+      id: 'code-lab',
+      icon: 'terminal',
+      title: 'Code Lab',
+      subtitle: 'Guided implementation',
+      description: 'Use prompts and Markdown steering files to work with local repositories.',
+      action: 'Open code lab',
+      route: '/code-lab'
+    },
+    {
+      id: 'integrations',
+      icon: 'hub',
+      title: 'Integrations',
+      subtitle: 'Connected workflows',
+      description: 'Connect GitHub, Jira, Confluence, ServiceNow, OpenAI, OpenArt, and more.',
+      action: 'Browse integrations',
+      route: '/integrations'
+    },
+    {
+      id: 'career',
+      icon: 'badge',
+      title: 'Career',
+      subtitle: 'Recruiter-ready',
+      description: 'Shape portfolio content, case studies, resume highlights, and contact paths.',
+      action: 'View profile',
+      route: '/career'
     }
   ];
 }

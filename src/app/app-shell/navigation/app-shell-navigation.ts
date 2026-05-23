@@ -1,12 +1,21 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatListItem, MatListItemIcon, MatListItemTitle, MatNavList } from '@angular/material/list';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { NavigationItem } from './navigation-item';
+import { type NavigationItem } from './navigation-item';
 
 @Component({
   selector: 'app-shell-navigation',
-  imports: [MatIcon, MatListItem, MatListItemIcon, MatListItemTitle, MatNavList],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    MatIcon,
+    MatListItem,
+    MatListItemIcon,
+    MatListItemTitle,
+    MatNavList
+  ],
   templateUrl: './app-shell-navigation.html',
   styleUrl: './app-shell-navigation.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

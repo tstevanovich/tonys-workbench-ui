@@ -1,15 +1,16 @@
 <section id="overview" class="page-introduction" aria-labelledby="page-title">
-  <p class="eyebrow mat-label-large">Dashboard</p>
-  <h1 id="page-title">Build useful AI agents</h1>
+  <p class="eyebrow mat-label-large">Personal operating workspace</p>
+  <h1 id="page-title">Tony's Workbench</h1>
   <p class="introduction mat-body-large">
-    Design agents, connect tools, and follow their progress from a single workspace.
+    A multipurpose workspace for living documentation, planning, AI production, code assistance,
+    side projects, career material, and connected tools.
   </p>
   <div class="introduction-actions">
-    <button matButton="filled" type="button">
-      <mat-icon fontIcon="smart_toy" />
-      Create an agent
-    </button>
-    <button matButton="tonal" type="button">Explore templates</button>
+    <a matButton="filled" routerLink="/docs">
+      <mat-icon fontIcon="article" />
+      Read the docs
+    </a>
+    <a matButton="tonal" routerLink="/planner">Open planner</a>
   </div>
 </section>
 
@@ -25,10 +26,10 @@
         <p>{{ card.description }}</p>
       </mat-card-content>
       <mat-card-actions align="end">
-        <button matButton type="button">
+        <a matButton [routerLink]="card.route">
           {{ card.action }}
           <mat-icon iconPositionEnd fontIcon="arrow_forward" />
-        </button>
+        </a>
       </mat-card-actions>
     </mat-card>
   }
