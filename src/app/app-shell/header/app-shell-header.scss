@@ -1,0 +1,30 @@
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: block;
+}
+
+header {
+  color: var(--mat-sys-on-primary-container);
+  background-color: var(--mat-sys-primary-container);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+mat-toolbar {
+  gap: 0.5rem;
+  background-color: transparent;
+}
+
+.brand {
+  font: var(--mat-sys-title-large);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.navigation-toggle {
+  color: var(--mat-sys-on-primary-container);
+}

@@ -1,0 +1,20 @@
+<header>
+  <mat-toolbar>
+    <button
+      matIconButton
+      type="button"
+      class="navigation-toggle"
+      [attr.aria-expanded]="navigationOpen()"
+      aria-controls="primary-navigation"
+      [attr.aria-label]="navigationOpen() ? 'Close navigation' : 'Open navigation'"
+      (click)="navigationToggled.emit()">
+      <mat-icon fontIcon="menu" />
+    </button>
+    <span class="brand">AI Agent</span>
+    <span class="toolbar-spacer"></span>
+    <button matButton="outlined" type="button">
+      <mat-icon fontIcon="account_circle" />
+      Sign in
+    </button>
+  </mat-toolbar>
+</header>

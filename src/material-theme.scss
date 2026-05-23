@@ -1,0 +1,64 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme(
+  (
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette
+    ),
+    typography: (
+      plain-family: (
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        sans-serif
+      ),
+      brand-family: (
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        sans-serif
+      )
+    ),
+    density: (
+      scale: 0
+    )
+  )
+);
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette
+      ),
+      typography: (
+        plain-family: (
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif
+        ),
+        brand-family: (
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif
+        )
+      ),
+      density: 0
+    )
+  );
+}
+
+@include mat.typography-hierarchy($theme);
+
+body {
+  min-height: 100%;
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-on-surface);
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+}

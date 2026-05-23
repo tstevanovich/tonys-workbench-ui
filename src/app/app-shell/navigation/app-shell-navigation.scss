@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  overflow: hidden;
+  background-color: var(--mat-sys-secondary-container);
+  border-right: 1px solid var(--mat-sys-outline-variant);
+}
+
+aside,
+nav {
+  height: 100%;
+}
+
+nav {
+  width: 17rem;
+  padding: 1.25rem 0.75rem;
+}
+
+.navigation-label {
+  margin: 0 1rem 0.75rem;
+  color: var(--mat-sys-on-secondary-container);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+a {
+  color: var(--mat-sys-on-secondary-container);
+}
+
+@media (width <= 48rem) {
+  :host {
+    border-right: 0;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+  }
+
+  nav {
+    width: auto;
+  }
+}

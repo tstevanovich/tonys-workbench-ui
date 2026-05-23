@@ -1,0 +1,35 @@
+<section id="overview" class="page-introduction" aria-labelledby="page-title">
+  <p class="eyebrow mat-label-large">Dashboard</p>
+  <h1 id="page-title">Build useful AI agents</h1>
+  <p class="introduction mat-body-large">
+    Design agents, connect tools, and follow their progress from a single workspace.
+  </p>
+  <div class="introduction-actions">
+    <button matButton="filled" type="button">
+      <mat-icon fontIcon="smart_toy" />
+      Create an agent
+    </button>
+    <button matButton="tonal" type="button">Explore templates</button>
+  </div>
+</section>
+
+<section class="card-grid" aria-label="Workspace highlights">
+  @for (card of cards; track card.id) {
+    <mat-card [id]="card.id" appearance="outlined">
+      <mat-card-header>
+        <mat-icon matCardAvatar class="card-icon" [fontIcon]="card.icon" />
+        <mat-card-title>{{ card.title }}</mat-card-title>
+        <mat-card-subtitle>{{ card.subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ card.description }}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button matButton type="button">
+          {{ card.action }}
+          <mat-icon iconPositionEnd fontIcon="arrow_forward" />
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  }
+</section>
