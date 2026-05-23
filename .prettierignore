@@ -1,0 +1,5 @@
+# Generated output and dependencies
+dist
+coverage
+.angular
+node_modules

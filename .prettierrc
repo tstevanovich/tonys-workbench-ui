@@ -1,6 +1,14 @@
 {
   "printWidth": 100,
+  "tabWidth": 2,
   "singleQuote": true,
+  "arrowParens": "always",
+  "semi": true,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "bracketSameLine": true,
+  "htmlWhitespaceSensitivity": "css",
+  "endOfLine": "lf",
   "overrides": [
     {
       "files": "*.html",
