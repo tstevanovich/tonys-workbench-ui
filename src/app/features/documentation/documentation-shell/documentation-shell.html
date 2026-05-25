@@ -1,4 +1,4 @@
-<section class="documentation-layout" aria-labelledby="documentation-title">
+<section #documentationTop class="documentation-layout" aria-labelledby="documentation-title">
   <div class="documentation-heading">
     <p class="eyebrow mat-label-large">Project documentation</p>
     <h1 id="documentation-title">Application playbook</h1>
@@ -10,15 +10,30 @@
   <nav class="documentation-nav" aria-label="Documentation pages">
     @for (category of categories; track category.id) {
       <section class="documentation-category">
-        <h2>{{ category.label }}</h2>
-        @for (article of category.articles; track article.id) {
-          <a
-            [routerLink]="article.id"
-            routerLinkActive="active-doc-link"
-            [routerLinkActiveOptions]="{ exact: true }">
-            <mat-icon fontIcon="article" />
-            <span>{{ article.title }}</span>
-          </a>
+        <button
+          type="button"
+          class="documentation-category-button"
+          [class.expanded]="isExpanded(category.id)"
+          [attr.aria-expanded]="isExpanded(category.id)"
+          [attr.aria-controls]="'documentation-category-' + category.id"
+          (click)="toggleCategory(category.id)">
+          <span>{{ category.label }}</span>
+          <mat-icon fontIcon="expand_more" />
+        </button>
+
+        @if (isExpanded(category.id)) {
+          <div class="documentation-category-links" [id]="'documentation-category-' + category.id">
+            @for (article of category.articles; track article.id) {
+              <a
+                [routerLink]="article.id"
+                [class.active-doc-link]="activeArticleId() === article.id"
+                [attr.aria-current]="activeArticleId() === article.id ? 'page' : null"
+                (click)="openArticle(category.id)">
+                <mat-icon [fontIcon]="article.icon" />
+                <span>{{ article.title }}</span>
+              </a>
+            }
+          </div>
         }
       </section>
     }

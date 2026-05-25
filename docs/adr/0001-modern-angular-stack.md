@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-This project is intended to be a reusable model for personal and corporate Angular applications. The stack must work with npm-installed packages and avoid required system-level installs in corporate environments.
+This project is intended to be a reusable model for personal and enterprise Angular applications. The stack must work with npm-installed packages and avoid required system-level installs in managed development environments.
 
 ## Decision
 

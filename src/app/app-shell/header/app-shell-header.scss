@@ -19,6 +19,12 @@ mat-toolbar {
 .brand {
   font: var(--mat-sys-title-large);
   color: var(--mat-sys-on-primary-container);
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 0.25rem;
+  }
 }
 
 .toolbar-spacer {
@@ -43,4 +49,46 @@ mat-toolbar {
   background-color: var(--app-theme-swatch);
   border: 1px solid var(--mat-sys-outline);
   border-radius: 50%;
+}
+
+.theme-menu-item {
+  min-width: 13rem;
+}
+
+.theme-menu-item-active {
+  color: var(--mat-sys-on-primary-container);
+  background-color: var(--mat-sys-primary-container);
+}
+
+.theme-menu-row {
+  display: grid;
+  grid-template-columns: 1.5rem max-content 1.5rem;
+  column-gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+}
+
+.theme-menu-radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--mat-sys-primary);
+}
+
+.theme-menu-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.theme-menu-theme-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  line-height: 1;
 }

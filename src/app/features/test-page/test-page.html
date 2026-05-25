@@ -1,0 +1,25 @@
+<main class="test-page">
+  <header class="test-page-header">
+    <div>
+      <p class="test-page-eyebrow">Internal test route</p>
+      <h1>Markdown rendering lab</h1>
+      <p>
+        Scratch examples for checking how markdown, fenced code blocks, tables, and copy buttons
+        render in the app.
+      </p>
+    </div>
+    <mat-icon aria-hidden="true">science</mat-icon>
+  </header>
+
+  <section class="test-page-examples" aria-label="Markdown examples">
+    @for (example of examples; track example.title) {
+      <article class="test-page-example">
+        <div class="test-page-example-header">
+          <h2>{{ example.title }}</h2>
+          <p>{{ example.description }}</p>
+        </div>
+        <app-markdown-renderer [content]="example.markdown" />
+      </article>
+    }
+  </section>
+</main>

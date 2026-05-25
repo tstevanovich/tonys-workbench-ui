@@ -235,6 +235,11 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'test',
+    loadComponent: () =>
+      import('./features/test-page/test-page').then((component) => component.TestPage)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

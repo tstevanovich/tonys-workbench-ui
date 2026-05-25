@@ -16,7 +16,7 @@ import { ThemeService } from './core/theme/theme.service';
 })
 export class App {
   protected readonly themeService = inject(ThemeService);
-  protected readonly navigationOpen = signal(true);
+  protected readonly navigationExpanded = signal(true);
   protected readonly navigationItems: readonly NavigationItem[] = [
     { label: 'Home', route: '/', icon: 'dashboard' },
     { label: 'Documentation', route: '/docs', icon: 'article' },
@@ -30,10 +30,14 @@ export class App {
   ];
 
   protected toggleNavigation(): void {
-    this.navigationOpen.update((open) => !open);
+    this.navigationExpanded.update((expanded) => !expanded);
   }
 
-  protected cycleTheme(): void {
-    this.themeService.cycleTheme();
+  protected compactNavigation(): void {
+    this.navigationExpanded.set(false);
+  }
+
+  protected selectTheme(themeId: string): void {
+    this.themeService.setTheme(themeId);
   }
 }

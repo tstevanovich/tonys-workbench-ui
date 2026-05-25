@@ -1,6 +1,9 @@
 import { type Routes } from '@angular/router';
 
-import { defaultDocumentationArticleId, documentationArticles } from './documentation-content';
+import {
+  defaultDocumentationArticleId,
+  documentationArticleEntries
+} from './documentation-catalog';
 
 export const docsRoutes: Routes = [
   {
@@ -15,7 +18,7 @@ export const docsRoutes: Routes = [
         pathMatch: 'full',
         redirectTo: defaultDocumentationArticleId
       },
-      ...documentationArticles.map((article) => ({
+      ...documentationArticleEntries.map((article) => ({
         path: article.id,
         loadComponent: () =>
           import('./documentation-article/documentation-article').then(
