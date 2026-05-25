@@ -17,3 +17,11 @@ export interface DocumentationArticle {
   readonly summary: string;
   readonly sections: readonly DocumentationSection[];
 }
+
+export interface DocumentationArticleEntry extends Pick<
+  DocumentationArticle,
+  'id' | 'title' | 'summary'
+> {
+  readonly icon: string;
+  readonly loadArticle: () => Promise<DocumentationArticle>;
+}

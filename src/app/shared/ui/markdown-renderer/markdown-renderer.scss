@@ -1,0 +1,209 @@
+.app-markdown {
+  display: block;
+  color: var(--mat-sys-on-surface-variant);
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 1.5rem 0 0.75rem;
+    color: var(--mat-sys-on-surface);
+  }
+
+  h1 {
+    font: var(--mat-sys-headline-large);
+  }
+
+  h2 {
+    font: var(--mat-sys-headline-medium);
+  }
+
+  h3 {
+    font: var(--mat-sys-title-large);
+  }
+
+  h4,
+  h5,
+  h6 {
+    font: var(--mat-sys-title-medium);
+  }
+
+  p,
+  ul,
+  ol,
+  blockquote,
+  table {
+    margin: 0 0 1rem;
+  }
+
+  ul,
+  ol {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+  }
+
+  a {
+    color: var(--mat-sys-primary);
+  }
+
+  blockquote {
+    padding: 0.25rem 0 0.25rem 1rem;
+    background: var(--mat-sys-surface-container-low);
+    border-left: 4px solid var(--mat-sys-primary);
+  }
+
+  table {
+    width: 100%;
+    overflow: hidden;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0.75rem;
+    vertical-align: top;
+    text-align: left;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+  }
+
+  th {
+    color: var(--mat-sys-on-surface);
+    background-color: var(--mat-sys-surface-container);
+  }
+
+  code {
+    padding: 0.125rem 0.375rem;
+    font-family: 'Cascadia Code', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9em;
+    color: var(--mat-sys-on-surface);
+    background: var(--mat-sys-surface-container);
+    border-radius: 4px;
+  }
+
+  pre {
+    padding: 1rem;
+    overflow: auto;
+    background: var(--mat-sys-surface-container-low);
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: 8px;
+
+    code {
+      display: block;
+      padding: 0;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      white-space: pre;
+      background: transparent;
+      border-radius: 0;
+    }
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: var(--mat-sys-outline);
+  }
+
+  .token.punctuation {
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .token.property,
+  .token.tag,
+  .token.boolean,
+  .token.number,
+  .token.constant,
+  .token.symbol {
+    color: var(--mat-sys-tertiary);
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin {
+    color: var(--mat-sys-primary);
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string {
+    color: var(--mat-sys-secondary);
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword {
+    color: var(--mat-sys-error);
+  }
+
+  .token.function,
+  .token.class-name {
+    color: var(--mat-sys-primary);
+  }
+
+  .token.regex,
+  .token.important,
+  .token.variable {
+    color: var(--mat-sys-on-tertiary-container);
+  }
+
+  .app-markdown-code-block {
+    position: relative;
+    margin: 0 0 1rem;
+
+    pre {
+      margin: 0;
+    }
+  }
+
+  .app-markdown-copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: var(--mat-sys-on-secondary-container);
+    cursor: pointer;
+    background: var(--mat-sys-secondary-container);
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    .material-symbols-outlined {
+      font-size: 1.125rem;
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 500,
+        'GRAD' 0,
+        'opsz' 20;
+    }
+  }
+
+  .app-markdown-copy-button:hover,
+  .app-markdown-copy-button:focus-visible {
+    border-color: var(--mat-sys-outline);
+  }
+
+  .app-markdown-copy-button.copied {
+    color: var(--mat-sys-on-primary-container);
+    background: var(--mat-sys-primary-container);
+  }
+}

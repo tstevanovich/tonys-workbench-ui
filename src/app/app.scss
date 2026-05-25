@@ -7,9 +7,10 @@
   display: grid;
   grid-template:
     'header header' auto
-    'navigation content' 1fr
+    'navigation content' minmax(0, 1fr)
     'footer footer' auto /
     17rem minmax(0, 1fr);
+  width: 100%;
   min-height: 100dvh;
   background-color: var(--mat-sys-surface);
   transition: grid-template-columns 180ms ease;
@@ -32,8 +33,8 @@
   transform: translateY(0);
 }
 
-.app-shell.navigation-closed {
-  grid-template-columns: 0 minmax(0, 1fr);
+.app-shell.navigation-compact {
+  grid-template-columns: 4.75rem minmax(0, 1fr);
 }
 
 app-shell-header {
@@ -45,8 +46,11 @@ app-shell-navigation {
 }
 
 .shell-content {
+  box-sizing: border-box;
   grid-area: content;
-  width: min(100%, 76rem);
+  width: 100%;
+  min-width: 0;
+  max-width: 76rem;
   padding: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -57,15 +61,14 @@ app-shell-footer {
 @media (width <= 48rem) {
   .app-shell {
     grid-template:
-      'header' auto
-      'navigation' auto
-      'content' 1fr
-      'footer' auto /
-      1fr;
+      'header header' auto
+      'navigation content' minmax(0, 1fr)
+      'footer footer' auto /
+      4.75rem minmax(0, 1fr);
   }
 
-  .app-shell.navigation-closed {
-    grid-template-columns: 1fr;
+  .app-shell:not(.navigation-compact) {
+    grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr);
   }
 
   .shell-content {

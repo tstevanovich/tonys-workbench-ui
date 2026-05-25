@@ -34,6 +34,12 @@ export class ThemeService {
     this.activeThemeId.set(nextTheme.id);
   }
 
+  setTheme(themeId: string): void {
+    if (appThemes.some((theme) => theme.id === themeId)) {
+      this.activeThemeId.set(themeId);
+    }
+  }
+
   private readStoredThemeId(): string {
     const storedThemeId = globalThis.localStorage?.getItem(storageKey);
 

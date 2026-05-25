@@ -1,18 +1,14 @@
 @use '@angular/material' as mat;
 
+$app-font-family:
+  'Inter',
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  sans-serif;
 $typography: (
-  plain-family: (
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    sans-serif
-  ),
-  brand-family: (
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    sans-serif
-  )
+  plain-family: $app-font-family,
+  brand-family: $app-font-family
 );
 
 @mixin app-theme($theme-type, $primary, $tertiary) {

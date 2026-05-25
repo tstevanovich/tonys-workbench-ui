@@ -7,7 +7,17 @@ const eslintConfigPrettier = require('eslint-config-prettier/flat');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
 
 module.exports = defineConfig([
-  globalIgnores(['dist/', 'coverage/', '.angular/', 'tmp/', 'out-tsc/', 'bazel-out/']),
+  globalIgnores([
+    'dist/',
+    'coverage/',
+    '.angular/',
+    'tmp/',
+    'out-tsc/',
+    'bazel-out/',
+    'playwright-report/',
+    'test-results/',
+    'reports/'
+  ]),
   {
     files: ['**/*.ts'],
     extends: [

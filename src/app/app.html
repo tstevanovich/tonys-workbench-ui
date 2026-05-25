@@ -1,15 +1,18 @@
-<div class="app-shell" [class.navigation-closed]="!navigationOpen()">
+<div class="app-shell" [class.navigation-compact]="!navigationExpanded()">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <app-shell-header
     [activeTheme]="themeService.activeTheme()"
-    [navigationOpen]="navigationOpen()"
+    [themes]="themeService.themes"
+    [navigationExpanded]="navigationExpanded()"
     (navigationToggled)="toggleNavigation()"
-    (themeToggled)="cycleTheme()" />
+    (themeSelected)="selectTheme($event)" />
 
-  @if (navigationOpen()) {
-    <app-shell-navigation [items]="navigationItems" />
-  }
+  <app-shell-navigation
+    [items]="navigationItems"
+    [expanded]="navigationExpanded()"
+    (modeToggled)="toggleNavigation()"
+    (linkActivated)="compactNavigation()" />
 
   <main id="main-content" class="shell-content" tabindex="-1">
     <router-outlet />
