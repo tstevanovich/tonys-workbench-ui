@@ -3,7 +3,8 @@ import { type DocumentationArticle } from '../../documentation.model';
 export const VscodeSettingsGuideArticle: DocumentationArticle = {
   id: 'vscode-settings-guide',
   title: 'VS Code Settings Guide',
-  summary: 'Recommended workspace settings for Angular, Java, documentation, and platform files.',
+  summary:
+    'Recommended workspace settings for Angular, Node.js BFF, Java, documentation, and platform files.',
   sections: [
     {
       heading: 'Source Of Truth',
@@ -151,7 +152,7 @@ export const VscodeSettingsGuideArticle: DocumentationArticle = {
     {
       heading: 'Why These Settings Exist',
       bullets: [
-        'Formatter settings keep Angular, TypeScript, SCSS, Markdown, JSON, Java, XML, and YAML files consistent.',
+        'Formatter settings keep Angular, TypeScript, Node.js BFF, SCSS, Markdown, JSON, Java, XML, and YAML files consistent.',
         'ESLint and Stylelint save actions keep routine fixes close to the editor while leaving TypeScript import organization under explicit control.',
         'The local TypeScript SDK setting keeps VS Code aligned with the TypeScript version installed by this repository.',
         'The MCP autostart setting lets VS Code start configured workspace MCP servers without a manual start step each session.',

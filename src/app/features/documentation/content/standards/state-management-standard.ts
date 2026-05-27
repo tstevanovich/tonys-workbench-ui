@@ -12,7 +12,9 @@ export const StateManagementStandardArticle: DocumentationArticle = {
 External async/server data -> TanStack Query + Mutations
 UI/client state -> SignalStore
 External data safety -> Zod
-Transport/contracts -> OpenAPI
+Browser transport/contracts -> OpenAPI-generated BFF clients
+BFF routes -> Node.js Backend-for-Frontend
+Domain services -> Java Spring Boot APIs
 Rendering -> Angular components
 \`\`\`
 `

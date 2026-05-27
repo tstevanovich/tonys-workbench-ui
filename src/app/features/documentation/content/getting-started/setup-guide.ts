@@ -8,7 +8,7 @@ export const SetupGuideArticle: DocumentationArticle = {
     {
       heading: 'Prerequisites',
       bullets: [
-        'Use Node 20.19+, 22.12+, or 24+ for Angular 21 compatibility.',
+        'Use Node 24 LTS for the Angular toolchain and future Node.js BFF runtime.',
         'Use npm 11+ for install and scripts.',
         'Use Java 25 LTS as the modern backend JDK baseline.',
         'Use the repository Gradle Wrapper instead of installing a global Gradle version when gradlew or gradlew.bat exists.',
@@ -25,6 +25,20 @@ npm run build
 \`\`\`
 `,
       bullets: ['Run npm install.', 'Run npm run check.', 'Run npm run build.']
+    },
+    {
+      heading: 'Node.js BFF Setup',
+      markdown: `
+\`\`\`bash
+node --version
+npm --version
+\`\`\`
+`,
+      bullets: [
+        'Use the current Node.js LTS line for new BFF work.',
+        'Add Express and BFF-specific dependencies only when a bff/ module exists.',
+        'Keep BFF secrets, downstream URLs, client credentials, and mTLS configuration in environment-specific configuration rather than committed files.'
+      ]
     },
     {
       heading: 'Java And Gradle Setup',

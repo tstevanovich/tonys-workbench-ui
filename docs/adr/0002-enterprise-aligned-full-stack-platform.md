@@ -6,16 +6,18 @@ Accepted
 
 ## Context
 
-This project should build skills that transfer to enterprise application work. The platform direction is Angular, Java/Spring Boot, Gradle, SQL Server, OIDC/OAuth, deployment workflow integration, OpenShift Container Platform, Helm charts, runtime configuration services, Elastic-compatible observability, OpenTelemetry-compatible instrumentation, and Java APM agent instrumentation. The Java side should be enterprise-aligned and configurable rather than a perfect clone of any one service.
+This project should build skills that transfer to enterprise application work. The platform direction is Angular, a Node.js Backend-for-Frontend layer, Java/Spring Boot domain services, Gradle, SQL Server, OIDC/OAuth, deployment workflow integration, OpenShift Container Platform, Helm charts, runtime configuration services, Elastic-compatible observability, OpenTelemetry-compatible instrumentation, and Java APM agent instrumentation. The Java side should be enterprise-aligned and configurable rather than a perfect clone of any one service.
 
 ## Decision
 
 Use the enterprise-aligned platform as the architecture baseline:
 
 - Angular for the web application.
-- Java 25 LTS for backend services.
-- Spring Boot for the backend API.
-- Cloud-native, 12-factor application design for backend services.
+- Node.js for the Backend-for-Frontend layer that sits between Angular and Java services.
+- Express or another approved Node HTTP framework for BFF routes when a server module is added.
+- Java 25 LTS for domain services.
+- Spring Boot for domain APIs and service APIs behind the BFF.
+- Cloud-native, 12-factor application design for BFF and Java services.
 - Clean Architecture and Domain-Driven Design for Java service structure.
 - Gradle and the Gradle Wrapper for Java build automation.
 - Maven repositories, Artifactory, or private dependency repositories may still appear inside Gradle builds; that does not mean Maven is the project build tool.
@@ -34,8 +36,8 @@ Use the enterprise-aligned platform as the architecture baseline:
 - Spring RestClient for normal synchronous outbound HTTP calls, Spring HTTP Interface for typed clients, WebClient for reactive calls, and Apache HttpClient 5 only when a low-level Apache transport is needed.
 - Caffeine for bounded short-lived user details caching when repeated identity lookups need local caching.
 - Managed keystore and truststore resolution for outbound mTLS, Kafka TLS, and certificate-secured integrations.
-- JUnit Jupiter, Mockito core, and Mockito JUnit Jupiter for backend tests.
-- Karate for API, smoke, and BDD-style backend tests, with Cucumber-compatible JSON only as a report format.
+- JUnit Jupiter, Mockito core, and Mockito JUnit Jupiter for Java service tests.
+- Karate for API, smoke, and BDD-style Java service tests, with Cucumber-compatible JSON only as a report format.
 - SLF4J with Logback and structured logging for backend logging.
 - Feature-specific libraries such as file generation, S3 clients, mail support, schedulers, and specialized caches should be added only when a feature needs them.
 

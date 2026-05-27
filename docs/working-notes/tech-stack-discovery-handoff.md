@@ -51,6 +51,7 @@ Avoid turning this page into folder structure guidance, coding standards, or arc
 - Caffeine is confirmed for bounded short-lived user details caching where repeated identity lookups need local caching.
 - Managed keystore and truststore resolution is confirmed for outbound mTLS, Kafka TLS, and certificate-secured integrations. Keep proprietary resolver/library names out of public docs.
 - Java services should be documented as cloud-native, 12-factor applications using Clean Architecture and Domain-Driven Design.
+- New architecture direction from work discovery: Angular should call a Node.js Backend-for-Frontend through same-origin `/api/...` routes, and the BFF should call Java services. Java remains the domain/service layer rather than being replaced by Node.
 - Do not adopt `spring.main.allow-circular-references: true` as a reusable standard. Treat it as compatibility debt in that service unless a modern framework guide says otherwise.
 - Multiple named datasources, named service URLs, and app-specific synchronization settings are evidence of supported patterns, but they are not universal stack choices.
 
@@ -92,9 +93,10 @@ Read operations:
 Component
 -> SignalStore (UI state only)
 -> TanStack Query (server state)
--> OpenAPI generated client
+-> OpenAPI generated BFF client
 -> HttpClient
--> Backend API
+-> Node.js BFF /api endpoint
+-> Java service API
 
 Response
 -> Zod validation
@@ -110,9 +112,10 @@ Write operations:
 Component
 -> SignalStore (UI state only)
 -> TanStack Mutation
--> OpenAPI generated client
+-> OpenAPI generated BFF client
 -> HttpClient
--> Backend API
+-> Node.js BFF /api endpoint
+-> Java service API
 
 Response
 -> Zod validation
@@ -123,25 +126,41 @@ Response
 
 Ownership:
 
-| Concern                    | Owner                        |
-| -------------------------- | ---------------------------- |
-| External async/server data | TanStack Query and Mutations |
-| UI/client state            | SignalStore                  |
-| External data safety       | Zod                          |
-| Transport/contracts        | OpenAPI                      |
-| Rendering                  | Angular components           |
+| Concern                     | Owner                        |
+| --------------------------- | ---------------------------- |
+| External async/server data  | TanStack Query and Mutations |
+| UI/client state             | SignalStore                  |
+| External data safety        | Zod                          |
+| Browser transport/contracts | OpenAPI-generated BFF client |
+| Web edge                    | Node.js Backend-for-Frontend |
+| Domain services             | Java Spring Boot APIs        |
+| Rendering                   | Angular components           |
 
 SignalStore owns UI state such as selected row, filters, pagination, dialog state, wizard state, layout state, and UI selections.
 
 SignalStore does not own server cache, HTTP loading state, retry logic, or API persistence.
 
-## Confirmed Backend Direction
+## Confirmed BFF Direction
+
+| Role               | Choice                                                                    |
+| ------------------ | ------------------------------------------------------------------------- |
+| Runtime            | Node.js 24 LTS                                                            |
+| Language           | TypeScript                                                                |
+| HTTP framework     | Express latest stable public release                                      |
+| Browser API routes | Same-origin `/api/...` endpoints                                          |
+| Runtime validation | Zod                                                                       |
+| Outbound HTTP      | Node.js fetch by default                                                  |
+| Boundary ownership | Token mediation, response shaping, request validation, safe error mapping |
+
+Do not install Express or BFF dependencies in this repo until a `bff/` module is actually implemented.
+
+## Confirmed Java Services Direction
 
 | Role                          | Choice                                       |
 | ----------------------------- | -------------------------------------------- |
-| Backend language              | Java 25 LTS                                  |
-| Backend framework             | Spring Boot latest stable public release     |
-| Backend security              | Spring Security latest stable public release |
+| Java service language         | Java 25 LTS                                  |
+| Java service framework        | Spring Boot latest stable public release     |
+| Java service security         | Spring Security latest stable public release |
 | Build tool                    | Gradle                                       |
 | Build runner                  | Gradle Wrapper                               |
 | Java dependency source        | Maven Central                                |

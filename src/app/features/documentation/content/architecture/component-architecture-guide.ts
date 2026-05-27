@@ -3,7 +3,8 @@ import { type DocumentationArticle } from '../../documentation.model';
 export const ComponentArchitectureGuideArticle: DocumentationArticle = {
   id: 'component-architecture-guide',
   title: 'Feature And Component Architecture Guide',
-  summary: 'How feature pieces are composed across frontend, backend, and database layers.',
+  summary:
+    'How feature pieces are composed across frontend, BFF, Java service, and database layers.',
   sections: [
     {
       heading: 'Front End',
@@ -16,9 +17,17 @@ export const ComponentArchitectureGuideArticle: DocumentationArticle = {
       ]
     },
     {
-      heading: 'Back End',
+      heading: 'Backend For Frontend',
       bullets: [
-        'Backend feature packages own the server-side use cases, controllers, DTOs, domain behavior, persistence adapters, and tests for one product capability.',
+        'BFF feature routes own browser-facing request validation, response shaping, error translation, and calls to Java services for one product capability.',
+        'BFF code should stay close to frontend workflow needs without duplicating durable business rules from Java services.',
+        'Shared BFF middleware owns cross-cutting concerns such as request correlation, session context, auth headers, logging, and security hardening.'
+      ]
+    },
+    {
+      heading: 'Java Services',
+      bullets: [
+        'Java service feature packages own the server-side use cases, controllers, DTOs, domain behavior, persistence adapters, and tests for one product capability.',
         'Controllers should stay thin and delegate workflow decisions to application services.',
         'Application services define transaction boundaries and coordinate domain logic, repositories, and external integrations.',
         'Domain code owns business rules that should not be duplicated in Angular components.',

@@ -9,7 +9,7 @@ export const LocalDevelopmentGuideArticle: DocumentationArticle = {
       heading: 'Daily Workflow',
       bullets: [
         'Create a small branch per change and keep commits focused on one behavior or documentation update.',
-        'Start only the parts of the stack needed for the change: web app, backend service, database, dependent services, or the full local environment.',
+        'Start only the parts of the stack needed for the change: web app, BFF, Java service, database, dependent services, or the full local environment.',
         'Update the in-app docs or decision records when the stack, architecture, workflow, deployment, or governance rules change.',
         'Run the relevant checks locally before pushing, then let GitHub Actions be the shared verification gate.'
       ]
@@ -34,7 +34,22 @@ npm run build
       ]
     },
     {
-      heading: 'Backend Commands',
+      heading: 'BFF Commands',
+      markdown: `
+\`\`\`bash
+npm run bff:start
+npm run bff:test
+npm run bff:check
+\`\`\`
+`,
+      bullets: [
+        'Add BFF scripts when the bff/ module exists.',
+        'Run the Angular dev server against the BFF rather than directly against Java services.',
+        'Use local proxy configuration only when the Angular dev server and BFF run on separate localhost ports.'
+      ]
+    },
+    {
+      heading: 'Java Service Commands',
       markdown: `
 \`\`\`bash
 ./gradlew bootRun
@@ -44,7 +59,7 @@ npm run build
 \`\`\`
 `,
       bullets: [
-        'Use the Gradle Wrapper for Java services when a backend module exists.',
+        'Use the Gradle Wrapper for Java services when a service module exists.',
         'Use bootRun for local Spring Boot startup.',
         'Use test for focused backend unit and integration tests.',
         'Use check or build before pushing backend changes.',

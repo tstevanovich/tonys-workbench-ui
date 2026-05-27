@@ -55,7 +55,9 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | UI and screen state | Filters, tabs, dialogs, pagination, selections | Angular Signals and NgRx SignalStore |
 | Server state | Loading, cache, retries, stale data | TanStack Query |
 | Data mutations | Save, update, delete, upload, command actions | TanStack Mutations |
-| API transport | HTTP communication | OpenAPI generated Angular client plus HttpClient |
+| Browser API transport | Same-origin HTTP communication | OpenAPI generated BFF client plus Angular HttpClient |
+| Web edge | Browser-facing API routes | Node.js Backend-for-Frontend |
+| Domain services | Business APIs and persistence workflows | Java 25 LTS and Spring Boot |
 | Runtime validation | Validate external data | Zod |
 | Data transformation | DTO to UI model | Mapper functions |
 | Shared business logic | Reusable workflows | Angular services |
@@ -69,8 +71,23 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Feature state library | NgRx SignalStore | Screen and workflow state that belongs to the browser client. |
 | Server state library | TanStack Query for Angular | API fetching, caching, invalidation, retry behavior, loading states, and server mutations. |
 | Runtime validation library | Zod | Validation for API responses, imported files, AI output, local storage, user-provided JSON, and external runtime boundaries. |
-| HTTP client | Angular HttpClient | Browser-to-backend HTTP transport used by generated clients and app-level API infrastructure. |
-| API contract generator | OpenAPI Generator | Generates Angular API clients and transport types from backend OpenAPI contracts. |
+| HTTP client | Angular HttpClient | Browser-to-BFF HTTP transport used by generated clients and app-level API infrastructure. |
+| API contract generator | OpenAPI Generator | Generates Angular API clients and transport types from BFF OpenAPI contracts. |
+`
+    },
+    {
+      heading: 'Backend For Frontend Stack',
+      markdown: `
+| Role | Choice | Description |
+| --- | --- | --- |
+| BFF runtime | Node.js 24 LTS | Current production LTS line for the web-edge server runtime. |
+| BFF language | TypeScript | Typed server-side JavaScript for BFF routes, middleware, validation, and service clients. |
+| BFF framework | Express latest stable public release | Minimal Node HTTP framework for browser-facing /api routes when a BFF module is added. |
+| BFF route contracts | OpenAPI | Browser-facing API contracts that can differ from downstream Java service contracts. |
+| BFF validation | Zod | Runtime validation for browser requests, downstream responses, config, and boundary data. |
+| BFF HTTP client | Node.js fetch | Built-in HTTP client for outbound service calls unless a feature needs a specialized transport. |
+| BFF security baseline | Express production hardening | Security headers, request limits, safe error responses, trusted proxy configuration, and dependency scanning. |
+| BFF observability | Structured logs and OpenTelemetry-compatible instrumentation | Correlation IDs, request logs, dependency timing, error mapping, and portable traces. |
 `
     },
     {
@@ -101,28 +118,28 @@ export const ModernTechStackArticle: DocumentationArticle = {
 `
     },
     {
-      heading: 'Back End Stack',
+      heading: 'Java Services Stack',
       markdown: `
 | Role | Choice | Description |
 | --- | --- | --- |
-| Backend language | Java 25 LTS | Standard Java language/runtime baseline for backend services. |
-| Backend framework | Spring Boot latest stable public release | API framework for endpoints, validation, auth enforcement, transactions, integrations, jobs, and observability hooks. |
-| Backend security | Spring Security latest stable public release | Token validation, authorization enforcement, resource protection, and method security. |
-| Java build tool | Gradle | Standard Java build automation tool for backend services. |
+| Java service language | Java 25 LTS | Standard Java language/runtime baseline for domain services. |
+| Java service framework | Spring Boot latest stable public release | API framework for domain endpoints, validation, auth enforcement, transactions, integrations, jobs, and observability hooks behind the BFF. |
+| Java service security | Spring Security latest stable public release | Token validation, authorization enforcement, resource protection, and method security. |
+| Java build tool | Gradle | Standard Java build automation tool for Java services. |
 | Gradle distribution | Gradle Wrapper | Repository-pinned Gradle execution for local machines and CI. |
 | Java dependency source | Maven Central | Standard public repository for Java dependencies. |
 | Gradle plugin source | Gradle Plugin Portal | Standard public repository for Gradle plugins. |
 | Java build conventions | Gradle convention plugins | Shared Gradle plugins encapsulate Java, Spring Boot, coverage, quality, API generation, and mutation-testing defaults. |
 | API documentation | springdoc-openapi | Generates OpenAPI documentation from Spring Boot APIs. |
-| API contract publishing | OpenAPI | Contract used by generated Angular clients and backend API documentation. |
-| API model generation | OpenAPI Generator Gradle plugin | Generates backend API models and definitions from OpenAPI specifications. |
+| API contract publishing | OpenAPI | Contract used by generated BFF/service clients and backend API documentation. |
+| API model generation | OpenAPI Generator Gradle plugin | Generates Java service API models and definitions from OpenAPI specifications. |
 | Persistence abstraction | Spring Data JPA | Repository and data access abstraction for relational persistence. |
 | ORM | Hibernate | JPA implementation for relational entity mapping. |
 | Bean validation | Hibernate Validator | Bean Validation implementation for request, DTO, and domain validation. |
 | JSON serialization | Jackson | Standard JSON serialization and deserialization stack for Spring Boot APIs. |
 | Database connection pool | HikariCP | Standard high-performance JDBC connection pool used by Spring Boot. |
 | Embedded servlet container | Apache Tomcat | Standard embedded web container for Spring Boot services. |
-| Backend logging facade | SLF4J | Logging facade used by backend code. |
+| Backend logging facade | SLF4J | Logging facade used by Java service code. |
 | Backend logging implementation | Logback | Logging backend paired with SLF4J. |
 | Structured backend logging | Logback structured logging | Standardized application, security, correlation, and operational logging through Logback-compatible configuration. |
 | Sensitive log masking | logback-spring.xml masking rules | Central Logback configuration masks sensitive fields before logs leave the service. |
@@ -143,7 +160,7 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Java boilerplate reduction | Lombok | Reduces Java boilerplate where records, constructors, and explicit code do not provide a cleaner model. |
 | Backend unit testing | JUnit Jupiter | Standard Java unit test framework. |
 | Backend mocking | Mockito core and Mockito JUnit Jupiter | Modern Mockito setup for Java unit tests and JUnit 5 extension integration. |
-| API and BDD testing | Karate | HTTP API, BDD-style, smoke, and integration testing for backend services. |
+| API and BDD testing | Karate | HTTP API, BDD-style, smoke, and integration testing for Java services. |
 | BDD report format | Cucumber-compatible JSON | Karate emits Cucumber-compatible JSON when CI, reporting, or test-management tooling needs that format. |
 `
     },
@@ -159,7 +176,7 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Local database runtime | SQL Server container | Local database runtime for Docker Compose and backend development. |
 | Backend persistence API | JPA | Java persistence API used through Spring Data JPA and Hibernate. |
 | Transaction management | Spring transactions | Service-layer transaction boundaries and rollback behavior. |
-| Connection pooling | HikariCP | JDBC connection pooling for backend services. |
+| Connection pooling | HikariCP | JDBC connection pooling for Java services. |
 | Schema ownership | Liquibase-managed schema | Hibernate schema generation stays disabled so database changes are controlled through versioned migrations. |
 | Query performance analysis | SQL Server execution plans | Standard tool for understanding query performance and indexing needs. |
 `
@@ -172,8 +189,8 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Identity provider standard | OIDC/OAuth 2.0 compatible provider | Authentication provider must support standard OIDC/OAuth flows without tying the stack to a proprietary provider. |
 | Auth protocol | OIDC/OAuth 2.0 | Token, scope, login, and protected API access protocol family. |
 | Service-to-service auth flow | OAuth 2.0 client credentials | Backend and app-to-app calls use client credentials to obtain access tokens for protected service calls. |
-| API ingress security | Enterprise API gateway | Backend API calls route through a gateway for token validation, threat checks, quotas, logging, header handling, and forwarding. |
-| API bearer token usage | OAuth bearer access tokens | Service calls send access tokens in the Authorization header and rely on gateway and backend validation. |
+| API ingress security | Enterprise API gateway | Service API calls route through a gateway for token validation, threat checks, quotas, logging, header handling, and forwarding. |
+| API bearer token usage | OAuth bearer access tokens | Service calls send access tokens in the Authorization header and rely on gateway and service-side validation. |
 | Backend auth enforcement | Spring Security OAuth2 Resource Server | Token validation and API authorization enforcement. |
 | Token validation metadata | OIDC issuer URI and JWK set URI | Backend services validate JWTs using configured issuer and signing-key metadata from the identity provider. |
 | OAuth client configuration | Externalized client credentials | OAuth client IDs, secrets, and token endpoint URLs are supplied through environment-specific configuration. |
@@ -191,10 +208,11 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Role | Choice | Description |
 | --- | --- | --- |
 | Split deployment packaging | Application repo plus deployment repo | Work environments with independent deployment ownership use a separate deployment repository. |
-| Local full-stack runtime | Docker Compose | Local orchestration for Angular, Spring Boot, SQL Server, and supporting services. |
+| Local full-stack runtime | Docker Compose | Local orchestration for Angular, Node.js BFF, Spring Boot services, SQL Server, and supporting services. |
 | Frontend package artifact | Static Angular build | Browser assets emitted by ng build. |
+| BFF package artifact | Node.js server package | Node runtime package or container image for browser-facing API routes. |
 | Backend package artifact | Spring Boot executable jar | Java service artifact built by Gradle. |
-| Container image build | Docker | Container packaging for backend services and deployable app images. |
+| Container image build | Docker | Container packaging for BFF, Java services, and deployable app images. |
 | Container runtime platform | OpenShift Container Platform | Kubernetes-based runtime platform for hosted application workloads. |
 | Kubernetes packaging | Helm | Chart and values packaging for Kubernetes and OpenShift deployments. |
 | Personal CI/CD | GitHub Actions | Automation for validation, build, and repository workflows. |
@@ -232,7 +250,7 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Java code coverage | JaCoCo | Code coverage reporting for backend tests. |
 | Java mutation testing | PIT | Mutation testing for checking whether backend tests catch meaningful behavior changes. |
 | Java quality analysis | SonarQube-compatible analysis | Static quality, coverage, duplication, and maintainability reporting through Sonar-compatible tooling. |
-| Migration checks | Liquibase validation | Database changelog validation in backend quality gates. |
+| Migration checks | Liquibase validation | Database changelog validation in Java service quality gates. |
 | Git hook runner | Husky | Git hook management for local automation. |
 | Changed-file checks | lint-staged | Runs format and lint tasks against staged files. |
 `
@@ -257,7 +275,8 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Kubernetes packaging tool | Helm | Deployment chart tooling. |
 | Local validation command | npm run check | Runs frontend linting, stylelint, Prettier check, unit tests, dependency-cruiser, and knip. |
 | CI validation command | npm run check:ci | Runs the local frontend validation command plus npm audit. |
-| Backend validation command | Gradle check | Runs backend tests, formatting checks, static analysis, and dependency checks. |
+| Java service validation command | Gradle check | Runs Java service tests, formatting checks, static analysis, and dependency checks. |
+| BFF validation command | npm run check | BFF TypeScript, lint, test, audit, and build checks should integrate with npm scripts when the server module exists. |
 `
     }
   ]

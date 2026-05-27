@@ -3,7 +3,8 @@ import { type DocumentationArticle } from '../../documentation.model';
 export const TestingGuideArticle: DocumentationArticle = {
   id: 'testing-guide',
   title: 'Testing Guide',
-  summary: 'The testing approach for frontend, accessibility, browser, and backend quality gates.',
+  summary:
+    'The testing approach for frontend, BFF, accessibility, browser, and Java service quality gates.',
   sections: [
     {
       heading: 'Commands',
@@ -14,6 +15,8 @@ npm run test:a11y
 npm run test:e2e
 npm run test:e2e:ui
 npm run check
+npm run bff:test
+npm run bff:check
 
 ./gradlew test
 ./gradlew check
@@ -27,8 +30,9 @@ npm run check
         'Use npm run test:e2e for browser flow coverage.',
         'Use npm run test:e2e:ui when debugging browser tests interactively.',
         'Use npm run check before pushing because it runs the standard local frontend quality gate.',
+        'Use BFF test and check scripts once a Node.js BFF module exists.',
         'Use ./gradlew test for backend unit, slice, and integration tests when a Java service exists.',
-        'Use ./gradlew check for the backend quality gate.',
+        'Use ./gradlew check for the Java service quality gate.',
         'Use ./gradlew jacocoTestReport for Java coverage reporting when JaCoCo is configured.',
         'Use ./gradlew pitest for Java mutation testing when PIT is configured.'
       ]
@@ -58,12 +62,20 @@ npm run check
       ]
     },
     {
-      heading: 'Back End',
+      heading: 'Backend For Frontend',
+      bullets: [
+        'Use TypeScript unit tests for BFF route handlers, middleware, schemas, and service clients.',
+        'Use route-level tests for request validation, auth/session behavior, error mapping, and downstream service failures.',
+        'Use contract tests or generated clients to keep BFF routes aligned with Java service APIs.'
+      ]
+    },
+    {
+      heading: 'Java Services',
       bullets: [
         'Use JUnit Jupiter for Java unit tests.',
         'Use Mockito core and Mockito JUnit Jupiter for mocks and JUnit 5 extension integration.',
-        'Use Spring Boot Test for application context tests, slice tests, and integration-style backend tests.',
-        'Use Karate for API, smoke, and BDD-style backend tests.',
+        'Use Spring Boot Test for application context tests, slice tests, and integration-style Java service tests.',
+        'Use Karate for API, smoke, and BDD-style Java service tests.',
         'Emit Cucumber-compatible JSON from Karate when CI, reporting, or test-management tooling needs that format.',
         'Use JaCoCo for Java code coverage and PIT for mutation testing.'
       ]

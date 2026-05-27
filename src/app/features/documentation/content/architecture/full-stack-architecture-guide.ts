@@ -10,15 +10,26 @@ export const FullStackArchitectureGuideArticle: DocumentationArticle = {
       bullets: [
         'Use Angular for the web application, user interaction, route composition, accessible UI, client-side workflow state, markdown rendering, and document generation workflows.',
         'Use TanStack Query for server state and NgRx SignalStore for feature workflow state.',
-        'Use frontend validation for fast user feedback, but treat backend validation as the trusted enforcement layer.',
+        'Use frontend validation for fast user feedback, but treat BFF and Java service validation as the trusted enforcement layers.',
         'Keep secrets, privileged decisions, and durable business rules out of the frontend bundle.'
       ]
     },
     {
-      heading: 'Back End',
+      heading: 'Backend For Frontend',
       bullets: [
-        'Use Java 25 LTS and Spring Boot for API endpoints, authorization enforcement, transactions, server-side validation, integrations, background jobs, and observability hooks.',
-        'Design backend services as cloud-native, 12-factor applications.',
+        'Use Node.js for the web-edge Backend-for-Frontend layer between Angular and Java services.',
+        'Expose same-origin /api routes for Angular services to call.',
+        'Use the BFF for session-aware request handling, token mediation, response shaping, request validation, frontend-specific aggregation, and user-safe error mapping.',
+        'Keep downstream service URLs, client credentials, mTLS material, private headers, and service-to-service token handling out of the browser.',
+        'Use TypeScript and the current Node.js LTS line when the BFF module is added.',
+        'Use Express or another approved Node HTTP framework for route handling when a server module is added.'
+      ]
+    },
+    {
+      heading: 'Java Services',
+      bullets: [
+        'Use Java 25 LTS and Spring Boot for domain APIs, durable authorization enforcement, transactions, server-side validation, integrations, background jobs, and observability hooks.',
+        'Design Java services as cloud-native, 12-factor applications.',
         'Use Clean Architecture and Domain-Driven Design to keep API contracts, application workflows, domain behavior, integration adapters, and persistence concerns intentionally separated.',
         'Use Gradle for Java build automation and the Gradle Wrapper for repository-pinned execution.',
         'Keep generated API contracts, DTOs, domain models, and persistence entities intentionally separated.',
@@ -39,6 +50,7 @@ export const FullStackArchitectureGuideArticle: DocumentationArticle = {
       heading: 'Deployment',
       bullets: [
         'Use Docker Compose first for local full-stack development.',
+        'Run the Angular app, Node.js BFF, Java services, SQL Server, and supporting services as separate local processes or containers as the stack grows.',
         'Use OpenShift Container Platform as the enterprise runtime environment.',
         'Use Helm and environment-specific values for OpenShift-style deployments.',
         'Use GitHub Actions for this personal repository while allowing workflows to hand off to deployment orchestration when environments require it.'

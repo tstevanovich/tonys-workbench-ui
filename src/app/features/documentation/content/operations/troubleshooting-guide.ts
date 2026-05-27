@@ -15,6 +15,14 @@ export const TroubleshootingGuideArticle: DocumentationArticle = {
       ]
     },
     {
+      heading: 'BFF Issues',
+      bullets: [
+        'If Angular calls fail locally, confirm whether the Angular dev server is pointed at the BFF and whether the BFF is running.',
+        'If a BFF route works but the screen fails, inspect request validation, response mapping, and Zod parsing before blaming the Java service.',
+        'If downstream calls fail, check BFF environment configuration, token mediation, private headers, mTLS configuration, and service URL routing.'
+      ]
+    },
+    {
       heading: 'Java And Gradle Issues',
       bullets: [
         'If Gradle fails with an unsupported class file major version, run the service with a JDK supported by that Gradle wrapper and plugin set.',

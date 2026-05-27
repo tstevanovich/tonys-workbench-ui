@@ -28,10 +28,35 @@ src/app/
       ]
     },
     {
-      heading: 'Back End',
+      heading: 'Backend For Frontend',
       markdown: `
 \`\`\`text
-backend/
+bff/
+  package.json
+  src/
+    app.ts                    Express app composition
+    server.ts                 Node server startup
+    routes/                   browser-facing /api route modules
+    middleware/               auth, correlation, logging, security, errors
+    clients/                  typed clients for Java services and gateways
+    schemas/                  Zod request, response, and config schemas
+    config/                   typed runtime configuration
+    observability/            logs, metrics, traces, health
+  test/                       unit and route tests
+\`\`\`
+`,
+      bullets: [
+        'Create bff/ when the Node.js Backend-for-Frontend module is added.',
+        'Use the BFF for browser-facing /api routes, response shaping, token mediation, frontend-specific aggregation, and safe error mapping.',
+        'Keep BFF routes separate from Angular components and Java domain service packages.',
+        'Do not commit private downstream URLs, tokens, mTLS material, or environment-specific secrets in BFF config.'
+      ]
+    },
+    {
+      heading: 'Java Services',
+      markdown: `
+\`\`\`text
+services/<service-name>/
   build.gradle
   settings.gradle
   src/main/java/<base-package>/
@@ -45,7 +70,7 @@ bdd/                          API and BDD test project
 \`\`\`
 `,
       bullets: [
-        'Create backend/ when the Spring Boot API is added.',
+        'Create services/<service-name>/ when a Spring Boot domain service is added.',
         'Use this enterprise Spring service layout when building Java services.',
         'Keep API contracts, business behavior, configuration, and integration adapters separate.',
         'Keep feature-specific subpackages inside these areas when a bounded context grows large enough to need clearer ownership.',
@@ -74,7 +99,7 @@ database/
       markdown: `
 \`\`\`text
 deploy/
-  compose/                    local Angular, API, and SQL Server composition
+  compose/                    local Angular, BFF, Java services, and SQL Server composition
   helm/                       Helm charts and values
   openshift/                  OpenShift-specific manifests when needed
 .github/workflows/           GitHub Actions for this personal repository
