@@ -11,7 +11,7 @@ export const DeploymentGuideArticle: DocumentationArticle = {
         'Use OpenShift Container Platform as the enterprise runtime target.',
         'Use Docker Compose for local full-stack development before adding OpenShift manifests.',
         'Use GitHub Actions for this personal repository and allow workflows to hand off to deployment orchestration when environments require it.',
-        'Use environment-specific API base URLs and keep secrets out of the frontend bundle.'
+        'Route browser API calls through same-origin BFF routes and keep secrets out of the frontend bundle.'
       ]
     },
     {
@@ -30,7 +30,8 @@ npm run build
 `,
       bullets: [
         'Use npm commands for the web app.',
-        'Use Gradle Wrapper commands for backend services when they exist.',
+        'Use npm commands for the Node.js BFF when it exists.',
+        'Use Gradle Wrapper commands for Java services when they exist.',
         'Run the narrow command while developing and the broader verification command before pushing.'
       ]
     },
@@ -39,7 +40,8 @@ npm run build
       bullets: [
         'Install with npm ci.',
         'Run lint, stylelint, format checks, architecture checks, dead-code checks, unit tests, accessibility checks, build, Playwright, CodeQL, and npm audit for the web app.',
-        'Run Gradle check, backend unit tests, Java CodeQL, dependency scans, and container build checks once the backend exists.',
+        'Run BFF TypeScript, lint, unit tests, route tests, dependency audit, CodeQL, and container build checks once the BFF exists.',
+        'Run Gradle check, Java service unit tests, Java CodeQL, dependency scans, and container build checks once Java services exist.',
         'Run database migration validation once migration tooling exists.',
         'Run Helm template or chart validation once deployment charts exist.',
         'Deploy only after quality gates pass.',

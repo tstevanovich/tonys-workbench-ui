@@ -12,6 +12,7 @@
     "sonarsource.sonarlint-vscode",
     "checkmarx.cxvscode",
     "eamodio.gitlens",
+    "humao.rest-client",
     "redhat.java",
     "vscjava.vscode-java-debug",
     "vscjava.vscode-java-test",

@@ -53,6 +53,16 @@ export const EditorExtensionsGuideArticle: DocumentationArticle = {
 `
     },
     {
+      heading: 'Node.js BFF',
+      markdown: `
+| Capability | Extension | Publisher | Extension ID |
+| --- | --- | --- | --- |
+| TypeScript linting | ESLint | dbaeumer | dbaeumer.vscode-eslint |
+| Formatting | Prettier - Code formatter | esbenp | esbenp.prettier-vscode |
+| API request scratchpad | REST Client | Huachao Mao | humao.rest-client |
+`
+    },
+    {
       heading: 'Java And Spring',
       markdown: `
 | Capability | Extension | Publisher | Extension ID |

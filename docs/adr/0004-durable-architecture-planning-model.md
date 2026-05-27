@@ -16,7 +16,8 @@ Maintain durable documentation for:
 
 - Angular application architecture and component patterns.
 - Shared UI and reusable component boundaries.
-- Java/Spring Boot backend package and module structure.
+- Node.js BFF package and module structure.
+- Java/Spring Boot service package and module structure.
 - Database folder ownership, migrations, seed data, and local development data.
 - Deployment layout for Docker Compose, Helm, OpenShift, GitHub Actions, and future enterprise deployment references.
 - Quality gates for frontend, backend, database, security, accessibility, and deployment checks.

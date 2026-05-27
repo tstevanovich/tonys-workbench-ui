@@ -2,7 +2,7 @@
 
 Tony's Workbench is a personal workspace for living documentation, planning, AI workflows, code assistance, side projects, career material, and tool integrations.
 
-The project is built with Angular and is evolving toward an enterprise-aligned full-stack architecture with Spring Boot, SQL Server, OIDC/OAuth, OpenShift, GitHub Actions, deployment workflow integration, and portable observability.
+The project is built with Angular and is evolving toward an enterprise-aligned full-stack architecture with a Node.js Backend-for-Frontend layer, Java/Spring Boot domain services, SQL Server, OIDC/OAuth, OpenShift, GitHub Actions, deployment workflow integration, and portable observability.
 
 ## Development server
 

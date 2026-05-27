@@ -29,7 +29,7 @@ export const ReleaseManagementGuideArticle: DocumentationArticle = {
         'Use GitHub releases and tags for production releases.',
         'Publish release notes that summarize user-facing changes, architecture changes, dependency upgrades, security fixes, and migration steps.',
         'Keep deployment history visible through GitHub Actions environments.',
-        'Use immutable container image tags once backend services or deployable containers exist.'
+        'Use immutable container image tags once BFF, Java service, or deployable application containers exist.'
       ]
     },
     {

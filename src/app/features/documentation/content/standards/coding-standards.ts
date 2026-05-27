@@ -17,9 +17,9 @@ export const CodingStandardsArticle: DocumentationArticle = {
       ]
     },
     {
-      heading: 'Backend',
+      heading: 'BFF And Java Services',
       bullets: [
-        'Use Java 25 LTS for backend services.',
+        'Use Node.js 24 LTS for BFF code and Java 25 LTS for domain services.',
         'Design Spring Boot services around Clean Architecture, Domain-Driven Design, and 12-factor runtime configuration.',
         'Use api, business, configuration, and integration boundaries for enterprise Java services.',
         'Keep controllers thin and put workflow logic in application services.',
@@ -33,7 +33,7 @@ export const CodingStandardsArticle: DocumentationArticle = {
     {
       heading: 'Database',
       bullets: [
-        'Use versioned migrations for schema changes once the backend exists.',
+        'Use versioned migrations for schema changes once Java services own durable persistence.',
         'Keep migration files, seed data, model notes, and local helpers in separate database folders.',
         'Review table ownership, permissions, retention, and audit needs before adding durable data structures.'
       ]

@@ -8,7 +8,9 @@ export const PlatformGuideArticle: DocumentationArticle = {
     {
       heading: 'Recommendation',
       bullets: [
-        'Use Java 25 LTS and Spring Boot for the backend API.',
+        'Use Node.js 24 LTS for the Backend-for-Frontend layer that serves browser-facing /api routes.',
+        'Use Express or another approved Node HTTP framework when the BFF module is added.',
+        'Use Java 25 LTS and Spring Boot for domain services behind the BFF.',
         'Use Gradle and the Gradle Wrapper for Java build automation.',
         'Maven repositories, Artifactory, or private dependency repositories may still appear inside Gradle builds; that does not mean Maven is the project build tool.',
         'Use SQL Server as the primary relational database.',
@@ -25,6 +27,15 @@ export const PlatformGuideArticle: DocumentationArticle = {
       ]
     },
     {
+      heading: 'BFF Responsibilities',
+      bullets: [
+        'Route Angular requests through same-origin /api endpoints instead of exposing Java service URLs to the browser.',
+        'Keep tokens, client credentials, mTLS material, private headers, and service-to-service details server-side.',
+        'Use the BFF for frontend-specific aggregation, response shaping, request validation, and safe error mapping.',
+        'Avoid blind proxy routes unless they protect a browser boundary or simplify a real frontend contract.'
+      ]
+    },
+    {
       heading: 'Configurable Java Dependencies',
       bullets: [
         'Mirror enterprise patterns without cloning every framework dependency from one service.',
@@ -32,7 +43,7 @@ export const PlatformGuideArticle: DocumentationArticle = {
         'Use Caffeine for bounded short-lived user details caching when repeated identity lookups need local caching.',
         'Use managed keystore and truststore resolution for outbound mTLS, Kafka TLS, and certificate-secured integrations.',
         'Add feature-specific dependencies such as file generation, S3 clients, mail support, schedulers, and specialized caches only when a feature needs them.',
-        'Keep backend modules replaceable so build, auth, persistence, caching, and deployment choices can be adjusted if better reference applications are found.'
+        'Keep BFF and Java service modules replaceable so build, auth, persistence, caching, and deployment choices can be adjusted if better reference applications are found.'
       ]
     },
     {
@@ -46,7 +57,7 @@ export const PlatformGuideArticle: DocumentationArticle = {
     {
       heading: 'Local And Personal Hosting',
       bullets: [
-        'Use Docker Compose first for local Angular, Spring Boot, and SQL Server development.',
+        'Use Docker Compose first for local Angular, Node.js BFF, Spring Boot services, and SQL Server development.',
         'Use OpenShift-style manifests to mirror the enterprise deployment model.',
         'Use Red Hat Developer Sandbox for the closest hosted OpenShift learning environment when available.',
         'Use Azure Container Apps or another container host only as a fallback public demo target.'
