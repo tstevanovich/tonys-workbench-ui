@@ -97,7 +97,7 @@
     "**/node_modules": true,
     "**/target": true
   },
-  "stylelint.configFile": "stylelint.config.mjs",
+  "stylelint.configFile": "client/stylelint.config.mjs",
   "stylelint.validate": ["css", "scss"],
   "yaml.format.enable": true,
   "yaml.keyOrdering": false,

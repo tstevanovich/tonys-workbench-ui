@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": ["src/app/app.routes.ts", "e2e/**/*.ts"],
+  "project": ["src/**/*.ts", "e2e/**/*.ts"],
+  "ignoreDependencies": [
+    "@fontsource/inter",
+    "@ngrx/signals",
+    "axe-core",
+    "docx",
+    "echarts",
+    "exceljs",
+    "material-symbols",
+    "ngx-echarts",
+    "pdfmake",
+    "zod"
+  ]
+}

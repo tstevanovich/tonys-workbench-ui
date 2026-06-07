@@ -1,0 +1,12 @@
+{
+  "name": "@tonys-workbench/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node -e \"console.log('No Node.js BFF module has been implemented yet.')\"",
+    "check": "node -e \"console.log('No Node.js BFF checks are configured yet.')\"",
+    "check:ci": "npm run check",
+    "test": "node -e \"console.log('No Node.js BFF tests are configured yet.')\""
+  }
+}

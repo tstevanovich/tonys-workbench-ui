@@ -20,7 +20,7 @@ Do not quietly turn candidates into confirmed choices.
 
 The main page being refined is:
 
-`src/app/features/documentation/content/standards/modern-tech-stack.ts`
+`client/src/app/features/documentation/content/standards/modern-tech-stack.ts`
 
 This page should read as a stack inventory:
 
@@ -152,7 +152,7 @@ SignalStore does not own server cache, HTTP loading state, retry logic, or API p
 | Outbound HTTP      | Node.js fetch by default                                                  |
 | Boundary ownership | Token mediation, response shaping, request validation, safe error mapping |
 
-Do not install Express or BFF dependencies in this repo until a `bff/` module is actually implemented.
+Do not install Express or BFF dependencies in this repo until the `server/` module is actually implemented.
 
 ## Confirmed Java Services Direction
 
@@ -300,5 +300,5 @@ npm.cmd run build
 
 - Current repo path: `C:\projects\tonys-workbench`
 - The old folder name `ai-agent` may appear only in older memory/context and should not be reintroduced.
-- The docs route is lazy-loaded and currently has a dedicated `Documentation Home` page.
+- The docs route is lazy-loaded from `client/` and currently has a dedicated `Documentation Home` page.
 - The Modern Tech Stack page is intentionally large and table-driven.
