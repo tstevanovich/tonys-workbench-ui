@@ -41,7 +41,7 @@ p {
 }
 
 .footer-meta {
-  color: color-mix(in srgb, var(--app-shell-footer-fg) 78%, transparent);
+  color: var(--app-shell-footer-fg);
 }
 
 .footer-links {
