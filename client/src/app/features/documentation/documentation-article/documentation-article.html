@@ -7,21 +7,21 @@
     <p>{{ article.summary }}</p>
   </header>
 
-  @for (section of article.sections; track section.heading) {
+  @for (articleSection of article.sections; track articleSection.heading) {
     <section class="article-section">
-      <h3>{{ section.heading }}</h3>
+      <h3>{{ articleSection.heading }}</h3>
 
-      @if (section.body) {
-        <p>{{ section.body }}</p>
+      @if (articleSection.body) {
+        <p>{{ articleSection.body }}</p>
       }
 
-      @if (section.markdown) {
-        <app-markdown-renderer [content]="section.markdown" />
+      @if (articleSection.markdown) {
+        <app-markdown-renderer [content]="articleSection.markdown" />
       }
 
-      @if (section.bullets) {
+      @if (articleSection.bullets) {
         <ul>
-          @for (bullet of section.bullets; track bullet) {
+          @for (bullet of articleSection.bullets; track bullet) {
             <li>{{ bullet }}</li>
           }
         </ul>

@@ -6,7 +6,7 @@ import {
   type ElementRef,
   inject,
   signal,
-  ViewChild
+  viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatIcon } from '@angular/material/icon';
@@ -32,8 +32,7 @@ export class DocumentationShell {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
-  @ViewChild('documentationTop')
-  private documentationTop?: ElementRef<HTMLElement>;
+  private readonly documentationTop = viewChild<ElementRef<HTMLElement>>('documentationTop');
 
   readonly categories = documentationCategories.map((category) => ({
     ...category,
@@ -96,7 +95,7 @@ export class DocumentationShell {
   }
 
   private scrollToTop(): void {
-    const target = this.documentationTop?.nativeElement;
+    const target = this.documentationTop()?.nativeElement;
 
     if (target) {
       target.scrollIntoView({ block: 'start' });

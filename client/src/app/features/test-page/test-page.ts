@@ -39,7 +39,7 @@ Use this page as a small rendering lab for markdown that will show up in prompts
 
 \`\`\`bash
 npm.cmd run lint
-npm.cmd run lint:styles
+npm.cmd run lint:client:styles
 npm.cmd run build
 \`\`\`
 `

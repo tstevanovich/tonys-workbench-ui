@@ -12,7 +12,7 @@
     17rem minmax(0, 1fr);
   width: 100%;
   min-height: 100dvh;
-  background-color: var(--mat-sys-surface);
+  background-color: var(--app-content-bg);
   transition: grid-template-columns 180ms ease;
 }
 
@@ -51,7 +51,10 @@ app-shell-navigation {
   width: 100%;
   min-width: 0;
   max-width: 76rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  background:
+    linear-gradient(var(--app-panel-bg), transparent 18rem) no-repeat,
+    var(--app-content-bg);
 }
 
 app-shell-footer {

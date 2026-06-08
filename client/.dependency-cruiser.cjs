@@ -20,6 +20,29 @@ module.exports = {
         path: '^src/app/features/([^/]+)/',
         pathNot: '^src/app/features/$1/'
       }
+    },
+    {
+      name: 'shared-does-not-import-features',
+      severity: 'error',
+      comment: 'Shared code should stay reusable and must not depend on feature folders.',
+      from: {
+        path: '^src/app/shared/'
+      },
+      to: {
+        path: '^src/app/features/'
+      }
+    },
+    {
+      name: 'core-does-not-import-features',
+      severity: 'error',
+      comment:
+        'Core code should provide app-wide infrastructure and must not depend on feature folders.',
+      from: {
+        path: '^src/app/core/'
+      },
+      to: {
+        path: '^src/app/features/'
+      }
     }
   ],
   options: {
@@ -29,7 +52,7 @@ module.exports = {
     tsPreCompilationDeps: true,
     combinedDependencies: true,
     exclude: {
-      path: '\\.spec\\.ts$|\\.test\\.ts$'
+      path: String.raw`\.spec\.ts$|\.test\.ts$`
     }
   }
 };

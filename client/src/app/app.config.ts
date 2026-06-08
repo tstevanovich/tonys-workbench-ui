@@ -6,8 +6,7 @@ import {
 } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { QueryClient } from '@tanstack/angular-query-experimental';
-import { provideTanStackQuery } from '@tanstack/angular-query-experimental';
+import { provideTanStackQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { provideMarkdown } from 'ngx-markdown';
 
 import { routes } from './app.routes';

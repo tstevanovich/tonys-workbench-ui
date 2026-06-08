@@ -203,6 +203,8 @@ Tony prefers Karate over adding both Karate and Cucumber because Karate appeared
 
 Tony confirmed the reference environment uses Liquibase with SQL Server.
 
+Tony added Checkstyle for Java as useful VS Code tooling for Java development, but the UI repo extension recommendations were later narrowed to Angular client and Node.js BFF tooling only. Java extension recommendations should live with the services repo or user-level setup until that repo defines its own workspace guidance.
+
 ## Corporate Documentation Evidence Captured So Far
 
 The user is reviewing DevX/framework pages by taking photos. Do not ask for proprietary source code. Use sanitized summaries and photos only.
@@ -240,7 +242,7 @@ Proprietary names were visible in the screenshots for auth, logging, error handl
 | Frontend error monitoring    | Sentry was mentioned as an option but not confirmed. Need discussion.                                                                                                     |
 | Frontend observability       | Java service observability uses Elastic-compatible tooling plus portable OpenTelemetry and Java APM agent instrumentation. Frontend monitoring is still undecided.        |
 | Deployment packaging         | Tony wants one default personal packaging standard. Need discussion before finalizing.                                                                                    |
-| Backend lint/static analysis | Candidate tools include Spotless, Checkstyle, SpotBugs, and OWASP Dependency-Check. Need evidence/discussion before locking.                                              |
+| Backend lint/static analysis | Candidate build tools include Spotless, Checkstyle, SpotBugs, and OWASP Dependency-Check. The Gradle Checkstyle gate still needs service-repo evidence or discussion.     |
 | Database repo conventions    | Need more info from database repo: changelog format, folder structure, rollback conventions, seed/reference data, stored procedures/views/functions, environment scripts. |
 
 ## Pages Worth Capturing Next

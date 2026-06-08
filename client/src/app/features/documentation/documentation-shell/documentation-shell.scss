@@ -7,6 +7,10 @@
 
 .documentation-heading {
   grid-column: 1 / -1;
+  padding: 1.5rem;
+  background-color: var(--app-hero-bg);
+  border: 1px solid color-mix(in srgb, var(--mat-sys-primary) 18%, transparent);
+  border-radius: var(--mat-sys-corner-large);
 
   h1 {
     margin: 0.25rem 0 0.5rem;
@@ -31,7 +35,11 @@
   position: sticky;
   top: 1rem;
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: var(--app-panel-bg);
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--mat-sys-corner-medium);
 }
 
 .documentation-category {
@@ -54,7 +62,7 @@
     &.active-doc-link {
       color: var(--mat-sys-on-primary-container);
       outline: 0;
-      background-color: var(--mat-sys-primary-container);
+      background-color: var(--app-shell-nav-active-bg);
     }
   }
 }
@@ -104,6 +112,7 @@
 
 .documentation-article {
   min-width: 0;
+  max-width: 56rem;
 }
 
 @media (width <= 56rem) {

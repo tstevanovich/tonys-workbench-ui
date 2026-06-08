@@ -12,23 +12,24 @@ export const FolderStructureGuideArticle: DocumentationArticle = {
 client/
   angular.json
   package.json
-  src/app/
-  core/                       frontend-wide infrastructure
-  shared/                     reusable frontend UI, forms, a11y, testing helpers
-  features/<feature-name>/    Angular routes, pages, components, state, data access
+  src/
+    main.ts                   Angular bootstrap entry point
+    app/
+      app-shell/              application layout used across routes
+      core/                   app-wide infrastructure created when needed
+      shared/                 reusable code created when real reuse exists
+      features/<feature-name>/ routed Angular feature areas
 \`\`\`
 `,
       bullets: [
         'Use `client/` for Angular application code, Angular config, client tests, browser assets, and frontend package scripts.',
-        'client/src/app/core/auth for authentication, authorization, route guards, and identity services.',
-        'client/src/app/core/api for HTTP configuration, OpenAPI clients, interceptors, and request utilities.',
-        'client/src/app/core/errors for global error handling and user-safe error mapping.',
-        'client/src/app/core/logging for client logging and observability adapters.',
-        'client/src/app/shared/ui for reusable standalone presentation components.',
-        'client/src/app/shared/forms for form controls, validators, and validation-message helpers.',
-        'client/src/app/shared/a11y for accessibility helpers and CDK a11y wrappers.',
-        'client/src/app/shared/testing for test builders, render helpers, and reusable mocks.',
-        'client/src/app/features/<feature-name> for routes, pages, components, stores, schemas, data-access, and tests for one product area.'
+        'Keep Angular UI code under client/src and bootstrap the application from client/src/main.ts.',
+        'Group component TypeScript, template, stylesheet, and nearby tests in the same feature or layout folder.',
+        'Use client/src/app/app-shell for cross-route shell layout such as header, navigation, and footer.',
+        'Use client/src/app/features/<feature-name> for routes, pages, components, stores, schemas, data-access, and tests for one product area.',
+        'Create core subfolders such as api, auth, errors, and logging only when app-wide infrastructure actually exists.',
+        'Create shared subfolders such as ui, forms, a11y, and testing only after code is genuinely reusable outside one feature.',
+        'Avoid broad type-first dumping grounds such as global components, services, models, or utilities folders.'
       ]
     },
     {

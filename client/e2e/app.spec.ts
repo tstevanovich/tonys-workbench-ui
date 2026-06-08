@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { expect, test } from '@playwright/test';
 
 test.describe('application shell', () => {
   test('loads the dashboard and documentation routes', async ({ page }) => {

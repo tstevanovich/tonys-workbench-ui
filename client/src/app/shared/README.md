@@ -1,6 +1,6 @@
 # Shared
 
-Reusable code with no feature dependency belongs here.
+Reusable code with no feature dependency belongs here. Promote code to `shared` only after at least two features need it or the code is clearly platform-level UI/infrastructure.
 
 - `ui`: standalone presentational components.
 - `forms`: form controls, validators, and validation-message helpers.

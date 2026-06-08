@@ -45,7 +45,8 @@ npm run build
         'Run database migration validation in `tonys-workbench-database` once migration tooling exists.',
         'Run Helm template or chart validation once deployment charts exist.',
         'Deploy only after quality gates pass.',
-        'Run OWASP ZAP baseline against the deployed URL where practical.'
+        'Run OWASP ZAP baseline against the deployed URL where practical.',
+        'Set the `PUBLIC_APP_URL` GitHub repository variable when the UI repository has a stable deployed URL to scan.'
       ]
     },
     {

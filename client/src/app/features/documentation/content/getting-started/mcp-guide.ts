@@ -38,7 +38,7 @@ Workspace MCP servers live in \`.vscode/mcp.json\`.
 }
 \`\`\`
 
-Workspace VS Code settings should allow configured MCP servers to start automatically when needed.
+Repository VS Code settings should allow configured MCP servers to start automatically when the repository is opened directly. In a multi-root workspace, keep this setting in the \`.code-workspace\` file instead.
 
 \`\`\`jsonc
 {

@@ -6,8 +6,8 @@
 }
 
 header {
-  color: var(--mat-sys-on-primary-container);
-  background-color: var(--mat-sys-primary-container);
+  color: var(--app-shell-header-fg);
+  background-color: var(--app-shell-header-bg);
   border-bottom: 1px solid var(--mat-sys-outline-variant);
 }
 
@@ -18,7 +18,7 @@ mat-toolbar {
 
 .brand {
   font: var(--mat-sys-title-large);
-  color: var(--mat-sys-on-primary-container);
+  color: var(--app-shell-header-fg);
   text-decoration: none;
 
   &:focus-visible {
@@ -32,12 +32,42 @@ mat-toolbar {
 }
 
 .navigation-toggle {
-  color: var(--mat-sys-on-primary-container);
+  color: var(--app-shell-header-fg);
 }
 
 .theme-toggle {
   position: relative;
-  color: var(--mat-sys-on-primary-container);
+  color: var(--app-shell-header-fg);
+}
+
+header button[matIconButton] {
+  position: relative;
+  color: var(--app-shell-header-fg);
+}
+
+header button[matButton] {
+  color: var(--app-shell-header-fg);
+  border-color: color-mix(in srgb, var(--app-shell-header-fg) 58%, transparent);
+
+  &:hover,
+  &:focus-visible {
+    background-color: color-mix(in srgb, var(--app-shell-header-fg) 10%, transparent);
+  }
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.25rem;
+  display: grid;
+  place-items: center;
+  min-width: 1rem;
+  height: 1rem;
+  padding-inline: 0.1875rem;
+  font: var(--mat-sys-label-small);
+  color: var(--mat-sys-on-error);
+  background-color: var(--mat-sys-error);
+  border-radius: 999px;
 }
 
 .theme-swatch {
@@ -56,8 +86,8 @@ mat-toolbar {
 }
 
 .theme-menu-item-active {
-  color: var(--mat-sys-on-primary-container);
-  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-secondary-container);
+  background-color: var(--mat-sys-secondary-container);
 }
 
 .theme-menu-row {

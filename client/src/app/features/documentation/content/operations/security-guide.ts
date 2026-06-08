@@ -32,7 +32,8 @@ npm --workspace server run check
         'Run SonarQube or equivalent code quality scanning for maintainability, reliability, and security findings.',
         'Use dependency review and update automation when available.',
         'Run container image scanning once container images are built.',
-        'Run OWASP ZAP against deployed environments when a stable URL exists.'
+        'Run OWASP ZAP against deployed environments when a stable URL exists.',
+        'Configure the `PUBLIC_APP_URL` GitHub repository variable before enabling scheduled ZAP scans for a deployed environment.'
       ]
     },
     {

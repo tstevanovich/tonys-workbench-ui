@@ -1,6 +1,6 @@
 # Core
 
-Singleton application infrastructure belongs here.
+Singleton application infrastructure belongs here. Create subfolders only when the app has real app-wide code for that concern.
 
 - `api`: HTTP configuration, generated OpenAPI clients, interceptors, request utilities.
 - `auth`: authentication, authorization, route guards, identity services.

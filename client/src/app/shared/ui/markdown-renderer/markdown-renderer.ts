@@ -9,7 +9,7 @@ import {
   inject,
   input,
   Renderer2,
-  ViewChild,
+  viewChild,
   ViewEncapsulation
 } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -30,8 +30,9 @@ export class MarkdownRenderer {
   private readonly renderer = inject(Renderer2);
   private readonly copyButtonCleanups: (() => void)[] = [];
 
-  @ViewChild('markdownHost', { read: ElementRef })
-  private markdownHost?: ElementRef<HTMLElement>;
+  private readonly markdownHost = viewChild<unknown, ElementRef<HTMLElement>>('markdownHost', {
+    read: ElementRef
+  });
 
   constructor() {
     this.destroyRef.onDestroy(() => {
@@ -42,7 +43,7 @@ export class MarkdownRenderer {
   protected addCopyButtons(): void {
     this.clearCopyButtonListeners();
 
-    const host = this.markdownHost?.nativeElement;
+    const host = this.markdownHost()?.nativeElement;
 
     if (!host) {
       return;

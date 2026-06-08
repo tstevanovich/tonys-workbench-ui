@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "$schema": "../node_modules/knip/schema.json",
   "entry": ["src/app/app.routes.ts", "e2e/**/*.ts"],
   "project": ["src/**/*.ts", "e2e/**/*.ts"],
   "ignoreDependencies": [

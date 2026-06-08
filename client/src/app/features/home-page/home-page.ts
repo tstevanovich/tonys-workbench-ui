@@ -52,7 +52,7 @@ export class HomePage {
       route: '/docs'
     },
     {
-      id: 'planner',
+      id: 'planning',
       icon: 'checklist',
       title: 'Planner',
       subtitle: 'Ideas into action',
@@ -61,7 +61,7 @@ export class HomePage {
       route: '/planner'
     },
     {
-      id: 'ai-studio',
+      id: 'ai',
       icon: 'auto_awesome',
       title: 'AI Studio',
       subtitle: 'Creative and practical AI',
@@ -70,7 +70,7 @@ export class HomePage {
       route: '/ai-studio'
     },
     {
-      id: 'code-lab',
+      id: 'code',
       icon: 'terminal',
       title: 'Code Lab',
       subtitle: 'Guided implementation',

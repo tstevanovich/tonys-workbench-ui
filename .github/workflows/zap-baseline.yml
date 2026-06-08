@@ -13,8 +13,22 @@ jobs:
   zap:
     runs-on: ubuntu-latest
     steps:
+      - name: Check target URL
+        id: target
+        env:
+          PUBLIC_APP_URL: ${{ vars.PUBLIC_APP_URL }}
+        run: |
+          if [ -z "$PUBLIC_APP_URL" ]; then
+            echo "::notice title=Skipping ZAP scan::PUBLIC_APP_URL repository variable is not configured."
+            echo "run_scan=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "run_scan=true" >> "$GITHUB_OUTPUT"
+
       - name: ZAP baseline scan
-        uses: zaproxy/action-baseline@v0.14.0
+        if: steps.target.outputs.run_scan == 'true'
+        uses: zaproxy/action-baseline@v0.15.0
         with:
           target: ${{ vars.PUBLIC_APP_URL }}
           fail_action: false
