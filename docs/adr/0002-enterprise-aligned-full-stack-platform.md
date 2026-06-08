@@ -8,12 +8,17 @@ Accepted
 
 This project should build skills that transfer to enterprise application work. The platform direction is Angular, a Node.js Backend-for-Frontend layer, Java/Spring Boot domain services, Gradle, SQL Server, OIDC/OAuth, deployment workflow integration, OpenShift Container Platform, Helm charts, runtime configuration services, Elastic-compatible observability, OpenTelemetry-compatible instrumentation, and Java APM agent instrumentation. The Java side should be enterprise-aligned and configurable rather than a perfect clone of any one service.
 
+The repository model is split by ownership: `tonys-workbench-ui` contains the Angular client and Node.js BFF, `tonys-workbench-services` contains Java/Spring Boot microservices, and `tonys-workbench-database` contains database-owned schema and data assets.
+
 ## Decision
 
 Use the enterprise-aligned platform as the architecture baseline:
 
 - Angular for the web application.
 - Node.js for the Backend-for-Frontend layer that sits between Angular and Java services.
+- Keep Angular code in `client/` and Node.js BFF code in `server/` inside `tonys-workbench-ui`.
+- Keep Java/Spring Boot microservices in `tonys-workbench-services`.
+- Keep SQL Server schema, Liquibase migrations, seed/reference data, and database docs in `tonys-workbench-database`.
 - Express or another approved Node HTTP framework for BFF routes when a server module is added.
 - Java 25 LTS for domain services.
 - Spring Boot for domain APIs and service APIs behind the BFF.
@@ -43,4 +48,4 @@ Use the enterprise-aligned platform as the architecture baseline:
 
 ## Consequences
 
-The project will be heavier than a frontend-only or serverless stack, but the learning overlap with enterprise systems is much higher. Local development should use Docker Compose first, then add OpenShift-style Helm/deployment manifests once the backend and database exist. This project can keep CD assets in the same repo while it is a personal learning project, but the app-repo plus app-cd-repo split remains documented as an enterprise delivery pattern.
+The project will be heavier than a frontend-only or serverless stack, but the learning overlap with enterprise systems is much higher. Local development should use Docker Compose first, then add OpenShift-style Helm/deployment manifests once the backend and database exist. This project now uses separate UI, services, and database repositories; a separate deployment repository remains a future option if deployment ownership becomes large, access-controlled, or maintained on a different lifecycle.

@@ -1,0 +1,198 @@
+@use '@angular/material' as mat;
+
+$app-font-family:
+  'Inter',
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  sans-serif;
+$typography: (
+  plain-family: $app-font-family,
+  brand-family: $app-font-family
+);
+
+@mixin app-theme($theme-type, $primary, $tertiary) {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: $theme-type,
+        primary: $primary,
+        tertiary: $tertiary
+      ),
+      typography: $typography,
+      density: 0
+    )
+  );
+}
+
+@mixin app-layout-tokens {
+  --app-shell-header-bg: var(--mat-sys-primary);
+  --app-shell-header-fg: var(--mat-sys-on-primary);
+  --app-shell-nav-bg: color-mix(
+    in srgb,
+    var(--mat-sys-primary-container) 42%,
+    var(--mat-sys-secondary-container)
+  );
+  --app-shell-nav-fg: var(--mat-sys-on-secondary-container);
+  --app-shell-nav-active-bg: color-mix(in srgb, var(--mat-sys-primary) 16%, transparent);
+  --app-shell-footer-bg: color-mix(in srgb, var(--mat-sys-primary) 88%, var(--mat-sys-surface));
+  --app-shell-footer-fg: var(--mat-sys-on-primary);
+  --app-content-bg: color-mix(in srgb, var(--mat-sys-surface) 94%, var(--mat-sys-primary));
+  --app-panel-bg: color-mix(
+    in srgb,
+    var(--mat-sys-surface-container-low) 92%,
+    var(--mat-sys-primary-container)
+  );
+  --app-hero-bg: color-mix(
+    in srgb,
+    var(--mat-sys-primary-container) 56%,
+    var(--mat-sys-tertiary-container)
+  );
+  --app-hero-fg: var(--mat-sys-on-surface);
+  --app-hero-accent: var(--mat-sys-primary);
+  --app-hero-panel-bg: color-mix(
+    in srgb,
+    var(--mat-sys-surface) 76%,
+    var(--mat-sys-primary-container)
+  );
+  --app-card-bg: color-mix(
+    in srgb,
+    var(--mat-sys-surface-container-low) 80%,
+    var(--mat-sys-surface)
+  );
+  --app-card-icon-bg: var(--mat-sys-tertiary-container);
+  --app-card-icon-fg: var(--mat-sys-tertiary);
+  --app-code-bg: color-mix(
+    in srgb,
+    var(--mat-sys-surface-container-low) 86%,
+    var(--mat-sys-primary-container)
+  );
+}
+
+$theme: mat.define-theme(
+  (
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette
+    ),
+    typography: $typography,
+    density: (
+      scale: 0
+    )
+  )
+);
+
+@include mat.typography-hierarchy($theme);
+
+html {
+  @include app-theme(light, mat.$azure-palette, mat.$blue-palette);
+  @include app-layout-tokens;
+
+  color-scheme: light;
+}
+
+html.app-theme-azure-light {
+  @include app-theme(light, mat.$azure-palette, mat.$blue-palette);
+  @include app-layout-tokens;
+
+  color-scheme: light;
+
+  --app-theme-swatch: #005cbb;
+  --app-shell-nav-bg: #d8e3f8;
+  --app-content-bg: #f4f7fb;
+  --app-hero-bg: #dfe5ff;
+  --app-hero-fg: #10233f;
+  --app-hero-panel-bg: #f7f9ff;
+  --app-card-bg: #fbfcff;
+}
+
+html.app-theme-green-light {
+  @include app-theme(light, mat.$green-palette, mat.$spring-green-palette);
+  @include app-layout-tokens;
+
+  color-scheme: light;
+
+  --app-theme-swatch: #146c2e;
+  --app-shell-header-bg: #146c2e;
+  --app-shell-nav-bg: color-mix(
+    in srgb,
+    var(--mat-sys-primary-container) 48%,
+    var(--mat-sys-secondary-container)
+  );
+  --app-shell-footer-bg: color-mix(
+    in srgb,
+    var(--mat-sys-primary) 86%,
+    var(--mat-sys-tertiary-container)
+  );
+  --app-hero-bg: color-mix(
+    in srgb,
+    var(--mat-sys-primary-container) 64%,
+    var(--mat-sys-secondary-container)
+  );
+}
+
+html.app-theme-cyan-dark {
+  @include app-theme(dark, mat.$cyan-palette, mat.$azure-palette);
+  @include app-layout-tokens;
+
+  color-scheme: dark;
+
+  --app-theme-swatch: #00acc1;
+  --app-shell-header-bg: color-mix(in srgb, var(--mat-sys-primary) 36%, #082f32);
+  --app-shell-header-fg: var(--mat-sys-on-surface);
+  --app-shell-nav-bg: color-mix(in srgb, var(--mat-sys-primary-container) 22%, #122423);
+  --app-shell-footer-bg: color-mix(in srgb, var(--mat-sys-primary) 24%, #082f32);
+  --app-shell-footer-fg: var(--mat-sys-on-surface);
+  --app-content-bg: color-mix(in srgb, var(--mat-sys-surface) 78%, var(--mat-sys-primary) 10%);
+  --app-panel-bg: var(--mat-sys-surface-container-low);
+  --app-hero-bg: color-mix(
+    in srgb,
+    var(--mat-sys-tertiary-container) 30%,
+    var(--mat-sys-surface-container)
+  );
+  --app-hero-panel-bg: color-mix(
+    in srgb,
+    var(--mat-sys-surface-container-low) 84%,
+    var(--mat-sys-primary-container)
+  );
+  --app-card-bg: var(--mat-sys-surface-container-low);
+  --app-code-bg: var(--mat-sys-surface-container-low);
+}
+
+html.app-theme-rose-dark {
+  @include app-theme(dark, mat.$rose-palette, mat.$orange-palette);
+  @include app-layout-tokens;
+
+  color-scheme: dark;
+
+  --app-theme-swatch: #c2185b;
+  --app-shell-header-bg: color-mix(in srgb, var(--mat-sys-primary) 38%, #301421);
+  --app-shell-header-fg: var(--mat-sys-on-surface);
+  --app-shell-nav-bg: color-mix(in srgb, var(--mat-sys-primary-container) 20%, #261923);
+  --app-shell-footer-bg: color-mix(in srgb, var(--mat-sys-tertiary) 22%, #301421);
+  --app-shell-footer-fg: var(--mat-sys-on-surface);
+  --app-content-bg: color-mix(in srgb, var(--mat-sys-surface) 80%, var(--mat-sys-primary) 8%);
+  --app-panel-bg: var(--mat-sys-surface-container-low);
+  --app-hero-bg: color-mix(
+    in srgb,
+    var(--mat-sys-tertiary-container) 32%,
+    var(--mat-sys-surface-container)
+  );
+  --app-hero-panel-bg: color-mix(
+    in srgb,
+    var(--mat-sys-surface-container-low) 84%,
+    var(--mat-sys-tertiary-container)
+  );
+  --app-card-bg: var(--mat-sys-surface-container-low);
+  --app-card-icon-bg: var(--mat-sys-primary-container);
+  --app-card-icon-fg: var(--mat-sys-primary);
+  --app-code-bg: var(--mat-sys-surface-container-low);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-on-surface);
+  background-color: var(--app-content-bg);
+}

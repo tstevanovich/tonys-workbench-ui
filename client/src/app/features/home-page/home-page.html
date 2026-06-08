@@ -1,0 +1,53 @@
+<section id="overview" class="page-introduction" aria-labelledby="page-title">
+  <div class="introduction-content">
+    <p class="eyebrow mat-label-large">Personal operating workspace</p>
+    <h1 id="page-title">Tony's Workbench</h1>
+    <p class="introduction mat-body-large">
+      A multipurpose workspace for living documentation, planning, AI production, code assistance,
+      side projects, career material, and connected tools.
+    </p>
+    <div class="introduction-actions">
+      <a matButton="filled" routerLink="/docs">
+        <mat-icon fontIcon="article" />
+        Read the docs
+      </a>
+      <a matButton="tonal" routerLink="/planner">Open planner</a>
+    </div>
+  </div>
+
+  <div class="introduction-summary" aria-label="Workspace focus areas">
+    <div>
+      <span class="summary-value">3</span>
+      <span class="summary-label">repo layers</span>
+    </div>
+    <div>
+      <span class="summary-value">4</span>
+      <span class="summary-label">themes</span>
+    </div>
+    <div>
+      <span class="summary-value">21</span>
+      <span class="summary-label">Angular baseline</span>
+    </div>
+  </div>
+</section>
+
+<section class="card-grid" aria-label="Workspace highlights">
+  @for (card of cards; track card.id) {
+    <mat-card [id]="card.id" appearance="outlined">
+      <mat-card-header>
+        <mat-icon matCardAvatar class="card-icon" [fontIcon]="card.icon" />
+        <mat-card-title>{{ card.title }}</mat-card-title>
+        <mat-card-subtitle>{{ card.subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ card.description }}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <a matButton [routerLink]="card.route">
+          {{ card.action }}
+          <mat-icon iconPositionEnd fontIcon="arrow_forward" />
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  }
+</section>

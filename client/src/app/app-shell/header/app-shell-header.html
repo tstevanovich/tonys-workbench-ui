@@ -1,0 +1,64 @@
+<header>
+  <mat-toolbar>
+    <button
+      matIconButton
+      type="button"
+      class="navigation-toggle"
+      [attr.aria-expanded]="navigationExpanded()"
+      aria-controls="primary-navigation"
+      [attr.aria-label]="navigationExpanded() ? 'Compact navigation' : 'Expand navigation'"
+      [title]="navigationExpanded() ? 'Compact navigation' : 'Expand navigation'"
+      (click)="navigationToggled.emit()">
+      <mat-icon fontIcon="menu" />
+    </button>
+    <a class="brand" routerLink="/" aria-label="Tony's Workbench home">Tony's Workbench</a>
+    <span class="toolbar-spacer"></span>
+    <button matIconButton type="button" aria-label="Search" title="Search">
+      <mat-icon fontIcon="search" />
+    </button>
+    <button matIconButton type="button" aria-label="Notifications" title="Notifications">
+      <span class="notification-badge" aria-hidden="true">3</span>
+      <mat-icon fontIcon="notifications" />
+    </button>
+    <button
+      matIconButton
+      type="button"
+      class="theme-toggle"
+      [matMenuTriggerFor]="themeMenu"
+      [attr.aria-label]="'Current theme: ' + activeTheme().label + '. Open theme menu'"
+      [title]="'Current theme: ' + activeTheme().label">
+      <span class="theme-swatch" aria-hidden="true"></span>
+      <mat-icon fontIcon="palette" />
+    </button>
+    <mat-menu #themeMenu="matMenu" xPosition="before">
+      @for (theme of themes(); track theme.id) {
+        <button
+          mat-menu-item
+          type="button"
+          class="theme-menu-item"
+          [class.theme-menu-item-active]="theme.id === activeTheme().id"
+          [attr.aria-current]="theme.id === activeTheme().id ? 'true' : null"
+          (click)="themeSelected.emit(theme.id)">
+          <span class="theme-menu-row">
+            <span class="theme-menu-radio material-symbols-outlined" aria-hidden="true">
+              {{
+                theme.id === activeTheme().id ? 'radio_button_checked' : 'radio_button_unchecked'
+              }}
+            </span>
+            <span class="theme-menu-label">{{ theme.label }}</span>
+            <span
+              class="theme-menu-theme-icon material-symbols-outlined"
+              aria-hidden="true"
+              [style.color]="theme.swatch">
+              {{ theme.icon }}
+            </span>
+          </span>
+        </button>
+      }
+    </mat-menu>
+    <button matButton="outlined" type="button">
+      <mat-icon fontIcon="account_circle" />
+      Sign in
+    </button>
+  </mat-toolbar>
+</header>

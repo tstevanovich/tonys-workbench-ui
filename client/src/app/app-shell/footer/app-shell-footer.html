@@ -1,0 +1,32 @@
+<footer>
+  <div class="footer-identity">
+    <span class="footer-mark" aria-hidden="true">TW</span>
+    <div>
+      <p class="footer-title mat-title-small">Tony's Workbench</p>
+      <p class="footer-meta mat-body-small">Copyright {{ currentYear }}. Application playbook.</p>
+    </div>
+  </div>
+
+  <nav class="footer-links" aria-label="Footer links">
+    <a matButton routerLink="/settings">Status</a>
+    <a matButton routerLink="/docs/release-management-guide">Changelog</a>
+    <a matButton routerLink="/docs/troubleshooting-guide">Help</a>
+    <a matButton routerLink="/docs/security-guide">Privacy</a>
+    <a matButton routerLink="/docs/documentation-home">
+      <mat-icon fontIcon="menu_book" />
+      Docs
+    </a>
+    <a matButton routerLink="/docs/modern-tech-stack">
+      <mat-icon fontIcon="layers" />
+      Stack
+    </a>
+    <a matButton routerLink="/docs/material-theming-guide">
+      <mat-icon fontIcon="palette" />
+      Theming
+    </a>
+    <a matButton [href]="repositoryUrl" target="_blank" rel="noreferrer">
+      <mat-icon fontIcon="code" />
+      GitHub
+    </a>
+  </nav>
+</footer>

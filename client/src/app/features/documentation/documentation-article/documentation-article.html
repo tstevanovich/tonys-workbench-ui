@@ -1,0 +1,33 @@
+@if (article(); as article) {
+  <header class="article-header">
+    <div class="article-title-row">
+      <mat-icon [fontIcon]="articleIcon()" />
+      <h2>{{ article.title }}</h2>
+    </div>
+    <p>{{ article.summary }}</p>
+  </header>
+
+  @for (articleSection of article.sections; track articleSection.heading) {
+    <section class="article-section">
+      <h3>{{ articleSection.heading }}</h3>
+
+      @if (articleSection.body) {
+        <p>{{ articleSection.body }}</p>
+      }
+
+      @if (articleSection.markdown) {
+        <app-markdown-renderer [content]="articleSection.markdown" />
+      }
+
+      @if (articleSection.bullets) {
+        <ul>
+          @for (bullet of articleSection.bullets; track bullet) {
+            <li>{{ bullet }}</li>
+          }
+        </ul>
+      }
+    </section>
+  }
+} @else {
+  <p class="article-loading">Loading documentation...</p>
+}

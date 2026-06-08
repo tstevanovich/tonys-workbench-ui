@@ -1,8 +1,9 @@
 # Generated output and dependencies
-dist
-coverage
-playwright-report
-test-results
-reports
 .angular
+coverage
+dist
 node_modules
+out-tsc
+playwright-report
+reports
+test-results

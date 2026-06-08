@@ -1,61 +1,117 @@
-# Tony's Workbench
+# Tony's Workbench UI
 
 Tony's Workbench is a personal workspace for living documentation, planning, AI workflows, code assistance, side projects, career material, and tool integrations.
 
-The project is built with Angular and is evolving toward an enterprise-aligned full-stack architecture with a Node.js Backend-for-Frontend layer, Java/Spring Boot domain services, SQL Server, OIDC/OAuth, OpenShift, GitHub Actions, deployment workflow integration, and portable observability.
+This repository contains the UI tier:
 
-## Development server
+- `client/` contains the Angular application and in-app documentation experience.
+- `server/` is reserved for the Node.js Backend-for-Frontend that will expose same-origin `/api/...` routes for the Angular client.
 
-To start a local development server, run:
+Sibling repositories own the other layers:
+
+- `tonys-workbench-services` owns Java/Spring Boot microservices.
+- `tonys-workbench-database` owns SQL Server schema, Liquibase migrations, seed/reference data, and database documentation.
+
+The project is evolving toward an enterprise-aligned full-stack architecture with Angular, a Node.js Backend-for-Frontend layer, Java/Spring Boot domain services, SQL Server, OIDC/OAuth, OpenShift, GitHub Actions, deployment workflow integration, and portable observability.
+
+## Prerequisites
+
+- Node.js 24
+- npm 11
+
+The expected Node.js version is also captured in `.nvmrc`.
+
+## Installation
+
+Install all workspace dependencies from the repository root:
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Development Server
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+To start the Angular development server from the repository root, run:
 
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Once the server is running, open `http://localhost:4200/`. The application reloads whenever you modify client files.
+
+## Code Scaffolding
+
+Angular CLI scaffolding runs inside the `client` workspace:
 
 ```bash
-ng generate --help
+npm --workspace client run ng -- generate component component-name
+```
+
+For a complete list of available schematics, run:
+
+```bash
+npm --workspace client run ng -- generate --help
 ```
 
 ## Building
 
-To build the project run:
+To build the UI project, run:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This compiles the Angular client and stores build artifacts in `client/dist/`.
 
-## Running unit tests
+## Node.js BFF
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+The `server/` workspace is currently a placeholder for the future Node.js Backend-for-Frontend. It exists so repository structure, scripts, and documentation already reflect the target UI-tier shape while the Angular client continues to evolve.
+
+## Running Unit Tests
+
+To execute unit tests with the [Vitest](https://vitest.dev/) test runner, run:
 
 ```bash
-ng test
+npm run test:unit
 ```
 
-## Running end-to-end tests
+## Running End-To-End Tests
 
-For end-to-end (e2e) testing, run:
+For Playwright end-to-end testing, run:
 
 ```bash
 npm run test:e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Formatting and Linting
 
-## Additional Resources
+Run the client lint checks from the repository root:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run lint
+npm run lint:client:styles
+```
+
+Format the repository with Prettier:
+
+```bash
+npm run format
+```
+
+## Validation
+
+Run the local quality gate from the repository root:
+
+```bash
+npm run check
+```
+
+Run the CI-oriented quality gate, including the npm security audit:
+
+```bash
+npm run check:ci
+```
+
+## Documentation
+
+Documentation and ADRs currently live in this UI repository under `docs/` and in the Angular documentation experience. They describe the intended architecture for the UI, services, and database repositories until documentation ownership moves to the database repository later.

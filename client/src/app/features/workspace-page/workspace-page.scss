@@ -1,0 +1,57 @@
+:host {
+  display: block;
+}
+
+.workspace-page {
+  display: grid;
+  gap: 2rem;
+}
+
+.workspace-header {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 52rem;
+  padding: 1.5rem;
+  background-color: var(--app-hero-bg);
+  border: 1px solid color-mix(in srgb, var(--mat-sys-primary) 18%, transparent);
+  border-radius: var(--mat-sys-corner-large);
+
+  h1 {
+    margin: 0;
+    font: var(--mat-sys-display-small);
+    color: var(--mat-sys-on-surface);
+  }
+
+  p {
+    margin: 0;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.eyebrow {
+  color: var(--mat-sys-primary);
+  text-transform: uppercase;
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+mat-card {
+  min-height: 12rem;
+  background-color: var(--app-card-bg);
+}
+
+.capability-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mat-sys-primary);
+  background-color: var(--mat-sys-primary-container);
+}
+
+mat-card-content {
+  color: var(--mat-sys-on-surface-variant);
+}

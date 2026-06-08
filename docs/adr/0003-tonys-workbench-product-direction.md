@@ -10,7 +10,9 @@ The project started as an AI agent app, but the product direction expanded into 
 
 ## Decision
 
-Rename the repository and application from `ai-agent` to `tonys-workbench`.
+Rename the application from `ai-agent` to `Tony's Workbench`.
+
+Use `tonys-workbench-ui` as the UI repository name for the Angular client and Node.js BFF. Use sibling repositories for Java services and database assets.
 
 Use **Tony's Workbench** as the display name.
 
@@ -28,4 +30,4 @@ Organize the first-level navigation around durable workspace areas:
 
 ## Consequences
 
-AI remains a major capability, but it is not the whole product identity. The app can grow into a personal operating workspace while keeping clear route boundaries for documentation, planning, AI workflows, code generation, creative production, integrations, and recruiter-facing content.
+AI remains a major capability, but it is not the whole product identity. The app can grow into a personal operating workspace while keeping clear route boundaries for documentation, planning, AI workflows, code generation, creative production, integrations, and recruiter-facing content. The product name can remain Tony's Workbench while repository names describe layer ownership.
