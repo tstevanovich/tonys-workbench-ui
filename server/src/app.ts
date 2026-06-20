@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import express, { type ErrorRequestHandler, type Request, type Response } from 'express';
+import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { type Options as PinoHttpOptions, pinoHttp } from 'pino-http';
@@ -69,9 +70,13 @@ export function createApp(dependencies: AppDependencies = {}) {
 
     if (clientStaticPath && existsSync(join(clientStaticPath, 'index.html'))) {
       app.use(express.static(clientStaticPath, { index: false }));
-      app.get(/^\/(?!api(?:\/|$)).*/, (_request: Request, response: Response) => {
-        response.sendFile('index.html', { root: clientStaticPath });
-      });
+      app.get(
+        /^\/(?!api(?:\/|$)).*/,
+        staticShellRateLimiter,
+        (_request: Request, response: Response) => {
+          response.sendFile('index.html', { root: clientStaticPath });
+        }
+      );
     }
   }
 
@@ -86,6 +91,13 @@ const errorHandler: ErrorRequestHandler = (_error, _request, response, _next) =>
     message: 'Unexpected server error.'
   });
 };
+
+const staticShellRateLimiter = rateLimit({
+  legacyHeaders: false,
+  limit: 600,
+  standardHeaders: 'draft-8',
+  windowMs: 60_000
+});
 
 function resolveClientStaticPath() {
   return fileURLToPath(
