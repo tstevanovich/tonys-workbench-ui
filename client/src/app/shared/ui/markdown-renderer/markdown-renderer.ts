@@ -1,6 +1,5 @@
 import './languages';
 
-import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -25,7 +24,6 @@ import { MarkdownComponent } from 'ngx-markdown';
 export class MarkdownRenderer {
   readonly content = input.required<string>();
 
-  private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
   private readonly renderer = inject(Renderer2);
   private readonly copyButtonCleanups: (() => void)[] = [];
@@ -97,25 +95,22 @@ export class MarkdownRenderer {
   }
 
   private async copyCodeBlock(pre: HTMLPreElement, button: HTMLButtonElement): Promise<void> {
-    await this.writeToClipboard(pre.innerText);
-    this.showCopiedState(button);
+    if (await this.writeToClipboard(pre.innerText)) {
+      this.showCopiedState(button);
+    }
   }
 
-  private async writeToClipboard(text: string): Promise<void> {
-    if (globalThis.navigator?.clipboard) {
-      await globalThis.navigator.clipboard.writeText(text);
-      return;
+  private async writeToClipboard(text: string): Promise<boolean> {
+    if (!globalThis.navigator?.clipboard) {
+      return false;
     }
 
-    const textarea = this.renderer.createElement('textarea') as HTMLTextAreaElement;
-
-    this.renderer.setStyle(textarea, 'position', 'fixed');
-    this.renderer.setStyle(textarea, 'opacity', '0');
-    this.renderer.setProperty(textarea, 'value', text);
-    this.renderer.appendChild(this.document.body, textarea);
-    textarea.select();
-    this.document.execCommand('copy');
-    this.renderer.removeChild(this.document.body, textarea);
+    try {
+      await globalThis.navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   private showCopiedState(button: HTMLButtonElement): void {

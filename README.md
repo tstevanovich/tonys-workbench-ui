@@ -5,14 +5,14 @@ Tony's Workbench is a personal workspace for living documentation, planning, AI 
 This repository contains the UI tier:
 
 - `client/` contains the Angular application and in-app documentation experience.
-- `server/` is reserved for the Node.js Backend-for-Frontend that will expose same-origin `/api/...` routes for the Angular client.
+- `server/` contains the Node.js server that exposes same-origin `/api/...` routes for the Angular client and owns SQL Server-backed data access.
 
 Sibling repositories own the other layers:
 
-- `tonys-workbench-services` owns Java/Spring Boot microservices.
+- `tonys-workbench-services` owns Java/Spring Boot services only when a durable domain, persistence, eventing, or background-work boundary is needed.
 - `tonys-workbench-database` owns SQL Server schema, Liquibase migrations, seed/reference data, and database documentation.
 
-The project is evolving toward an enterprise-aligned full-stack architecture with Angular, a Node.js Backend-for-Frontend layer, Java/Spring Boot domain services, SQL Server, OIDC/OAuth, OpenShift, GitHub Actions, deployment workflow integration, and portable observability.
+The project is evolving toward an enterprise-aligned full-stack architecture with Angular, a Node.js web/API server, SQL Server-backed data access, optional Java/Spring Boot domain services, OIDC/OAuth, OpenShift, GitHub Actions, deployment workflow integration, and portable observability.
 
 ## Prerequisites
 
@@ -31,13 +31,21 @@ npm install
 
 ## Development Server
 
-To start the Angular development server from the repository root, run:
+To start the local full-stack development server from the repository root, run:
 
 ```bash
-npm start
+npm run dev
 ```
 
-Once the server is running, open `http://localhost:4200/`. The application reloads whenever you modify client files.
+Once the server is running, open `http://localhost:8080/`. The Node.js server listens on port 8080, serves `/api/...` itself, and proxies Angular application requests to the Angular dev server. The application reloads whenever you modify client files.
+
+To run only the Angular development server, use:
+
+```bash
+npm run start:client
+```
+
+After building, `npm start` runs the compiled Node.js server on `http://localhost:8080/` and serves the built Angular app from `client/dist/`.
 
 ## Code Scaffolding
 
@@ -61,19 +69,29 @@ To build the UI project, run:
 npm run build
 ```
 
-This compiles the Angular client and stores build artifacts in `client/dist/`.
+This cleans generated output, builds the Node.js server into `server/dist/`, and builds the Angular client into `client/dist/`.
 
-## Node.js BFF
+The client build writes footer build metadata before bundling. `npm run build:local` marks the app as `local`; `npm run build` marks the app as `prod`. This repository promotes directly from local verification to production release rather than modeling separate dev, SIT, or UAT environments.
 
-The `server/` workspace is currently a placeholder for the future Node.js Backend-for-Frontend. It exists so repository structure, scripts, and documentation already reflect the target UI-tier shape while the Angular client continues to evolve.
+## Node.js Server
+
+The `server/` workspace is the Node.js API edge for the Angular application. It exposes browser-facing same-origin `/api/...` routes, validates requests, maps safe errors, shapes frontend responses, mediates server-side auth details, and uses SQL Server repositories/query modules for application data.
+
+Run the server workspace checks directly when working on server code:
+
+```bash
+npm --workspace server run check
+```
 
 ## Running Unit Tests
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, run:
+To execute the client and server test suites, run:
 
 ```bash
-npm run test:unit
+npm test
 ```
+
+For only the Angular unit tests, run `npm run test:unit`.
 
 ## Running End-To-End Tests
 
@@ -85,7 +103,7 @@ npm run test:e2e
 
 ## Formatting and Linting
 
-Run the client lint checks from the repository root:
+Run workspace lint checks from the repository root:
 
 ```bash
 npm run lint

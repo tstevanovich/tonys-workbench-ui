@@ -11,31 +11,37 @@
     "client",
     "server"
   ],
-  "overrides": {
-    "exceljs": {
-      "uuid": "^11.1.1"
-    }
-  },
   "scripts": {
-    "start": "npm --workspace client run start",
-    "build": "npm --workspace client run build",
+    "dev": "npm run build:clean && concurrently -n \"CLIENT,SERVER\" -c \"blue,green\" \"npm run start:client\" \"npm run wait-for-client && npm run dev:server\"",
+    "dev:server": "cross-env NODE_ENV=development PORT=8080 CLIENT_DEV_SERVER_URL=http://127.0.0.1:4200 npm --workspace server run dev",
+    "start": "cross-env NODE_ENV=production PORT=8080 npm --workspace server run start",
+    "start:client": "npm --workspace client run start -- --host 127.0.0.1 --port 4200",
+    "build:local": "npm run build:clean && npm run build:server && npm run build:local:client",
+    "build": "npm run build:clean && npm run build:server && npm run build:client",
+    "build:local:client": "npm --workspace client run build:local",
+    "build:server": "npm --workspace server run build",
+    "build:client": "npm --workspace client run build",
+    "build:clean": "rimraf client/dist server/dist dist",
     "watch": "npm --workspace client run watch",
-    "test": "npm run test:unit",
+    "test": "npm run test:server && npm run test:client",
+    "test:server": "npm --workspace server run test",
+    "test:client": "npm --workspace client run test",
     "test:unit": "npm --workspace client run test:unit",
     "test:e2e": "npm --workspace client run test:e2e",
     "test:e2e:ui": "npm --workspace client run test:e2e:ui",
     "test:a11y": "npm --workspace client run test:a11y",
-    "lint": "npm --workspace client run lint",
-    "lint:fix": "npm --workspace client run lint:fix",
+    "lint": "npm --workspaces run lint",
+    "lint:fix": "npm --workspaces run lint:fix",
     "lint:client:styles": "npm --workspace client run lint:styles",
     "lint:client:styles:fix": "npm --workspace client run lint:styles:fix",
-    "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "format:write": "prettier . --write",
     "quality:architecture": "npm --workspace client run quality:architecture",
     "quality:dead-code": "npm --workspace client run quality:dead-code",
     "security:audit": "npm audit --audit-level=moderate",
     "check": "npm run lint && npm run lint:client:styles && npm run format:check && npm run test:unit && npm run quality:architecture && npm run quality:dead-code && npm --workspace server run check",
     "check:ci": "npm run check && npm run security:audit",
+    "wait-for-client": "wait-on tcp:127.0.0.1:4200",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -47,11 +53,18 @@
     ],
     "client/src/**/*.{ts,html}": [
       "eslint --config client/eslint.config.js --fix"
+    ],
+    "server/**/*.{ts,js}": [
+      "eslint --config server/eslint.config.js --fix"
     ]
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "rimraf": "^6.1.2",
+    "wait-on": "^9.0.3"
   }
 }

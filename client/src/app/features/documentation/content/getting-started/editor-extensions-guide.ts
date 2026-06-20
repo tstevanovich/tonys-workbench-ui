@@ -35,7 +35,7 @@ export const EditorExtensionsGuideArticle: DocumentationArticle = {
 `
     },
     {
-      heading: 'Node.js BFF',
+      heading: 'Node.js Server',
       markdown: `
 | Capability | Extension | Publisher | Extension ID |
 | --- | --- | --- | --- |

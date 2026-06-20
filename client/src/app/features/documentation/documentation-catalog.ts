@@ -77,7 +77,7 @@ export const documentationArticleEntries = [
   {
     id: 'modern-tech-stack',
     title: 'Modern Tech Stack',
-    summary: 'The default stack for the UI, Java service, and database repositories.',
+    summary: 'The default stack for the UI, Node.js server, service, and database repositories.',
     icon: 'layers',
     loadArticle: () =>
       import('./content/standards/modern-tech-stack').then(
@@ -87,7 +87,7 @@ export const documentationArticleEntries = [
   {
     id: 'architecture-overview',
     title: 'Architecture Overview',
-    summary: 'How the UI, services, and database repositories fit together as one system.',
+    summary: 'How the UI, Node.js server, optional services, and database fit together.',
     icon: 'account_tree',
     loadArticle: () =>
       import('./content/architecture/architecture-overview').then(
@@ -97,7 +97,7 @@ export const documentationArticleEntries = [
   {
     id: 'folder-structure-guide',
     title: 'Folder Structure Guide',
-    summary: 'Where client, server, service, database, and deployment assets belong.',
+    summary: 'Where client, server, optional service, database, and deployment assets belong.',
     icon: 'folder_open',
     loadArticle: () =>
       import('./content/architecture/folder-structure-guide').then(
@@ -155,7 +155,8 @@ export const documentationArticleEntries = [
   {
     id: 'vscode-settings-guide',
     title: 'VS Code Settings Guide',
-    summary: 'Recommended workspace settings for Angular, Java, documentation, and platform files.',
+    summary:
+      'Recommended workspace settings for Angular, Node.js, documentation, and platform files.',
     icon: 'settings',
     loadArticle: () =>
       import('./content/getting-started/vscode-settings-guide').then(
@@ -204,7 +205,7 @@ export const documentationArticleEntries = [
     id: 'api-guide',
     title: 'API Guide',
     summary:
-      'How frontend API access, BFF contracts, service contracts, and database persistence are separated.',
+      'How frontend API access, Node.js server contracts, service contracts, and database persistence are separated.',
     icon: 'api',
     loadArticle: () =>
       import('./content/architecture/api-guide').then((article) => article.ApiGuideArticle)
@@ -212,7 +213,8 @@ export const documentationArticleEntries = [
   {
     id: 'testing-guide',
     title: 'Testing Guide',
-    summary: 'The testing approach for UI, BFF, accessibility, browser, and service quality gates.',
+    summary:
+      'The testing approach for UI, Node.js server, accessibility, browser, and service quality gates.',
     icon: 'fact_check',
     loadArticle: () =>
       import('./content/standards/testing-guide').then((article) => article.TestingGuideArticle)

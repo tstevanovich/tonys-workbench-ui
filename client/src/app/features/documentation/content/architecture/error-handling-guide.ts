@@ -4,23 +4,23 @@ export const ErrorHandlingGuideArticle: DocumentationArticle = {
   id: 'error-handling-guide',
   title: 'Error Handling Guide',
   summary:
-    'How frontend, BFF, Java service, and database errors are captured, translated, and surfaced.',
+    'How frontend, Node.js server, optional Java service, and database errors are captured, translated, and surfaced.',
   sections: [
     {
       heading: 'Front End',
       bullets: [
         'Use a global error handler for unexpected client errors.',
-        'Use HTTP interceptors for request correlation and consistent BFF API error mapping.',
+        'Use HTTP interceptors for request correlation and consistent Node.js server API error mapping.',
         'Show user-safe messages in the UI and keep technical details in logs.',
         'Keep validation errors close to forms and workflow errors close to the action that failed.'
       ]
     },
     {
-      heading: 'Backend For Frontend',
+      heading: 'Node.js Server',
       bullets: [
-        'Translate downstream Java service errors into browser-safe responses with stable error codes and correlation IDs.',
+        'Translate SQL Server, downstream dependency, and optional Java service errors into browser-safe responses with stable error codes and correlation IDs.',
         'Do not expose downstream stack traces, token details, private service URLs, SQL details, secrets, or raw dependency messages to the browser.',
-        'Log BFF request context, user/session context, route, downstream dependency, and correlation ID without logging sensitive payloads.'
+        'Log server request context, user/session context, route, downstream dependency, and correlation ID without logging sensitive payloads.'
       ]
     },
     {
@@ -44,8 +44,8 @@ export const ErrorHandlingGuideArticle: DocumentationArticle = {
     {
       heading: 'Observability',
       bullets: [
-        'Carry correlation IDs across frontend, BFF, Java services, logs, API responses, and background work.',
-        'Capture frontend errors, BFF request failures, Java service failures, dependency failures, database failures, performance metrics, and release versions.',
+        'Carry correlation IDs across frontend, Node.js server, optional Java services, logs, API responses, and background work.',
+        'Capture frontend errors, Node.js server request failures, downstream service failures, Java service failures, dependency failures, database failures, performance metrics, and release versions.',
         'Use Java APM agent instrumentation when the runtime platform requires application performance monitoring.'
       ]
     }

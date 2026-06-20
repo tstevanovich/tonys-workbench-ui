@@ -13,7 +13,7 @@ export const DocumentationHomeArticle: DocumentationArticle = {
       heading: 'Start Here',
       bullets: [
         'Use Getting Started when setting up the repo, running the app locally, or onboarding a new contributor.',
-        'Use Architecture when making structural choices across the Angular client, Node.js BFF, Java services repository, database repository, and deployment layout.',
+        'Use Architecture when making structural choices across the Angular client, Node.js server, optional Java services repository, database repository, and deployment layout.',
         'Use Standards when changing code quality rules, accessibility expectations, tests, or shared technology choices.',
         'Use Operations when working on deployment, platform direction, security, observability, or troubleshooting.',
         'Use Decisions when adding ADRs, release notes, governance rules, or durable project direction.'
@@ -24,7 +24,7 @@ export const DocumentationHomeArticle: DocumentationArticle = {
       bullets: [
         'Docs should describe the intended architecture, not only the files that exist today.',
         'This UI app is the current documentation host for the UI, services, and database repositories.',
-        'Frontend, BFF, Java services, database, and deployment guidance should stay connected so the repo family can grow without rewriting the playbook.',
+        'Frontend, Node.js server, optional Java services, database, and deployment guidance should stay connected so the repo family can grow without rewriting the playbook.',
         'Architecture decisions should be captured as ADRs when they affect contributors, agents, or sibling repositories.'
       ]
     }

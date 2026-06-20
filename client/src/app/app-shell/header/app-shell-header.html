@@ -16,9 +16,16 @@
     <button matIconButton type="button" aria-label="Search" title="Search">
       <mat-icon fontIcon="search" />
     </button>
-    <button matIconButton type="button" aria-label="Notifications" title="Notifications">
-      <span class="notification-badge" aria-hidden="true">3</span>
-      <mat-icon fontIcon="notifications" />
+    <button
+      matIconButton
+      type="button"
+      class="notification-button"
+      aria-label="Notifications: 3 unread"
+      title="Notifications">
+      <span class="header-action-icon">
+        <mat-icon fontIcon="notifications" />
+      </span>
+      <span class="notification-count" aria-hidden="true">3</span>
     </button>
     <button
       matIconButton
@@ -27,7 +34,6 @@
       [matMenuTriggerFor]="themeMenu"
       [attr.aria-label]="'Current theme: ' + activeTheme().label + '. Open theme menu'"
       [title]="'Current theme: ' + activeTheme().label">
-      <span class="theme-swatch" aria-hidden="true"></span>
       <mat-icon fontIcon="palette" />
     </button>
     <mat-menu #themeMenu="matMenu" xPosition="before">

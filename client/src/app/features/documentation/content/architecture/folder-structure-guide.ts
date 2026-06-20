@@ -42,19 +42,22 @@ server/
     app.ts                    Express app composition
     server.ts                 Node server startup
     routes/                   browser-facing /api route modules
+    handlers/                 route handlers and use-case orchestration
     middleware/               auth, correlation, logging, security, errors
-    clients/                  typed clients for Java services and gateways
+    repositories/             SQL Server query modules and data access
     schemas/                  Zod request, response, and config schemas
+    database/                 SQL Server connection pool and database config
     config/                   typed runtime configuration
     observability/            logs, metrics, traces, health
   test/                       unit and route tests
 \`\`\`
 `,
       bullets: [
-        'Use `server/` for the Node.js Backend-for-Frontend module.',
-        'Use the BFF for browser-facing /api routes, response shaping, token mediation, frontend-specific aggregation, and safe error mapping.',
-        'Keep BFF routes separate from Angular components and Java domain service packages.',
-        'Do not commit private downstream URLs, tokens, mTLS material, or environment-specific secrets in BFF config.'
+        'Use `server/` for the Node.js web/API server.',
+        'Use the server for browser-facing /api routes, direct SQL Server-backed data access, response shaping, token mediation, frontend-specific aggregation, and safe error mapping.',
+        'Keep SQL in repositories/query modules instead of Express route handlers.',
+        'Keep server routes separate from Angular components and optional Java domain service packages.',
+        'Do not commit private downstream URLs, tokens, mTLS material, or environment-specific secrets in server config.'
       ]
     },
     {
@@ -76,8 +79,8 @@ bdd/                          API and BDD test project
 \`\`\`
 `,
       bullets: [
-        'Create Java/Spring Boot microservices in the sibling `tonys-workbench-services` repository.',
-        'Use this enterprise Spring service layout when building Java services.',
+        'Create Java/Spring Boot services in the sibling `tonys-workbench-services` repository only when a feature needs a separate durable backend boundary.',
+        'Use this enterprise Spring service layout when building optional Java services.',
         'Keep API contracts, business behavior, configuration, and integration adapters separate.',
         'Keep feature-specific subpackages inside these areas when a bounded context grows large enough to need clearer ownership.',
         'Keep BDD tests in a dedicated bdd/ project when they need their own configuration, dependencies, reports, or runtime profile.'
@@ -105,7 +108,7 @@ tonys-workbench-database/
       markdown: `
 \`\`\`text
 deploy/
-  compose/                    local client, server, Java services, and SQL Server composition
+  compose/                    local client, server, optional Java services, and SQL Server composition
   helm/                       Helm charts and values
   openshift/                  OpenShift-specific manifests when needed
 .github/workflows/           GitHub Actions for this personal repository

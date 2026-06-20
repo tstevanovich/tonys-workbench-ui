@@ -4,7 +4,7 @@ export const TestingGuideArticle: DocumentationArticle = {
   id: 'testing-guide',
   title: 'Testing Guide',
   summary:
-    'The testing approach for frontend, BFF, accessibility, browser, and Java service quality gates.',
+    'The testing approach for frontend, Node.js server, accessibility, browser, and optional Java service quality gates.',
   sections: [
     {
       heading: 'Commands',
@@ -30,7 +30,7 @@ npm --workspace server run check
         'Use npm run test:e2e for browser flow coverage.',
         'Use npm run test:e2e:ui when debugging browser tests interactively.',
         'Use npm run check before pushing because it runs the standard local frontend quality gate.',
-        'Use server workspace test and check scripts once the Node.js BFF module is implemented.',
+        'Use server workspace test and check scripts for Node.js server route, middleware, schema, and client checks.',
         'Use ./gradlew test in `tonys-workbench-services` for backend unit, slice, and integration tests when a Java service exists.',
         'Use ./gradlew check for the Java service quality gate in the services repository.',
         'Use ./gradlew jacocoTestReport for Java coverage reporting when JaCoCo is configured.',
@@ -62,11 +62,11 @@ npm --workspace server run check
       ]
     },
     {
-      heading: 'Backend For Frontend',
+      heading: 'Node.js Server',
       bullets: [
-        'Use TypeScript unit tests for BFF route handlers, middleware, schemas, and service clients.',
-        'Use route-level tests for request validation, auth/session behavior, error mapping, and downstream service failures.',
-        'Use contract tests or generated clients to keep BFF routes aligned with Java service APIs.'
+        'Use TypeScript unit tests for server route handlers, middleware, schemas, repositories, mappers, and SQL query modules.',
+        'Use route-level tests for request validation, auth/session behavior, error mapping, and database failure behavior.',
+        'Use contract tests or generated clients to keep server routes aligned with Angular clients and optional Java service APIs.'
       ]
     },
     {
