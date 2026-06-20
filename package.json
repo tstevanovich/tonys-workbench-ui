@@ -38,7 +38,7 @@
     "format:write": "prettier . --write",
     "quality:architecture": "npm --workspace client run quality:architecture",
     "quality:dead-code": "npm --workspace client run quality:dead-code",
-    "security:audit": "npm audit --audit-level=moderate",
+    "security:audit": "node tools/security-audit.mjs",
     "check": "npm run lint && npm run lint:client:styles && npm run format:check && npm run test:unit && npm run quality:architecture && npm run quality:dead-code && npm --workspace server run check",
     "check:ci": "npm run check && npm run security:audit",
     "wait-for-client": "wait-on tcp:127.0.0.1:4200",
@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@angular/compiler": "^21.2.17",
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
     "husky": "^9.1.7",
