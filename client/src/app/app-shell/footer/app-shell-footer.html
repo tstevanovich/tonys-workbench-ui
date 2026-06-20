@@ -3,7 +3,12 @@
     <span class="footer-mark" aria-hidden="true">TW</span>
     <div>
       <p class="footer-title mat-title-small">Tony's Workbench</p>
-      <p class="footer-meta mat-body-small">Copyright {{ currentYear }}. Application playbook.</p>
+      <p class="footer-meta mat-body-small">
+        Copyright {{ currentYear }}. Application playbook.
+        <span class="footer-build">
+          {{ buildInfo().environment }} v{{ buildInfo().version }} {{ buildInfo().commit }}
+        </span>
+      </p>
     </div>
   </div>
 

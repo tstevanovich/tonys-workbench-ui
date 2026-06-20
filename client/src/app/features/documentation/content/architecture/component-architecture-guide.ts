@@ -4,7 +4,7 @@ export const ComponentArchitectureGuideArticle: DocumentationArticle = {
   id: 'component-architecture-guide',
   title: 'Feature And Component Architecture Guide',
   summary:
-    'How feature pieces are composed across frontend, BFF, Java service, and database layers.',
+    'How feature pieces are composed across frontend, Node.js server, optional Java service, and database layers.',
   sections: [
     {
       heading: 'Front End',
@@ -17,17 +17,18 @@ export const ComponentArchitectureGuideArticle: DocumentationArticle = {
       ]
     },
     {
-      heading: 'Backend For Frontend',
+      heading: 'Node.js Server',
       bullets: [
-        'BFF feature routes own browser-facing request validation, response shaping, error translation, and calls to Java services for one product capability.',
-        'BFF code should stay close to frontend workflow needs without duplicating durable business rules from Java services.',
-        'Shared BFF middleware owns cross-cutting concerns such as request correlation, session context, auth headers, logging, and security hardening.'
+        'Server feature routes own browser-facing request validation, response shaping, error translation, and SQL-backed API behavior for one product capability.',
+        'Keep direct SQL in repositories/query modules and call them through route handlers or use cases.',
+        'Server code should stay close to frontend workflow needs without duplicating durable business rules that belong in optional domain services.',
+        'Shared server middleware owns cross-cutting concerns such as request correlation, session context, auth headers, logging, and security hardening.'
       ]
     },
     {
       heading: 'Java Services',
       bullets: [
-        'Java service feature packages own the server-side use cases, controllers, DTOs, domain behavior, persistence adapters, and tests for one product capability.',
+        'Java service feature packages are added only when a capability needs a separate durable service boundary.',
         'Controllers should stay thin and delegate workflow decisions to application services.',
         'Application services define transaction boundaries and coordinate domain logic, repositories, and external integrations.',
         'Domain code owns business rules that should not be duplicated in Angular components.',

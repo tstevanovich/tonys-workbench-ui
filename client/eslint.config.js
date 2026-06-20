@@ -7,26 +7,27 @@ const eslintConfigPrettier = require('eslint-config-prettier/flat');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
 
 const ignoredPaths = [
-  '.angular/',
-  'coverage/',
-  'dist/',
-  'node_modules/',
-  'playwright-report/',
-  'reports/',
-  'test-results/'
+  '**/.angular/**',
+  '**/coverage/**',
+  '**/dist/**',
+  '**/node_modules/**',
+  '**/playwright-report/**',
+  '**/reports/**',
+  '**/test-results/**'
 ];
 
 /** @type {import('eslint').Linter.RulesRecord} */
 const typeScriptRules = {
-  'simple-import-sort/imports': 'warn',
-  'simple-import-sort/exports': 'warn',
   '@typescript-eslint/consistent-type-imports': [
     'error',
     {
       prefer: 'type-imports',
       fixStyle: 'inline-type-imports'
     }
-  ]
+  ],
+  'no-undef': 'off',
+  'simple-import-sort/exports': 'warn',
+  'simple-import-sort/imports': 'warn'
 };
 
 /** @type {import('eslint').Linter.RulesRecord} */
@@ -60,6 +61,7 @@ const angularRules = {
   '@angular-eslint/prefer-output-readonly': 'error',
   '@angular-eslint/prefer-signal-model': 'error',
   '@angular-eslint/prefer-signals': 'error',
+  '@angular-eslint/prefer-standalone': 'error',
   '@angular-eslint/relative-url-prefix': 'error',
   '@angular-eslint/use-injectable-provided-in': 'error'
 };
@@ -85,7 +87,14 @@ const templateRules = {
   '@angular-eslint/template/prefer-class-binding': 'error',
   '@angular-eslint/template/prefer-ngsrc': 'error',
   '@angular-eslint/template/prefer-self-closing-tags': 'error',
-  '@angular-eslint/template/prefer-static-string-properties': 'error'
+  '@angular-eslint/template/prefer-static-string-properties': 'error',
+  'no-restricted-syntax': [
+    'error',
+    {
+      selector: 'BoundAttribute[name="hidden"]',
+      message: 'Do not use [hidden] in Angular templates. Use @if instead.'
+    }
+  ]
 };
 
 module.exports = defineConfig([

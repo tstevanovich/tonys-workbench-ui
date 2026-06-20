@@ -3,14 +3,59 @@
 }
 
 .workspace-page {
+  --feature-accent: var(--mat-sys-primary);
+  --feature-accent-container: var(--mat-sys-primary-container);
+  --feature-on-accent-container: var(--mat-sys-on-primary-container);
+
   display: grid;
   gap: 2rem;
+}
+
+.workspace-page[data-workspace-page='AI Studio'] {
+  --feature-accent: #267888;
+  --feature-accent-container: color-mix(in srgb, #267888 18%, var(--mat-sys-surface));
+  --feature-on-accent-container: #064c57;
+}
+
+.workspace-page[data-workspace-page='Career'] {
+  --feature-accent: #b43668;
+  --feature-accent-container: color-mix(in srgb, #b43668 18%, var(--mat-sys-surface));
+  --feature-on-accent-container: #72183d;
+}
+
+.workspace-page[data-workspace-page='Code Lab'] {
+  --feature-accent: #146fc6;
+  --feature-accent-container: color-mix(in srgb, #146fc6 16%, var(--mat-sys-surface));
+  --feature-on-accent-container: #064579;
+}
+
+.workspace-page[data-workspace-page='Integrations'] {
+  --feature-accent: #b34d00;
+  --feature-accent-container: color-mix(in srgb, #b34d00 18%, var(--mat-sys-surface));
+  --feature-on-accent-container: #713100;
+}
+
+.workspace-page[data-workspace-page='Planner'] {
+  --feature-accent: #18783c;
+  --feature-accent-container: color-mix(in srgb, #18783c 16%, var(--mat-sys-surface));
+  --feature-on-accent-container: #075322;
+}
+
+.workspace-page[data-workspace-page='Projects'] {
+  --feature-accent: #5b5fc7;
+  --feature-accent-container: color-mix(in srgb, #5b5fc7 16%, var(--mat-sys-surface));
+  --feature-on-accent-container: #252a8b;
+}
+
+.workspace-page[data-workspace-page='Settings'] {
+  --feature-accent: #6c5f0b;
+  --feature-accent-container: color-mix(in srgb, #6c5f0b 16%, var(--mat-sys-surface));
+  --feature-on-accent-container: #463d05;
 }
 
 .workspace-header {
   display: grid;
   gap: 0.75rem;
-  max-width: 52rem;
   padding: 1.5rem;
   background-color: var(--app-hero-bg);
   border: 1px solid color-mix(in srgb, var(--mat-sys-primary) 18%, transparent);
@@ -40,18 +85,67 @@
 }
 
 mat-card {
-  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 12.25rem;
   background-color: var(--app-card-bg);
+  border-color: color-mix(in srgb, var(--mat-sys-outline-variant) 82%, transparent);
+}
+
+.capability-card-header {
+  display: flex;
+  gap: 0.875rem;
+  align-items: center;
+  padding: 1rem 1rem 0;
+}
+
+.capability-heading {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    font: var(--mat-sys-title-large);
+    color: var(--mat-sys-on-surface);
+  }
+
+  p {
+    font: var(--mat-sys-title-small);
+    color: var(--mat-sys-on-surface);
+  }
 }
 
 .capability-icon {
   display: inline-flex;
+  flex: 0 0 2.5rem;
   align-items: center;
   justify-content: center;
-  color: var(--mat-sys-primary);
-  background-color: var(--mat-sys-primary-container);
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 450,
+    'GRAD' 0,
+    'opsz' 24;
+  line-height: 1;
+  color: #fff;
+  background-color: var(--feature-accent);
+  border-radius: 50%;
 }
 
 mat-card-content {
+  flex: 1 1 auto;
+  padding: 0.875rem 1rem 1rem;
   color: var(--mat-sys-on-surface-variant);
+
+  p {
+    margin: 0;
+    line-height: 1.45;
+  }
 }

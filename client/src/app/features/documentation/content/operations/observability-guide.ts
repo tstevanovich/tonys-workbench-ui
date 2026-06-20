@@ -8,8 +8,8 @@ export const ObservabilityGuideArticle: DocumentationArticle = {
     {
       heading: 'Signals',
       bullets: [
-        'Capture logs, metrics, traces, frontend errors, BFF request failures, Java service failures, dependency failures, performance timings, release versions, and deployment environment.',
-        'Attach correlation IDs or trace IDs to BFF logs, Java service logs, and outbound integration calls.',
+        'Capture logs, metrics, traces, frontend errors, Node.js server request failures, optional Java service failures, dependency failures, performance timings, release versions, and deployment environment.',
+        'Attach correlation IDs or trace IDs to Node.js server logs, SQL Server activity, optional Java service logs, and outbound integration calls.',
         'Preserve enough context to debug failures without logging secrets, tokens, identity documents, certificates, or sensitive payloads.'
       ]
     },
@@ -22,11 +22,11 @@ export const ObservabilityGuideArticle: DocumentationArticle = {
       ]
     },
     {
-      heading: 'Backend For Frontend',
+      heading: 'Node.js Server',
       bullets: [
-        'Use structured request logging for BFF routes, response status, latency, user/session context, correlation IDs, and downstream dependencies.',
-        'Capture BFF validation failures, auth/session failures, downstream Java service failures, timeout behavior, and safe error mappings.',
-        'Use OpenTelemetry-compatible instrumentation for BFF traces and metrics when the platform supports it.'
+        'Use structured request logging for server routes, response status, latency, user/session context, correlation IDs, and downstream dependencies.',
+        'Capture server validation failures, auth/session failures, SQL Server failures, optional Java service failures, timeout behavior, and safe error mappings.',
+        'Use OpenTelemetry-compatible instrumentation for server traces and metrics when the platform supports it.'
       ]
     },
     {
@@ -36,7 +36,7 @@ export const ObservabilityGuideArticle: DocumentationArticle = {
         'Use Elastic-compatible observability for Java service logs and diagnostics.',
         'Use OpenTelemetry-compatible instrumentation for portable backend traces, metrics, and logs.',
         'Use Java APM agent instrumentation where the runtime platform requires application performance monitoring.',
-        'Record dependency health for SQL Server, Kafka, outbound HTTP integrations, cache clients, and certificate-backed connections.'
+        'Record dependency health for SQL Server, Kafka, optional outbound integrations, cache clients, and certificate-backed connections.'
       ]
     },
     {

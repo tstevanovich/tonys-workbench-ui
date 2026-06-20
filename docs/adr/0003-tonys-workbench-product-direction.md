@@ -12,7 +12,7 @@ The project started as an AI agent app, but the product direction expanded into 
 
 Rename the application from `ai-agent` to `Tony's Workbench`.
 
-Use `tonys-workbench-ui` as the UI repository name for the Angular client and Node.js BFF. Use sibling repositories for Java services and database assets.
+Use `tonys-workbench-ui` as the UI repository name for the Angular client and Node.js server. Use sibling repositories for optional Java services and database assets.
 
 Use **Tony's Workbench** as the display name.
 

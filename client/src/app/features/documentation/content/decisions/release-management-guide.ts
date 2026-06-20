@@ -17,6 +17,7 @@ export const ReleaseManagementGuideArticle: DocumentationArticle = {
     {
       heading: 'Change Flow',
       bullets: [
+        'Use a local to prod flow for this repository: verify locally, then rely on GitHub Actions and release checks before production promotion.',
         'Use pull requests and required checks for all changes that leave a local branch.',
         'Run local checks before pushing and rely on GitHub Actions as the shared verification gate.',
         'Require passing quality, security, accessibility, browser, backend, and deployment checks before promoting a release.',
@@ -29,13 +30,15 @@ export const ReleaseManagementGuideArticle: DocumentationArticle = {
         'Use GitHub releases and tags for production releases.',
         'Publish release notes that summarize user-facing changes, architecture changes, dependency upgrades, security fixes, and migration steps.',
         'Keep deployment history visible through GitHub Actions environments.',
-        'Use immutable container image tags once BFF, Java service, or deployable application containers exist.'
+        'Use immutable container image tags once Node.js server, Java service, or deployable application containers exist.'
       ]
     },
     {
       heading: 'Promotion',
       bullets: [
         'Treat GitHub Actions as the source of build verification for this repository.',
+        'Do not model dev, SIT, or UAT stages unless the project grows enough to need separate deployed environments.',
+        'Write build metadata into the client footer so local and production bundles expose their environment, package version, and commit.',
         'Allow deployment workflows to hand off to a promotion system when environments require approvals or change records.',
         'Do not promote builds with failed dependency, SAST, CodeQL, accessibility, migration, container, or smoke-test checks.',
         'Record which commit, package version, image tag, environment, and workflow run produced each promoted release.'

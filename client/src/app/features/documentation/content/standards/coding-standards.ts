@@ -17,15 +17,17 @@ export const CodingStandardsArticle: DocumentationArticle = {
       ]
     },
     {
-      heading: 'BFF And Java Services',
+      heading: 'Node.js Server And Java Services',
       bullets: [
-        'Use Node.js 24 LTS for BFF code and Java 25 LTS for domain services.',
-        'Design Spring Boot services around Clean Architecture, Domain-Driven Design, and 12-factor runtime configuration.',
-        'Use api, business, configuration, and integration boundaries for enterprise Java services.',
+        'Use Node.js 24 LTS for server code and Java 25 LTS for optional domain services.',
+        'Put browser-facing API routes and SQL Server-backed data access in the Node.js server by default.',
+        'Keep SQL in repositories/query modules instead of Express route handlers.',
+        'Design Spring Boot services around Clean Architecture, Domain-Driven Design, and 12-factor runtime configuration when a feature needs a separate Java service boundary.',
+        'Use api, business, configuration, and integration boundaries for optional enterprise Java services.',
         'Keep controllers thin and put workflow logic in application services.',
         'Keep domain models separate from persistence entities when domain behavior grows beyond simple CRUD.',
         'Use DTOs for API request and response contracts rather than exposing persistence entities.',
-        'Use Spring RestClient for normal synchronous outbound HTTP calls and WebClient only when reactive behavior is useful.',
+        'Use Spring HTTP clients only for Java-owned outbound calls that remain inside optional Java services.',
         'Use Kafka for event-driven integration when asynchronous service decoupling is the right architecture.',
         'Use JUnit Jupiter, Mockito core, and Mockito JUnit Jupiter for backend unit tests.'
       ]
@@ -33,7 +35,7 @@ export const CodingStandardsArticle: DocumentationArticle = {
     {
       heading: 'Database',
       bullets: [
-        'Use versioned migrations for schema changes once Java services own durable persistence.',
+        'Use versioned migrations for SQL Server schema changes.',
         'Keep migration files, seed data, model notes, and local helpers in separate database folders.',
         'Review table ownership, permissions, retention, and audit needs before adding durable data structures.'
       ]

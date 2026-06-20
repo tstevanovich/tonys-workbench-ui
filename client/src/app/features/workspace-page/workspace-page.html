@@ -1,4 +1,7 @@
-<section class="workspace-page" aria-labelledby="workspace-page-title">
+<section
+  class="workspace-page"
+  aria-labelledby="workspace-page-title"
+  [attr.data-workspace-page]="page().eyebrow">
   <header class="workspace-header">
     <p class="eyebrow mat-label-large">{{ page().eyebrow }}</p>
     <h1 id="workspace-page-title">{{ page().title }}</h1>
@@ -8,11 +11,13 @@
   <section class="capability-grid" aria-label="Workspace capabilities">
     @for (capability of page().capabilities; track capability.title) {
       <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-icon matCardAvatar class="capability-icon" [fontIcon]="capability.icon" />
-          <mat-card-title>{{ capability.title }}</mat-card-title>
-          <mat-card-subtitle>{{ page().title }}</mat-card-subtitle>
-        </mat-card-header>
+        <div class="capability-card-header">
+          <mat-icon class="capability-icon" [fontIcon]="capability.icon" />
+          <div class="capability-heading">
+            <h2>{{ capability.title }}</h2>
+            <p>{{ page().title }}</p>
+          </div>
+        </div>
         <mat-card-content>
           <p>{{ capability.description }}</p>
         </mat-card-content>

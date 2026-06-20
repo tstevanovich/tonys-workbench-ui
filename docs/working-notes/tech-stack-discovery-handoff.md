@@ -51,7 +51,7 @@ Avoid turning this page into folder structure guidance, coding standards, or arc
 - Caffeine is confirmed for bounded short-lived user details caching where repeated identity lookups need local caching.
 - Managed keystore and truststore resolution is confirmed for outbound mTLS, Kafka TLS, and certificate-secured integrations. Keep proprietary resolver/library names out of public docs.
 - Java services should be documented as cloud-native, 12-factor applications using Clean Architecture and Domain-Driven Design.
-- New architecture direction from work discovery: Angular should call a Node.js Backend-for-Frontend through same-origin `/api/...` routes, and the BFF should call Java services. Java remains the domain/service layer rather than being replaced by Node.
+- Newer architecture direction from work discovery: Angular should call a Node.js server through same-origin `/api/...` routes, and the Node.js server owns SQL Server-backed data access by default. Java is no longer the default API or data-access path; use Java only when a feature needs a durable domain, persistence, eventing, or background-work boundary.
 - Do not adopt `spring.main.allow-circular-references: true` as a reusable standard. Treat it as compatibility debt in that service unless a modern framework guide says otherwise.
 - Multiple named datasources, named service URLs, and app-specific synchronization settings are evidence of supported patterns, but they are not universal stack choices.
 
@@ -93,10 +93,12 @@ Read operations:
 Component
 -> SignalStore (UI state only)
 -> TanStack Query (server state)
--> OpenAPI generated BFF client
+-> OpenAPI generated server API client
 -> HttpClient
--> Node.js BFF /api endpoint
--> Java service API
+-> Node.js server /api endpoint
+-> Handler/use case
+-> SQL Server repository/query module
+-> SQL Server
 
 Response
 -> Zod validation
@@ -112,10 +114,12 @@ Write operations:
 Component
 -> SignalStore (UI state only)
 -> TanStack Mutation
--> OpenAPI generated BFF client
+-> OpenAPI generated server API client
 -> HttpClient
--> Node.js BFF /api endpoint
--> Java service API
+-> Node.js server /api endpoint
+-> Handler/use case
+-> SQL Server repository/query module
+-> SQL Server
 
 Response
 -> Zod validation
@@ -126,33 +130,34 @@ Response
 
 Ownership:
 
-| Concern                     | Owner                        |
-| --------------------------- | ---------------------------- |
-| External async/server data  | TanStack Query and Mutations |
-| UI/client state             | SignalStore                  |
-| External data safety        | Zod                          |
-| Browser transport/contracts | OpenAPI-generated BFF client |
-| Web edge                    | Node.js Backend-for-Frontend |
-| Domain services             | Java Spring Boot APIs        |
-| Rendering                   | Angular components           |
+| Concern                     | Owner                                            |
+| --------------------------- | ------------------------------------------------ |
+| External async/server data  | TanStack Query and Mutations                     |
+| UI/client state             | SignalStore                                      |
+| External data safety        | Zod                                              |
+| Browser transport/contracts | OpenAPI-generated server API client              |
+| Web/API edge                | Node.js server                                   |
+| Data access                 | SQL Server repositories/query modules in Node.js |
+| Optional domain services    | Java Spring Boot APIs                            |
+| Rendering                   | Angular components                               |
 
 SignalStore owns UI state such as selected row, filters, pagination, dialog state, wizard state, layout state, and UI selections.
 
 SignalStore does not own server cache, HTTP loading state, retry logic, or API persistence.
 
-## Confirmed BFF Direction
+## Confirmed Node.js Server Direction
 
-| Role               | Choice                                                                    |
-| ------------------ | ------------------------------------------------------------------------- |
-| Runtime            | Node.js 24 LTS                                                            |
-| Language           | TypeScript                                                                |
-| HTTP framework     | Express latest stable public release                                      |
-| Browser API routes | Same-origin `/api/...` endpoints                                          |
-| Runtime validation | Zod                                                                       |
-| Outbound HTTP      | Node.js fetch by default                                                  |
-| Boundary ownership | Token mediation, response shaping, request validation, safe error mapping |
+| Role               | Choice                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| Runtime            | Node.js 24 LTS                                                                             |
+| Language           | TypeScript                                                                                 |
+| HTTP framework     | Express latest stable public release                                                       |
+| Browser API routes | Same-origin `/api/...` endpoints                                                           |
+| Runtime validation | Zod                                                                                        |
+| SQL Server client  | mssql with tedious                                                                         |
+| Boundary ownership | SQL-backed APIs, token mediation, response shaping, request validation, safe error mapping |
 
-Do not install Express or BFF dependencies in this repo until the `server/` module is actually implemented.
+The `server/` module now has real Express, TypeScript, mssql, lint, and test dependencies.
 
 ## Confirmed Java Services Direction
 
@@ -196,14 +201,15 @@ Tony prefers Karate over adding both Karate and Cucumber because Karate appeared
 | -------------------------------- | ----------------------------------------------------------------- |
 | Primary relational database      | SQL Server                                                        |
 | Schema migration/version control | Liquibase                                                         |
-| Java database driver             | Microsoft JDBC Driver for SQL Server                              |
+| Node.js database client          | mssql with tedious                                                |
+| Java database driver             | Microsoft JDBC Driver for SQL Server when Java owns persistence   |
 | Local database runtime           | SQL Server container                                              |
 | Schema ownership                 | Liquibase-managed schema with Hibernate DDL generation disabled   |
 | Database tests                   | Testcontainers SQL Server is a candidate; confirm before locking. |
 
 Tony confirmed the reference environment uses Liquibase with SQL Server.
 
-Tony added Checkstyle for Java as useful VS Code tooling for Java development, but the UI repo extension recommendations were later narrowed to Angular client and Node.js BFF tooling only. Java extension recommendations should live with the services repo or user-level setup until that repo defines its own workspace guidance.
+Tony added Checkstyle for Java as useful VS Code tooling for Java development, but the UI repo extension recommendations were later narrowed to Angular client and Node.js server tooling only. Java extension recommendations should live with the services repo or user-level setup until that repo defines its own workspace guidance.
 
 ## Corporate Documentation Evidence Captured So Far
 

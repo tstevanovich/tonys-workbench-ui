@@ -6,28 +6,31 @@ Accepted
 
 ## Context
 
-This project should build skills that transfer to enterprise application work. The platform direction is Angular, a Node.js Backend-for-Frontend layer, Java/Spring Boot domain services, Gradle, SQL Server, OIDC/OAuth, deployment workflow integration, OpenShift Container Platform, Helm charts, runtime configuration services, Elastic-compatible observability, OpenTelemetry-compatible instrumentation, and Java APM agent instrumentation. The Java side should be enterprise-aligned and configurable rather than a perfect clone of any one service.
+This project should build skills that transfer to enterprise application work. The platform direction is Angular, a Node.js web/API server that owns SQL Server-backed REST APIs, optional Java/Spring Boot domain services, Gradle, SQL Server, OIDC/OAuth, deployment workflow integration, OpenShift Container Platform, Helm charts, runtime configuration services, Elastic-compatible observability, OpenTelemetry-compatible instrumentation, and Java APM agent instrumentation. The Java side should be enterprise-aligned and configurable when a feature needs a separate service boundary.
 
-The repository model is split by ownership: `tonys-workbench-ui` contains the Angular client and Node.js BFF, `tonys-workbench-services` contains Java/Spring Boot microservices, and `tonys-workbench-database` contains database-owned schema and data assets.
+The repository model is split by ownership: `tonys-workbench-ui` contains the Angular client and Node.js server, `tonys-workbench-services` contains optional Java/Spring Boot services, and `tonys-workbench-database` contains database-owned schema and data assets.
 
 ## Decision
 
 Use the enterprise-aligned platform as the architecture baseline:
 
 - Angular for the web application.
-- Node.js for the Backend-for-Frontend layer that sits between Angular and Java services.
-- Keep Angular code in `client/` and Node.js BFF code in `server/` inside `tonys-workbench-ui`.
-- Keep Java/Spring Boot microservices in `tonys-workbench-services`.
+- Node.js for the web/API layer that sits between Angular and SQL Server-backed application data.
+- Keep Angular code in `client/` and Node.js server code in `server/` inside `tonys-workbench-ui`.
+- Keep Java/Spring Boot services in `tonys-workbench-services` only when a feature needs a durable service boundary.
 - Keep SQL Server schema, Liquibase migrations, seed/reference data, and database docs in `tonys-workbench-database`.
-- Express or another approved Node HTTP framework for BFF routes when a server module is added.
-- Java 25 LTS for domain services.
-- Spring Boot for domain APIs and service APIs behind the BFF.
-- Cloud-native, 12-factor application design for BFF and Java services.
+- Express or another approved Node HTTP framework for server routes.
+- `mssql` with the `tedious` driver for SQL Server access from the Node.js server.
+- Keep SQL in repositories/query modules instead of Express route handlers.
+- Java 25 LTS for optional domain services.
+- Spring Boot for optional domain APIs and service APIs behind the Node.js server when Java is justified.
+- Cloud-native, 12-factor application design for the Node.js server and optional Java services.
 - Clean Architecture and Domain-Driven Design for Java service structure.
 - Gradle and the Gradle Wrapper for Java build automation.
 - Maven repositories, Artifactory, or private dependency repositories may still appear inside Gradle builds; that does not mean Maven is the project build tool.
 - SQL Server for relational persistence.
-- Spring Data JPA and Hibernate for persistence mapping when relational domain modeling is needed.
+- Keep SQL Server schema, migrations, and seed/reference data in the database repository.
+- Spring Data JPA and Hibernate only for optional Java services that own relational persistence.
 - OIDC/OAuth for authentication and authorization.
 - Kafka for event streaming when asynchronous events, pub/sub messaging, stream processing, or service decoupling are needed.
 - OpenShift Container Platform as the enterprise runtime target.
@@ -38,7 +41,7 @@ Use the enterprise-aligned platform as the architecture baseline:
 - OpenTelemetry-compatible instrumentation for portable traces, metrics, and logs.
 - Java APM agent instrumentation where the runtime platform requires application performance monitoring.
 - Runtime configuration loaded through a typed external config pattern.
-- Spring RestClient for normal synchronous outbound HTTP calls, Spring HTTP Interface for typed clients, WebClient for reactive calls, and Apache HttpClient 5 only when a low-level Apache transport is needed.
+- Spring RestClient, Spring HTTP Interface, WebClient, or Apache HttpClient 5 only for Java-owned outbound calls that remain inside optional Java services.
 - Caffeine for bounded short-lived user details caching when repeated identity lookups need local caching.
 - Managed keystore and truststore resolution for outbound mTLS, Kafka TLS, and certificate-secured integrations.
 - JUnit Jupiter, Mockito core, and Mockito JUnit Jupiter for Java service tests.

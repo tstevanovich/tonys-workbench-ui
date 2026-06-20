@@ -8,12 +8,13 @@ export const PlatformGuideArticle: DocumentationArticle = {
     {
       heading: 'Recommendation',
       bullets: [
-        'Use Node.js 24 LTS for the Backend-for-Frontend layer that serves browser-facing /api routes.',
-        'Use Express or another approved Node HTTP framework when the BFF module is added.',
-        'Use Java 25 LTS and Spring Boot for domain services behind the BFF.',
+        'Use Node.js 24 LTS for the web/API server that serves browser-facing /api routes and owns SQL Server-backed data access.',
+        'Use Express or another approved Node HTTP framework for server routes.',
+        'Use Java 25 LTS and Spring Boot for optional domain services behind the Node.js server.',
         'Use Gradle and the Gradle Wrapper for Java build automation.',
         'Maven repositories, Artifactory, or private dependency repositories may still appear inside Gradle builds; that does not mean Maven is the project build tool.',
         'Use SQL Server as the primary relational database.',
+        'Use `mssql` with the `tedious` driver for Node.js SQL Server access.',
         'Use Spring Data JPA and Hibernate for persistence mapping when relational domain modeling is needed.',
         'Use OIDC/OAuth for authentication and authorization.',
         'Use Kafka as the event-streaming platform when services need asynchronous events, pub/sub messaging, stream processing, or service decoupling.',
@@ -27,11 +28,12 @@ export const PlatformGuideArticle: DocumentationArticle = {
       ]
     },
     {
-      heading: 'BFF Responsibilities',
+      heading: 'Node.js Server Responsibilities',
       bullets: [
-        'Route Angular requests through same-origin /api endpoints instead of exposing Java service URLs to the browser.',
+        'Route Angular requests through same-origin /api endpoints instead of exposing downstream service URLs to the browser.',
         'Keep tokens, client credentials, mTLS material, private headers, and service-to-service details server-side.',
-        'Use the BFF for frontend-specific aggregation, response shaping, request validation, and safe error mapping.',
+        'Use the Node.js server for SQL Server-backed data access, frontend-specific aggregation, response shaping, request validation, and safe error mapping.',
+        'Keep SQL in repositories/query modules instead of Express route handlers.',
         'Avoid blind proxy routes unless they protect a browser boundary or simplify a real frontend contract.'
       ]
     },
@@ -39,18 +41,18 @@ export const PlatformGuideArticle: DocumentationArticle = {
       heading: 'Configurable Java Dependencies',
       bullets: [
         'Mirror enterprise patterns without cloning every framework dependency from one service.',
-        'Use Spring RestClient for normal synchronous outbound HTTP calls, Spring WebClient for reactive calls, and Apache HttpClient 5 only when a low-level Apache transport is needed.',
+        'Use Java persistence or outbound HTTP clients only for capabilities that remain inside optional Java services.',
         'Use Caffeine for bounded short-lived user details caching when repeated identity lookups need local caching.',
         'Use managed keystore and truststore resolution for outbound mTLS, Kafka TLS, and certificate-secured integrations.',
         'Add feature-specific dependencies such as file generation, S3 clients, mail support, schedulers, and specialized caches only when a feature needs them.',
-        'Keep BFF and Java service modules replaceable so build, auth, persistence, caching, and deployment choices can be adjusted if better reference applications are found.'
+        'Keep Node.js server and Java service modules replaceable so build, auth, persistence, caching, and deployment choices can be adjusted if better reference applications are found.'
       ]
     },
     {
       heading: 'Repository Layout',
       bullets: [
-        '`tonys-workbench-ui` contains `client/` for Angular and `server/` for the Node.js BFF.',
-        '`tonys-workbench-services` contains Java/Spring Boot microservices that the BFF calls.',
+        '`tonys-workbench-ui` contains `client/` for Angular and `server/` for the Node.js web/API server.',
+        '`tonys-workbench-services` contains Java/Spring Boot services only when a feature needs a separate durable backend boundary.',
         '`tonys-workbench-database` contains SQL Server schema, Liquibase migrations, seed/reference data, and database documentation.',
         'Enterprise services may also use a separate deployment repo for Helm charts, environment values, workflows, and promotion configuration.',
         'Split into a separate deployment repository later only if deployment configuration becomes large, access-controlled, or maintained on a different lifecycle.'
@@ -59,7 +61,7 @@ export const PlatformGuideArticle: DocumentationArticle = {
     {
       heading: 'Local And Personal Hosting',
       bullets: [
-        'Use Docker Compose first for local Angular, Node.js BFF, Spring Boot services, and SQL Server development.',
+        'Use Docker Compose first for local Angular, Node.js server, optional Spring Boot services, and SQL Server development.',
         'Use OpenShift-style manifests to mirror the enterprise deployment model.',
         'Use Red Hat Developer Sandbox for the closest hosted OpenShift learning environment when available.',
         'Use Azure Container Apps or another container host only as a fallback public demo target.'

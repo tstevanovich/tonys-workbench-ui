@@ -1,11 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import {
-  MatCard,
-  MatCardContent,
-  MatCardHeader,
-  MatCardSubtitle,
-  MatCardTitle
-} from '@angular/material/card';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 
@@ -24,7 +18,7 @@ interface WorkspacePageData {
 
 @Component({
   selector: 'app-workspace-page',
-  imports: [MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle, MatIcon],
+  imports: [MatCard, MatCardContent, MatIcon],
   templateUrl: './workspace-page.html',
   styleUrl: './workspace-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,5 +26,5 @@ interface WorkspacePageData {
 export class WorkspacePage {
   private readonly route = inject(ActivatedRoute);
 
-  protected readonly page = computed(() => this.route.snapshot.data as WorkspacePageData);
+  readonly page = computed(() => this.route.snapshot.data as WorkspacePageData);
 }

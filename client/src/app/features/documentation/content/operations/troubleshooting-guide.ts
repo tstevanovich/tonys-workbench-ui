@@ -15,11 +15,12 @@ export const TroubleshootingGuideArticle: DocumentationArticle = {
       ]
     },
     {
-      heading: 'BFF Issues',
+      heading: 'Node.js Server Issues',
       bullets: [
-        'If Angular calls fail locally, confirm whether the Angular dev server is pointed at the BFF and whether the BFF is running.',
-        'If a BFF route works but the screen fails, inspect request validation, response mapping, and Zod parsing before blaming the Java service.',
-        'If downstream calls fail, check BFF environment configuration, token mediation, private headers, mTLS configuration, and service URL routing.'
+        'If Angular calls fail locally, prefer npm run dev and open http://localhost:8080 so browser and API calls share the Node.js origin.',
+        'If the page does not load through port 8080, confirm the Angular dev server started and the Node.js server has CLIENT_DEV_SERVER_URL set by the root dev script.',
+        'If a server route works but the screen fails, inspect request validation, response mapping, and Zod parsing before blaming a downstream service.',
+        'If database calls fail, check server environment configuration, SQL Server connectivity, credentials, TLS settings, and migration state.'
       ]
     },
     {

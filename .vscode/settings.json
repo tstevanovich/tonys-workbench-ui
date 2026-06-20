@@ -20,7 +20,6 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "chat.mcp.autostart": "newAndOutdated",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit",
@@ -29,6 +28,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "eslint.useFlatConfig": true,
+  "eslint.run": "onType",
   "eslint.validate": ["javascript", "typescript", "html"],
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "files.eol": "\n",

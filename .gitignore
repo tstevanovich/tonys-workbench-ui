@@ -26,6 +26,7 @@ node_modules/
 
 # Miscellaneous
 **/.angular/
+client/public/build-info.json
 coverage/
 playwright-report/
 test-results/

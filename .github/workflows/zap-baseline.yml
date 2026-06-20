@@ -16,8 +16,10 @@ jobs:
       - name: Check target URL
         id: target
         env:
-          PUBLIC_APP_URL: ${{ vars.PUBLIC_APP_URL }}
+          REPOSITORY_VARS: ${{ toJson(vars) }}
         run: |
+          PUBLIC_APP_URL="$(jq -r '.PUBLIC_APP_URL // ""' <<< "$REPOSITORY_VARS")"
+
           if [ -z "$PUBLIC_APP_URL" ]; then
             echo "::notice title=Skipping ZAP scan::PUBLIC_APP_URL repository variable is not configured."
             echo "run_scan=false" >> "$GITHUB_OUTPUT"
@@ -25,10 +27,11 @@ jobs:
           fi
 
           echo "run_scan=true" >> "$GITHUB_OUTPUT"
+          echo "target_url=$PUBLIC_APP_URL" >> "$GITHUB_OUTPUT"
 
       - name: ZAP baseline scan
         if: steps.target.outputs.run_scan == 'true'
         uses: zaproxy/action-baseline@v0.15.0
         with:
-          target: ${{ vars.PUBLIC_APP_URL }}
+          target: ${{ steps.target.outputs.target_url }}
           fail_action: false

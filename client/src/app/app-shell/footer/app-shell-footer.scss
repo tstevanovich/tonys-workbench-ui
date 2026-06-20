@@ -44,6 +44,12 @@ p {
   color: var(--app-shell-footer-fg);
 }
 
+.footer-build {
+  display: inline-block;
+  margin-inline-start: 0.5rem;
+  font-weight: 600;
+}
+
 .footer-links {
   display: flex;
   flex-wrap: wrap;

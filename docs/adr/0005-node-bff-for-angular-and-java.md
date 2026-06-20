@@ -2,11 +2,13 @@
 
 ## Status
 
-Accepted
+Superseded by [0007 Node.js Server Owns SQL-Backed API Routes](0007-node-server-owns-sql-backed-api-routes.md)
 
 ## Context
 
 The previous target model allowed Angular services to call backend Java APIs directly. Enterprise web applications often benefit from a Backend-for-Frontend layer between browser code and domain services. A BFF can keep service URLs, token handling, client credentials, mTLS details, private headers, and UI-specific response shaping out of the browser.
+
+This decision established the browser-to-Node boundary. It is now superseded because Node.js is also the default owner for SQL Server-backed API routes.
 
 ## Decision
 
@@ -22,4 +24,4 @@ Use a Node.js Backend-for-Frontend layer for Angular web applications that need 
 
 ## Consequences
 
-The architecture gains another deployable runtime and another dependency surface, so the BFF needs its own tests, dependency scanning, logging, health checks, and observability. The payoff is a cleaner browser boundary, less CORS and token exposure, and a better place for frontend-specific API composition. This repository should document the BFF pattern now, but should not add Express dependencies until an actual BFF module is implemented.
+The architecture gains another deployable runtime and another dependency surface, so the BFF needs its own tests, dependency scanning, logging, health checks, and observability. The payoff is a cleaner browser boundary, less CORS and token exposure, and a better place for frontend-specific API composition.

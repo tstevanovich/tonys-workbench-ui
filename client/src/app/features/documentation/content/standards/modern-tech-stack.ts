@@ -15,8 +15,8 @@ export const ModernTechStackArticle: DocumentationArticle = {
       markdown: `
 | Role | Repository | Description |
 | --- | --- | --- |
-| UI and web edge | tonys-workbench-ui | Contains \`client/\` for Angular and \`server/\` for the Node.js BFF. |
-| Java microservices | tonys-workbench-services | Contains Spring Boot services called by the BFF. |
+| UI and web/API edge | tonys-workbench-ui | Contains \`client/\` for Angular and \`server/\` for the Node.js server. |
+| Optional Java services | tonys-workbench-services | Contains Spring Boot services only when a feature needs a separate durable backend boundary. |
 | Database ownership | tonys-workbench-database | Contains SQL Server schema, Liquibase migrations, seed/reference data, and database documentation. |
 | Current documentation host | tonys-workbench-ui | In-app docs stay in the UI app until database-backed markdown storage is implemented. |
 `
@@ -66,9 +66,9 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | UI and screen state | Filters, tabs, dialogs, pagination, selections | Angular Signals and NgRx SignalStore |
 | Server state | Loading, cache, retries, stale data | TanStack Query |
 | Data mutations | Save, update, delete, upload, command actions | TanStack Mutations |
-| Browser API transport | Same-origin HTTP communication | OpenAPI generated BFF client plus Angular HttpClient |
-| Web edge | Browser-facing API routes | Node.js Backend-for-Frontend |
-| Domain services | Business APIs and persistence workflows | Java 25 LTS and Spring Boot |
+| Browser API transport | Same-origin HTTP communication | OpenAPI generated server API client plus Angular HttpClient |
+| Web/API edge | Browser-facing API routes and SQL Server-backed data access | Node.js server |
+| Optional domain services | Durable business APIs and persistence workflows | Java 25 LTS and Spring Boot |
 | Runtime validation | Validate external data | Zod |
 | Data transformation | DTO to UI model | Mapper functions |
 | Shared business logic | Reusable workflows | Angular services |
@@ -82,23 +82,24 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Feature state library | NgRx SignalStore | Screen and workflow state that belongs to the browser client. |
 | Server state library | TanStack Query for Angular | API fetching, caching, invalidation, retry behavior, loading states, and server mutations. |
 | Runtime validation library | Zod | Validation for API responses, imported files, AI output, local storage, user-provided JSON, and external runtime boundaries. |
-| HTTP client | Angular HttpClient | Browser-to-BFF HTTP transport used by generated clients and app-level API infrastructure. |
-| API contract generator | OpenAPI Generator | Generates Angular API clients and transport types from BFF OpenAPI contracts. |
+| HTTP client | Angular HttpClient | Browser-to-server HTTP transport used by generated clients and app-level API infrastructure. |
+| API contract generator | OpenAPI Generator | Generates Angular API clients and transport types from Node.js server OpenAPI contracts. |
 `
     },
     {
-      heading: 'Backend For Frontend Stack',
+      heading: 'Node.js Server Stack',
       markdown: `
 | Role | Choice | Description |
 | --- | --- | --- |
-| BFF runtime | Node.js 24 LTS | Current production LTS line for the web-edge server runtime. |
-| BFF language | TypeScript | Typed server-side JavaScript for BFF routes, middleware, validation, and service clients. |
-| BFF framework | Express latest stable public release | Minimal Node HTTP framework for browser-facing /api routes when the server module is implemented. |
-| BFF route contracts | OpenAPI | Browser-facing API contracts that can differ from downstream Java service contracts. |
-| BFF validation | Zod | Runtime validation for browser requests, downstream responses, config, and boundary data. |
-| BFF HTTP client | Node.js fetch | Built-in HTTP client for outbound service calls unless a feature needs a specialized transport. |
-| BFF security baseline | Express production hardening | Security headers, request limits, safe error responses, trusted proxy configuration, and dependency scanning. |
-| BFF observability | Structured logs and OpenTelemetry-compatible instrumentation | Correlation IDs, request logs, dependency timing, error mapping, and portable traces. |
+| Server runtime | Node.js 24 LTS | Current production LTS line for the web/API server runtime. |
+| Server language | TypeScript | Typed server-side JavaScript for routes, handlers, repositories, validation, and SQL-backed API behavior. |
+| Server framework | Express latest stable public release | Minimal Node HTTP framework for browser-facing /api routes. |
+| Server route contracts | OpenAPI | Browser-facing API contracts that can differ from SQL table shapes and optional backend service contracts. |
+| Server validation | Zod | Runtime validation for browser requests, downstream responses, config, and boundary data. |
+| Server SQL client | mssql | SQL Server client library used by the Node.js server for pooled database access. |
+| SQL Server driver | tedious | TDS driver used underneath mssql for Microsoft SQL Server connectivity. |
+| Server security baseline | Express production hardening | Security headers, request limits, safe error responses, trusted proxy configuration, and dependency scanning. |
+| Server observability | Structured logs and OpenTelemetry-compatible instrumentation | Correlation IDs, request logs, dependency timing, error mapping, and portable traces. |
 `
     },
     {
@@ -133,16 +134,16 @@ export const ModernTechStackArticle: DocumentationArticle = {
       markdown: `
 | Role | Choice | Description |
 | --- | --- | --- |
-| Java service language | Java 25 LTS | Standard Java language/runtime baseline for domain services. |
-| Java service framework | Spring Boot latest stable public release | API framework for domain endpoints, validation, auth enforcement, transactions, integrations, jobs, and observability hooks behind the BFF. |
-| Java service security | Spring Security latest stable public release | Token validation, authorization enforcement, resource protection, and method security. |
-| Java build tool | Gradle | Standard Java build automation tool for Java services. |
+| Java service language | Java 25 LTS | Standard Java language/runtime baseline for optional domain services. |
+| Java service framework | Spring Boot latest stable public release | API framework for durable domain endpoints, validation, auth enforcement, transactions, persistence workflows, jobs, and observability hooks when Java is justified. |
+| Java service security | Spring Security latest stable public release | Token validation, authorization enforcement, resource protection, and method security for optional Java services. |
+| Java build tool | Gradle | Standard Java build automation tool for optional Java services. |
 | Gradle distribution | Gradle Wrapper | Repository-pinned Gradle execution for local machines and CI. |
 | Java dependency source | Maven Central | Standard public repository for Java dependencies. |
 | Gradle plugin source | Gradle Plugin Portal | Standard public repository for Gradle plugins. |
 | Java build conventions | Gradle convention plugins | Shared Gradle plugins encapsulate Java, Spring Boot, coverage, quality, API generation, and mutation-testing defaults. |
 | API documentation | springdoc-openapi | Generates OpenAPI documentation from Spring Boot APIs. |
-| API contract publishing | OpenAPI | Contract used by generated BFF/service clients and backend API documentation. |
+| API contract publishing | OpenAPI | Contract used by generated Node.js server/service clients and backend API documentation. |
 | API model generation | OpenAPI Generator Gradle plugin | Generates Java service API models and definitions from OpenAPI specifications. |
 | Persistence abstraction | Spring Data JPA | Repository and data access abstraction for relational persistence. |
 | ORM | Hibernate | JPA implementation for relational entity mapping. |
@@ -159,10 +160,10 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Telemetry standard | OpenTelemetry | Vendor-neutral telemetry format for traces, metrics, and logs. |
 | Java service observability backend | Elastic-compatible observability | Backend services can send logs, metrics, and operational diagnostics to an Elastic-compatible observability stack. |
 | Java APM agent instrumentation | Java monitoring agent | Runtime instrumentation can be attached through a Java agent without hard-coding the application to one vendor API. |
-| Synchronous outbound HTTP client | Spring RestClient | Modern Spring client for blocking REST calls in Spring MVC services. |
-| Typed outbound HTTP clients | Spring HTTP Interface | Declarative Java interfaces for typed service clients backed by RestClient or WebClient. |
-| Reactive outbound HTTP client | Spring WebClient | Backend client for reactive or non-blocking service-to-service HTTP calls, exchange filters, request/response handling, and OAuth-backed outbound calls. |
-| Advanced HTTP transport | Apache HttpClient 5 | Low-level HTTP transport option when Apache-specific connection, TLS, or proxy behavior is needed. |
+| Java synchronous HTTP client | Spring RestClient | Modern Spring client only for Java-owned REST calls that remain inside optional Java services. |
+| Java typed HTTP clients | Spring HTTP Interface | Declarative Java interfaces for typed service clients backed by RestClient or WebClient inside optional Java services. |
+| Java reactive HTTP client | Spring WebClient | Java client for reactive or non-blocking service-to-service HTTP calls when an optional Java service owns that integration. |
+| Java advanced HTTP transport | Apache HttpClient 5 | Low-level HTTP transport option when Apache-specific connection, TLS, or proxy behavior is needed inside optional Java services. |
 | Service resilience | Resilience4j Retry | Retry policy library for bounded retries around transient IO, database, transaction, and service-call failures. |
 | Event streaming | Apache Kafka | Standard event-streaming platform for asynchronous events, pub/sub messaging, stream processing, and service decoupling. |
 | Spring Kafka integration | Spring for Apache Kafka | Spring Boot integration for Kafka producers, consumers, listener containers, and externalized Kafka configuration. |
@@ -181,13 +182,16 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Role | Choice | Description |
 | --- | --- | --- |
 | Primary relational database | SQL Server | Standard relational database for application persistence. |
-| SQL Server JDBC driver | Microsoft JDBC Driver for SQL Server | Java database driver for SQL Server connectivity. |
+| Node.js SQL Server client | mssql | Node.js package for direct SQL Server access from the server workspace. |
+| SQL Server TDS driver | tedious | Driver used by mssql for SQL Server wire-protocol connectivity. |
+| Java SQL Server JDBC driver | Microsoft JDBC Driver for SQL Server | Optional Java database driver when a Java service owns persistence. |
 | Schema migration tool | Liquibase | Database version control for schema changes, repeatable changes, and migration history. |
 | Migration format | Liquibase changelog files | Versioned database changes stored in the database repository. |
 | Local database runtime | SQL Server container | Local database runtime for Docker Compose and backend development. |
-| Backend persistence API | JPA | Java persistence API used through Spring Data JPA and Hibernate. |
+| Optional Java persistence API | JPA | Java persistence API used through Spring Data JPA and Hibernate only when an optional Java service owns persistence. |
 | Transaction management | Spring transactions | Service-layer transaction boundaries and rollback behavior. |
-| Connection pooling | HikariCP | JDBC connection pooling for Java services. |
+| Node.js connection pooling | mssql connection pool | Pooled SQL Server connections owned by the Node.js server. |
+| Java connection pooling | HikariCP | JDBC connection pooling for optional Java services. |
 | Schema ownership | Liquibase-managed schema | Hibernate schema generation stays disabled so database changes are controlled through versioned migrations. |
 | Query performance analysis | SQL Server execution plans | Standard tool for understanding query performance and indexing needs. |
 `
@@ -218,13 +222,13 @@ export const ModernTechStackArticle: DocumentationArticle = {
       markdown: `
 | Role | Choice | Description |
 | --- | --- | --- |
-| Split layer repositories | UI repo plus services repo plus database repo | UI/BFF, Java service, and database ownership live in separate repositories. |
+| Split layer repositories | UI repo plus services repo plus database repo | UI/server, optional Java service, and database ownership live in separate repositories. |
 | Optional deployment repository | Separate deployment repo | Work environments with independent deployment ownership may use a separate deployment repository. |
-| Local full-stack runtime | Docker Compose | Local orchestration for Angular, Node.js BFF, Spring Boot services, SQL Server, and supporting services. |
+| Local full-stack runtime | Docker Compose | Local orchestration for Angular, Node.js server, optional Spring Boot services, SQL Server, and supporting services. |
 | Frontend package artifact | Static Angular build | Browser assets emitted by ng build from client/. |
-| BFF package artifact | Node.js server package | Node runtime package or container image for browser-facing API routes. |
-| Backend package artifact | Spring Boot executable jar | Java service artifact built by Gradle from tonys-workbench-services. |
-| Container image build | Docker | Container packaging for BFF, Java services, and deployable app images. |
+| Server package artifact | Node.js server package | Node runtime package or container image for browser-facing API routes and SQL-backed data access. |
+| Backend package artifact | Spring Boot executable jar | Optional Java service artifact built by Gradle from tonys-workbench-services. |
+| Container image build | Docker | Container packaging for the Node.js server, optional Java services, and deployable app images. |
 | Container runtime platform | OpenShift Container Platform | Kubernetes-based runtime platform for hosted application workloads. |
 | Kubernetes packaging | Helm | Chart and values packaging for Kubernetes and OpenShift deployments. |
 | Personal CI/CD | GitHub Actions | Automation for validation, build, and repository workflows. |
@@ -285,11 +289,11 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | Artifact repository | Artifactory-compatible Maven repository | Shared binary repository for published Java artifacts and build outputs. |
 | Container tooling | Docker and Docker Compose | Local images, local service orchestration, and integration environments. |
 | Kubernetes packaging tool | Helm | Deployment chart tooling. |
-| UI validation command | npm run check | Runs UI repository linting, stylelint, Prettier check, unit tests, dependency-cruiser, knip, and placeholder server checks. |
+| UI validation command | npm run check | Runs UI repository linting, stylelint, Prettier check, unit tests, dependency-cruiser, knip, and server checks. |
 | UI CI validation command | npm run check:ci | Runs the local UI validation command plus npm audit. |
 | Java service validation command | Gradle check | Runs Java service tests, formatting checks, static analysis, and dependency checks in tonys-workbench-services. |
 | Database validation command | Liquibase validation | Runs database changelog validation in tonys-workbench-database once database tooling exists. |
-| BFF validation command | npm --workspace server run check | BFF TypeScript, lint, test, audit, and build checks should replace the placeholder server checks when implemented. |
+| Server validation command | npm --workspace server run check | Runs Node.js server TypeScript, lint, and test checks. |
 `
     }
   ]
