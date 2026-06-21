@@ -243,6 +243,7 @@ export const ModernTechStackArticle: DocumentationArticle = {
 | --- | --- | --- |
 | Angular unit test command | ng test | Standard command for Angular unit tests. |
 | Frontend unit test runner | Vitest | Test runner package used by the Angular unit-test setup. |
+| Frontend coverage provider | @vitest/coverage-v8 | V8 coverage provider used for focused Angular and Vitest coverage reports. |
 | Frontend DOM test environment | jsdom | Browser-like test environment for component tests without launching a real browser. |
 | End-to-end test framework | Playwright | Browser automation framework for routed workflows and real app behavior. |
 | Accessibility test engine | axe-core | Accessibility engine used directly and through Playwright integration. |

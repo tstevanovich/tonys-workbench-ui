@@ -27,6 +27,7 @@
     "test:server": "npm --workspace server run test",
     "test:client": "npm --workspace client run test",
     "test:unit": "npm --workspace client run test:unit",
+    "test:client:coverage": "npm --workspace client run test:coverage",
     "test:e2e": "npm --workspace client run test:e2e",
     "test:e2e:ui": "npm --workspace client run test:e2e:ui",
     "test:a11y": "npm --workspace client run test:a11y",

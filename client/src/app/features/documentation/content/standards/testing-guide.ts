@@ -11,6 +11,7 @@ export const TestingGuideArticle: DocumentationArticle = {
       markdown: `
 \`\`\`bash
 npm run test:unit
+npm run test:client:coverage
 npm run test:a11y
 npm run test:e2e
 npm run test:e2e:ui
@@ -26,6 +27,7 @@ npm --workspace server run check
 `,
       bullets: [
         'Use npm run test:unit for the fast Angular and Vitest unit-test suite.',
+        'Use npm run test:client:coverage when you need the full client unit-test run with terminal and JSON coverage summaries.',
         'Use npm run test:a11y for the dedicated Playwright axe-core accessibility suite.',
         'Use npm run test:e2e for browser flow coverage.',
         'Use npm run test:e2e:ui when debugging browser tests interactively.',

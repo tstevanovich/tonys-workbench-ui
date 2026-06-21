@@ -11,6 +11,7 @@ export const CodingStandardsArticle: DocumentationArticle = {
         'Prefer standalone components and route-level lazy loading.',
         'Prefer the inject function for dependency injection in new Angular code.',
         'Prefer signals for local reactive state.',
+        'Do not use Angular class lifecycle hooks; prefer signals, computed state, effects, async pipe flows, render callbacks, or service-owned setup.',
         'Use typed reactive forms for complex forms.',
         'Keep components presentational unless they are routed pages.',
         'Keep API transport types out of templates.'

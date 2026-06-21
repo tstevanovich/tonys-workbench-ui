@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -17,6 +18,7 @@ import { type AppTheme } from '../../core/theme/app-theme';
     MatMenuItem,
     MatMenuTrigger,
     MatToolbar,
+    NgOptimizedImage,
     RouterLink
   ],
   templateUrl: './app-shell-header.html',
@@ -24,6 +26,7 @@ import { type AppTheme } from '../../core/theme/app-theme';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppShellHeader {
+  protected readonly repositoryUrl = 'https://github.com/tstevanovich/tonys-workbench-ui';
   readonly activeTheme = input.required<AppTheme>();
   readonly themes = input.required<readonly AppTheme[]>();
   readonly navigationExpanded = input.required<boolean>();

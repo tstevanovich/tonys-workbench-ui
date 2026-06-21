@@ -11,22 +11,29 @@
       (click)="navigationToggled.emit()">
       <mat-icon fontIcon="menu" />
     </button>
-    <a class="brand" routerLink="/" aria-label="Tony's Workbench home">Tony's Workbench</a>
+    <a class="brand" routerLink="/" aria-label="Tony's Workbench home">
+      <img
+        ngSrc="/brand/tonys-workbench-logo.png"
+        width="36"
+        height="36"
+        alt=""
+        aria-hidden="true"
+        priority />
+      <span>Tony's Workbench</span>
+    </a>
     <span class="toolbar-spacer"></span>
     <button matIconButton type="button" aria-label="Search" title="Search">
       <mat-icon fontIcon="search" />
     </button>
-    <button
+    <a
       matIconButton
-      type="button"
-      class="notification-button"
-      aria-label="Notifications: 3 unread"
-      title="Notifications">
-      <span class="header-action-icon">
-        <mat-icon fontIcon="notifications" />
-      </span>
-      <span class="notification-count" aria-hidden="true">3</span>
-    </button>
+      [href]="repositoryUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Open GitHub repository"
+      title="GitHub repository">
+      <mat-icon fontIcon="code" />
+    </a>
     <button
       matIconButton
       type="button"

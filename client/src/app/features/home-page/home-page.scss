@@ -22,16 +22,29 @@
   align-items: start;
 }
 
-.page-introduction h1 {
-  margin-bottom: 0;
-  font: var(--mat-sys-headline-large);
-}
-
 .eyebrow {
   margin: 0;
   color: var(--app-hero-accent);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.title-lockup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  align-items: center;
+
+  img {
+    flex: 0 0 auto;
+    inline-size: clamp(2.75rem, 6vw, 3.5rem);
+    block-size: clamp(2.75rem, 6vw, 3.5rem);
+  }
+
+  h1 {
+    margin-bottom: 0;
+    font: var(--mat-sys-headline-large);
+  }
 }
 
 .introduction {

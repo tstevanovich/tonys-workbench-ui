@@ -5,6 +5,16 @@
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@angular/cli", "mcp"]
+    },
+    "ESLint": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@eslint/mcp@latest"],
+      "cwd": "${workspaceFolder}"
+    },
+    "vscode-diagnostics": {
+      "type": "http",
+      "url": "http://127.0.0.1:3846/mcp"
     }
   }
 }
