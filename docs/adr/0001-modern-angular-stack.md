@@ -10,7 +10,7 @@ This project is intended to be a reusable model for personal and enterprise Angu
 
 ## Decision
 
-Use Angular 21+, standalone components, signals, Angular Material/CDK, SCSS with native CSS capabilities, npm, Vitest, Playwright, NgRx SignalStore, TanStack Query for Angular, Zod, ECharts, ExcelJS, pdfmake, and docx.
+Use Angular 21+, standalone components, signals, Angular Material/CDK, SCSS with native CSS capabilities, npm, Vitest with the V8 coverage provider, Playwright, NgRx SignalStore, TanStack Query for Angular, Zod, ECharts, ExcelJS, pdfmake, and docx.
 
 ## Consequences
 

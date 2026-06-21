@@ -28,22 +28,5 @@
         </a>
       }
     </div>
-
-    <section class="quick-actions" aria-label="Quick actions">
-      <p class="quick-actions-label mat-label-medium">Quick actions</p>
-      <div class="quick-actions-list">
-        @for (action of quickActions; track action.route) {
-          <a
-            class="quick-action"
-            [routerLink]="action.route"
-            [attr.aria-label]="action.label"
-            [title]="action.label"
-            (click)="linkActivated.emit()">
-            <mat-icon [fontIcon]="action.icon" />
-            <span>{{ action.label }}</span>
-          </a>
-        }
-      </div>
-    </section>
   </nav>
 </aside>

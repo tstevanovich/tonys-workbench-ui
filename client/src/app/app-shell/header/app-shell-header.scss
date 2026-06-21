@@ -17,9 +17,19 @@ mat-toolbar {
 }
 
 .brand {
+  display: inline-flex;
+  gap: 0.625rem;
+  align-items: center;
+  min-width: 0;
   font: var(--mat-sys-title-large);
   color: var(--app-shell-header-fg);
   text-decoration: none;
+
+  img {
+    flex: 0 0 auto;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
 
   &:focus-visible {
     outline: 2px solid currentcolor;
@@ -51,42 +61,10 @@ mat-toolbar {
   }
 }
 
-header button[matIconButton] {
+header button[matIconButton],
+header a[matIconButton] {
   position: relative;
   color: var(--app-shell-header-fg);
-}
-
-.header-action-icon {
-  position: absolute;
-  top: 50%;
-  left: 0.5rem;
-  display: inline-grid;
-  place-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  transform: translateY(-50%);
-}
-
-.notification-button {
-  width: 3.5rem;
-}
-
-.notification-count {
-  position: absolute;
-  top: 50%;
-  left: 2.375rem;
-  display: grid;
-  place-items: center;
-  min-width: 0.875rem;
-  height: 0.875rem;
-  padding-inline: 0.125rem;
-  font: var(--mat-sys-label-small);
-  line-height: 1;
-  color: var(--mat-sys-on-error);
-  background-color: var(--mat-sys-error);
-  border: 1px solid var(--app-shell-header-bg);
-  border-radius: 999px;
-  transform: translate(-50%, -50%);
 }
 
 header button[matButton] {

@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
@@ -34,6 +35,7 @@ interface FeatureCard {
     MatCardSubtitle,
     MatCardTitle,
     MatIcon,
+    NgOptimizedImage,
     RouterLink
   ],
   templateUrl: './home-page.html',

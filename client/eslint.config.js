@@ -16,6 +16,28 @@ const ignoredPaths = [
   '**/test-results/**'
 ];
 
+const angularLifecycleInterfaces = [
+  'AfterContentChecked',
+  'AfterContentInit',
+  'AfterViewChecked',
+  'AfterViewInit',
+  'DoCheck',
+  'OnChanges',
+  'OnDestroy',
+  'OnInit'
+];
+
+const angularLifecycleMethods = [
+  'ngAfterContentChecked',
+  'ngAfterContentInit',
+  'ngAfterViewChecked',
+  'ngAfterViewInit',
+  'ngDoCheck',
+  'ngOnChanges',
+  'ngOnDestroy',
+  'ngOnInit'
+];
+
 /** @type {import('eslint').Linter.RulesRecord} */
 const typeScriptRules = {
   '@typescript-eslint/consistent-type-imports': [
@@ -63,7 +85,28 @@ const angularRules = {
   '@angular-eslint/prefer-signals': 'error',
   '@angular-eslint/prefer-standalone': 'error',
   '@angular-eslint/relative-url-prefix': 'error',
-  '@angular-eslint/use-injectable-provided-in': 'error'
+  '@angular-eslint/use-injectable-provided-in': 'error',
+  'no-restricted-imports': [
+    'error',
+    {
+      paths: [
+        {
+          name: '@angular/core',
+          importNames: angularLifecycleInterfaces,
+          message:
+            'Do not use Angular class lifecycle hooks. Prefer signals, computed state, effects, async pipe flows, render callbacks, or service-owned setup.'
+        }
+      ]
+    }
+  ],
+  'no-restricted-syntax': [
+    'error',
+    ...angularLifecycleMethods.map((methodName) => ({
+      selector: `MethodDefinition[key.name="${methodName}"]`,
+      message:
+        'Do not use Angular class lifecycle hooks. Prefer signals, computed state, effects, async pipe flows, render callbacks, or service-owned setup.'
+    }))
+  ]
 };
 
 /** @type {import('eslint').Linter.RulesRecord} */

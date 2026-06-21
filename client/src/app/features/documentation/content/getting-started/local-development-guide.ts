@@ -23,6 +23,7 @@ npm start
 npm run start:client
 npm run dev:server
 npm run test:unit
+npm run test:client:coverage
 npm test
 npm run test:e2e
 npm run check
@@ -38,6 +39,7 @@ npm run build:local
         'Use npm run dev:server to run only the Node.js server with the local Angular proxy configuration.',
         'Use npm test to run the server and client test suites.',
         'Use npm run test:unit for Vitest-based unit tests.',
+        'Use npm run test:client:coverage to run the full client unit suite once and print coverage numbers.',
         'Use npm run test:e2e for Playwright browser coverage.',
         'Use npm run check for linting, style linting, formatting, architecture, dead-code checks, and unit tests.',
         'Use npm run build to verify the production server and web bundles.',

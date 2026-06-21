@@ -3,8 +3,10 @@ import { RouterOutlet } from '@angular/router';
 
 import { AppShellFooter } from './app-shell/footer/app-shell-footer';
 import { AppShellHeader } from './app-shell/header/app-shell-header';
-import { AppShellNavigation } from './app-shell/navigation/app-shell-navigation';
-import { type NavigationItem } from './app-shell/navigation/navigation-item';
+import {
+  AppShellNavigation,
+  type NavigationItem
+} from './app-shell/navigation/app-shell-navigation';
 import { ThemeService } from './core/theme/theme.service';
 
 @Component({

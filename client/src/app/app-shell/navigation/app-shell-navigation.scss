@@ -76,30 +76,6 @@ a {
   background-color: var(--app-shell-nav-active-bg);
 }
 
-.quick-actions {
-  display: grid;
-  gap: 0.5rem;
-  padding-top: 1rem;
-  margin-top: auto;
-  border-top: 1px solid color-mix(in srgb, var(--app-shell-nav-fg) 16%, transparent);
-}
-
-.quick-actions-label {
-  margin: 0 0 0 0.25rem;
-  color: var(--app-shell-nav-fg);
-}
-
-.quick-actions-list {
-  display: grid;
-  gap: 0.125rem;
-}
-
-.quick-action {
-  min-height: 2.25rem;
-  padding-inline: 0.75rem;
-  font: var(--mat-sys-body-small);
-}
-
 .compact-navigation {
   nav {
     padding-inline: 0.5rem;
@@ -110,7 +86,6 @@ a {
   }
 
   .navigation-label,
-  .quick-actions-label,
   a span {
     position: absolute;
     width: 1px;
@@ -126,10 +101,6 @@ a {
     display: flex;
     justify-content: center;
     padding-inline: 0;
-  }
-
-  .quick-actions {
-    padding-top: 0.75rem;
   }
 }
 
